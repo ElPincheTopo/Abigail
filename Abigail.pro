@@ -16,3 +16,7 @@ SOURCES += src/main.cpp\
 HEADERS  += src/mainwindow.h
 
 FORMS    += ui/mainwindow.ui
+
+OTHER_FILES += \
+    README.md \
+    COPYING
