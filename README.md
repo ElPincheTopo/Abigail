@@ -46,4 +46,4 @@ Bug Reports
 
 Please report any bugs you find [here](https://github.com/ElPincheTopo/Abigail/issues): https://github.com/ElPincheTopo/Abigail/issues
 
-Or by e-mail to this [adress](mailto:topo@asustin.net): mailto:topo@asustin.net
+Or by e-mail to this [adress](mailto:topo@asustin.net): topo@asustin.net
