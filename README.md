@@ -18,7 +18,7 @@ Abigail
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Abigail is written in C++ using Qt4.
-More documentation [here](https://github.com/ElPincheTopo/Abigail/wiki)
+More documentation [here](https://github.com/ElPincheTopo/Abigail/wiki).
 
 Features
 ------------
