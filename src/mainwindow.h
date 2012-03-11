@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "about.h"
 
 namespace Ui {
     class MainWindow;
@@ -18,8 +19,13 @@ public:
 protected:
     void changeEvent(QEvent *e);
 
+private slots:
+    void on_actionAbout_activated();
+    void on_actionQuit_activated();
+
 private:
     Ui::MainWindow *ui;
+    About *about;
 };
 
 #endif // MAINWINDOW_H
