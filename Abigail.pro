@@ -23,3 +23,6 @@ FORMS    += ui/mainwindow.ui \
 OTHER_FILES += \
     README.md \
     COPYING
+
+RESOURCES += \
+    resources/icons.qrc

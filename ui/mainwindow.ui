@@ -46,11 +46,21 @@
      <addaction name="actionFile"/>
      <addaction name="actionProject"/>
     </widget>
+    <widget class="QMenu" name="menu_Close">
+     <property name="title">
+      <string>&amp;Close</string>
+     </property>
+     <addaction name="actionFile_2"/>
+     <addaction name="actionProject_2"/>
+    </widget>
     <addaction name="menuNew"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
     <addaction name="actionSave_All"/>
+    <addaction name="menu_Close"/>
+    <addaction name="separator"/>
+    <addaction name="action_Print"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -122,6 +132,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionNew"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionContents">
@@ -292,8 +303,47 @@
     <string>Ctrl+O</string>
    </property>
   </action>
+  <action name="action_Print">
+   <property name="text">
+    <string>&amp;Print</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionFile_2">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/pack</normaloff>:/resources/images/pack</iconset>
+   </property>
+   <property name="text">
+    <string>File</string>
+   </property>
+  </action>
+  <action name="actionProject_2">
+   <property name="text">
+    <string>Project</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/pack</normaloff>:/resources/images/pack</iconset>
+   </property>
+   <property name="text">
+    <string>New</string>
+   </property>
+   <property name="toolTip">
+    <string>New File or Project...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../resources/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
