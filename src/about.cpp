@@ -22,6 +22,8 @@
 
 #include "about.h"
 #include "ui_about.h"
+#include "QDesktopServices"
+#include "QUrl"
 
 About::About(QWidget *parent) :
     QDialog(parent),
@@ -45,4 +47,9 @@ void About::changeEvent(QEvent *e)
     default:
         break;
     }
+}
+
+void About::on_linksLabel_linkActivated(const QString &link)
+{
+    QDesktopServices::openUrl(QUrl(link));
 }

@@ -121,9 +121,17 @@ p, li { white-space: pre-wrap; }
    <property name="text">
     <string/>
    </property>
+   <property name="pixmap">
+    <pixmap resource="../resources/icons.qrc">:/resources/images/apple</pixmap>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources/icons.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

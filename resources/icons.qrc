@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/resources/images">
         <file alias="pack">images/installer.png</file>
+        <file alias="apple">images/apple-red.png</file>
     </qresource>
 </RCC>

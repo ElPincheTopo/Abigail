@@ -40,6 +40,9 @@ public:
 protected:
     void changeEvent(QEvent *e);
 
+private slots:
+    void on_linksLabel_linkActivated(const QString &link);
+
 private:
     Ui::About *ui;
 };
