@@ -22,7 +22,9 @@ FORMS    += ui/mainwindow.ui \
 
 OTHER_FILES += \
     README.md \
-    COPYING
+    COPYING \
+    resources/images/installer.png \
+    resources/images/apple-red.png
 
 RESOURCES += \
     resources/icons.qrc

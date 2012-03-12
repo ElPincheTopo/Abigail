@@ -22,12 +22,18 @@
 
 #include <QtGui/QApplication>
 #include "mainwindow.h"
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
+    std::cout << "     Abigail  Copyright (C) 2012  Roberto Lapuente Romo" << std::endl
+              << "     This program comes with ABSOLUTELY NO WARRANTY." << std::endl
+              << "     This is free software, and you are welcome to redistribute it" << std::endl
+              << "     under certain conditions." << std::endl << std::endl
+              << "     Visit https://github.com/ElPincheTopo/Abigail for more information." << std::endl;
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-
     return a.exec();
 }
