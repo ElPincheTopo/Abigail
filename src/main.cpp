@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
               << "     This program comes with ABSOLUTELY NO WARRANTY.\n"
               << "     This is free software, and you are welcome to redistribute it\n"
               << "     under certain conditions.\n\n"
-              << "     Visit https://github.com/ElPincheTopo/Abigail for more information." << std::endl;
+              << "     Visit http://elpinchetopo.github.com/Abigail/ for more information." << std::endl;
 
     QApplication a(argc, argv);
     MainWindow w;
