@@ -67,8 +67,3 @@ void MainWindow::on_actionGet_Involved_activated()
 {
     QDesktopServices::openUrl(QUrl("https://github.com/ElPincheTopo/Abigail"));
 }
-
-void MainWindow::on_textEdit_cursorPositionChanged()
-{
-
-}
