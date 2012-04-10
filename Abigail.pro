@@ -24,7 +24,12 @@ OTHER_FILES += \
     README.md \
     COPYING \
     resources/images/installer.png \
-    resources/images/apple-red.png
+    resources/images/icons/transmission.png \
+    resources/images/icons/nautilus.xpm \
+    resources/images/icons/minecraft.png \
+    resources/images/icons/installer.png \
+    resources/images/icons/gnome-word.png \
+    resources/images/logos/apple-red.png
 
 RESOURCES += \
     resources/icons.qrc

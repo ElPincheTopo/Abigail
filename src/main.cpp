@@ -16,9 +16,8 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 
     For more information visit https://github.com/ElPincheTopo/Abigail
-    or sen an e-mail to topo@asustin.net.
+    or send an e-mail to topo@asustin.net.
 */
-
 
 #include <QtGui/QApplication>
 #include "mainwindow.h"
@@ -26,14 +25,19 @@
 
 int main(int argc, char *argv[])
 {
-    std::cout << "     Abigail  Copyright (C) 2012  Roberto Lapuente Romo" << std::endl
-              << "     This program comes with ABSOLUTELY NO WARRANTY." << std::endl
-              << "     This is free software, and you are welcome to redistribute it" << std::endl
-              << "     under certain conditions." << std::endl << std::endl
+    std::cout << "     Abigail, A lightweight, powerful and customizable cross-platform IDE.\n"
+              << "     Copyright (C) 2012  Roberto Lapuente\n\n"
+              << "     This program comes with ABSOLUTELY NO WARRANTY.\n"
+              << "     This is free software, and you are welcome to redistribute it\n"
+              << "     under certain conditions.\n\n"
               << "     Visit https://github.com/ElPincheTopo/Abigail for more information." << std::endl;
 
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-    return a.exec();
+    int exec = a.exec();
+
+    std::cout << "Goodbye!" << std::endl;
+
+    return exec;
 }

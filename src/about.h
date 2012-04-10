@@ -16,9 +16,8 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 
     For more information visit https://github.com/ElPincheTopo/Abigail
-    or sen an e-mail to topo@asustin.net.
+    or send an e-mail to topo@asustin.net.
 */
-
 
 #ifndef ABOUT_H
 #define ABOUT_H

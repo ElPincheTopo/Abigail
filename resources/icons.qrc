@@ -1,6 +1,26 @@
 <RCC>
-    <qresource prefix="/resources/images">
-        <file alias="pack">images/installer.png</file>
-        <file alias="apple">images/apple-red.png</file>
+    <qresource prefix="/resources/images/icons">
+        <file alias="craft">images/icons/minecraft.png</file>
+        <file alias="aSearch">images/icons/aSearch.png</file>
+        <file alias="build">images/icons/build.png</file>
+        <file alias="buildRun">images/icons/buildRun.jpg</file>
+        <file alias="comment">images/icons/comment.png</file>
+        <file alias="copy">images/icons/copy.gif</file>
+        <file alias="cut">images/icons/cut.png</file>
+        <file alias="findReplace">images/icons/findReplace.png</file>
+        <file alias="format">images/icons/format.png</file>
+        <file alias="indent">images/icons/indent.png</file>
+        <file alias="new">images/icons/new.png</file>
+        <file alias="open">images/icons/open.png</file>
+        <file alias="paste">images/icons/paste.png</file>
+        <file alias="redo">images/icons/redo.png</file>
+        <file alias="run">images/icons/run.png</file>
+        <file alias="save">images/icons/save.png</file>
+        <file alias="saveAll">images/icons/saveAll.png</file>
+        <file alias="undo">images/icons/undo.png</file>
+        <file alias="unindent">images/icons/unindent.png</file>
+    </qresource>
+    <qresource prefix="/resources/images/logos">
+        <file alias="apple">images/logos/apple-red.png</file>
     </qresource>
 </RCC>

@@ -16,9 +16,8 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 
     For more information visit https://github.com/ElPincheTopo/Abigail
-    or sen an e-mail to topo@asustin.net.
+    or send an e-mail to topo@asustin.net.
 */
-
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -28,6 +27,7 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->statusBar->showMessage(QString("Hi! Welcome to Abigail"), 10000);
 }
 
 MainWindow::~MainWindow()
@@ -66,4 +66,9 @@ void MainWindow::on_actionAbigail_Home_Page_activated()
 void MainWindow::on_actionGet_Involved_activated()
 {
     QDesktopServices::openUrl(QUrl("https://github.com/ElPincheTopo/Abigail"));
+}
+
+void MainWindow::on_textEdit_cursorPositionChanged()
+{
+
 }

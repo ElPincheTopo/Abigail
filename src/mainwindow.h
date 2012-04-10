@@ -16,9 +16,8 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 
     For more information visit https://github.com/ElPincheTopo/Abigail
-    or sen an e-mail to topo@asustin.net.
+    or send an e-mail to topo@asustin.net.
 */
-
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
@@ -44,10 +43,11 @@ protected:
 private slots:
     void on_actionAbout_activated();
     void on_actionQuit_activated();
-
     void on_actionAbigail_Home_Page_activated();
-
     void on_actionGet_Involved_activated();
+
+
+    void on_textEdit_cursorPositionChanged();
 
 private:
     Ui::MainWindow *ui;

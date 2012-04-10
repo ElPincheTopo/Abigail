@@ -16,9 +16,8 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 
     For more information visit https://github.com/ElPincheTopo/Abigail
-    or sen an e-mail to topo@asustin.net.
+    or send an e-mail to topo@asustin.net.
 */
-
 
 #include "about.h"
 #include "ui_about.h"
