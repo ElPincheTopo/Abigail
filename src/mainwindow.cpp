@@ -60,7 +60,7 @@ void MainWindow::on_actionQuit_activated()
 
 void MainWindow::on_actionAbigail_Home_Page_activated()
 {
-    QDesktopServices::openUrl(QUrl("https://github.com/ElPincheTopo/Abigail"));
+    QDesktopServices::openUrl(QUrl("http://elpinchetopo.github.com/Abigail/"));
 }
 
 void MainWindow::on_actionGet_Involved_activated()
