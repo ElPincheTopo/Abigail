@@ -46,9 +46,6 @@ private slots:
     void on_actionAbigail_Home_Page_activated();
     void on_actionGet_Involved_activated();
 
-
-    void on_textEdit_cursorPositionChanged();
-
 private:
     Ui::MainWindow *ui;
 };
