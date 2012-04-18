@@ -10,12 +10,12 @@ TARGET = Abigail
 TEMPLATE = app
 
 
-SOURCES += src/main.cpp\
-        src/mainwindow.cpp \
-    src/about.cpp
+SOURCES += code/main.cpp\
+        code/mainwindow.cpp \
+    code/about.cpp
 
-HEADERS  += src/mainwindow.h \
-    src/about.h
+HEADERS  += code/mainwindow.h \
+    code/about.h
 
 FORMS    += ui/mainwindow.ui \
     ui/about.ui
@@ -23,13 +23,8 @@ FORMS    += ui/mainwindow.ui \
 OTHER_FILES += \
     README.md \
     COPYING \
-    resources/images/installer.png \
-    resources/images/icons/transmission.png \
-    resources/images/icons/nautilus.xpm \
-    resources/images/icons/minecraft.png \
-    resources/images/icons/installer.png \
-    resources/images/icons/gnome-word.png \
-    resources/images/logos/apple-red.png
+    resources/images/logos/abigail.png
 
 RESOURCES += \
-    resources/icons.qrc
+    resources/icons.qrc \
+    resources/logos.qrc

@@ -20,7 +20,4 @@
         <file alias="undo">images/icons/undo.png</file>
         <file alias="unindent">images/icons/unindent.png</file>
     </qresource>
-    <qresource prefix="/resources/images/logos">
-        <file alias="apple">images/logos/apple-red.png</file>
-    </qresource>
 </RCC>
