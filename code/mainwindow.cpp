@@ -27,6 +27,8 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->projectExplorer->close();
+    ui->textEdit->setFocus();
     ui->statusBar->showMessage(QString("Hi! Welcome to Abigail"), 10000);
 }
 
