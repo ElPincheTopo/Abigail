@@ -19,49 +19,32 @@
     or send an e-mail to topo@asustin.net.
 */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
 
-#include <QMainWindow>
-#include "about.h"
+#ifndef TABMANAGER_H
+#define TABMANAGER_H
 
-namespace Ui {
-    class MainWindow;
-}
+#include <QTabWidget>
+#include "document.h"
 
-class MainWindow : public QMainWindow
+class TabManager : public QTabWidget
 {
     Q_OBJECT
-
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-protected:
-    void changeEvent(QEvent *e);
-
-private slots:
-    void on_actionAbout_activated();
-    void on_actionQuit_activated();
-    void on_actionAbigail_Home_Page_activated();
-    void on_actionGet_Involved_activated();
-
-    void on_actionSave_All_triggered();
-
-    void on_actionOpen_triggered();
-
-    void on_actionSave_triggered();
-
-    void on_tabsManager_tabCloseRequested(int index);
-
-    void on_actionSave_As_triggered();
-
-    void on_actionFile_triggered();
-
-    void on_actionCloseFile_triggered();
-
+    explicit TabManager(QWidget *parent = 0);
+    ~TabManager();
 private:
-    Ui::MainWindow *ui;
+
+signals:
+
+public slots:
+    void newDoc();
+    void saveCurrentDoc();
+    void save(int index);
+    void saveAll();
+    void saveAs(QString archivo);
+    void open(QString archivo);
+    void open(QStringList archivos);
+
 };
 
-#endif // MAINWINDOW_H
+#endif // TABMANAGER_H

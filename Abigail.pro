@@ -12,10 +12,14 @@ TEMPLATE = app
 
 SOURCES += code/main.cpp\
         code/mainwindow.cpp \
-    code/about.cpp
+    code/about.cpp \
+    code/document.cpp \
+    code/tabmanager.cpp
 
 HEADERS  += code/mainwindow.h \
-    code/about.h
+    code/about.h \
+    code/document.h \
+    code/tabmanager.h
 
 FORMS    += ui/mainwindow.ui \
     ui/about.ui

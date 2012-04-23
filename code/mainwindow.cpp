@@ -21,14 +21,14 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QDesktopServices"
-#include "QUrl"
+#include <QDesktopServices>
+#include <QUrl>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->projectExplorer->close();
-    ui->textEdit->setFocus();
     ui->statusBar->showMessage(QString("Hi! Welcome to Abigail"), 10000);
 }
 
@@ -68,4 +68,47 @@ void MainWindow::on_actionAbigail_Home_Page_activated()
 void MainWindow::on_actionGet_Involved_activated()
 {
     QDesktopServices::openUrl(QUrl("https://github.com/ElPincheTopo/Abigail"));
+}
+
+void MainWindow::on_actionSave_All_triggered()
+{
+    ui->tabsManager->saveAll();
+}
+
+void MainWindow::on_actionOpen_triggered()
+{
+    QStringList archivos = QFileDialog::getOpenFileNames(this, "Select a file to open...", "/home");
+    ui->tabsManager->open(archivos);
+}
+
+void MainWindow::on_actionSave_triggered()
+{
+    // Aqui hay que checar si el documento ya esta guardado
+    ui->tabsManager->saveCurrentDoc();
+}
+
+void MainWindow::on_tabsManager_tabCloseRequested(int index)
+{
+    // Aqui hay que checar si el documento ya esta guardado
+    if (true) {
+        delete ui->tabsManager->widget(index);
+        ui->tabsManager->removeTab(index);
+    }
+}
+
+void MainWindow::on_actionSave_As_triggered()
+{
+    QString archivo = QFileDialog::getSaveFileName(this, "Choose a file name...", "/home");
+    ui->tabsManager->saveAs(archivo);
+}
+
+void MainWindow::on_actionFile_triggered()
+{
+    ui->tabsManager->newDoc();
+}
+
+void MainWindow::on_actionCloseFile_triggered()
+{
+    int index = ui->tabsManager->currentIndex();
+    on_tabsManager_tabCloseRequested(index);
 }

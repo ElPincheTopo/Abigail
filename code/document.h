@@ -19,49 +19,35 @@
     or send an e-mail to topo@asustin.net.
 */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
 
-#include <QMainWindow>
-#include "about.h"
+#ifndef DOCUMENT_H
+#define DOCUMENT_H
 
-namespace Ui {
-    class MainWindow;
-}
+#include <QWidget>
+#include <QTextEdit>
+#include <QGridLayout>
+#include <QFile>
 
-class MainWindow : public QMainWindow
+class Document : public QWidget
 {
     Q_OBJECT
-
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-protected:
-    void changeEvent(QEvent *e);
-
-private slots:
-    void on_actionAbout_activated();
-    void on_actionQuit_activated();
-    void on_actionAbigail_Home_Page_activated();
-    void on_actionGet_Involved_activated();
-
-    void on_actionSave_All_triggered();
-
-    void on_actionOpen_triggered();
-
-    void on_actionSave_triggered();
-
-    void on_tabsManager_tabCloseRequested(int index);
-
-    void on_actionSave_As_triggered();
-
-    void on_actionFile_triggered();
-
-    void on_actionCloseFile_triggered();
-
+    explicit Document(QWidget *parent = 0);
+    ~Document();
+    QTextEdit *textArea;
 private:
-    Ui::MainWindow *ui;
+    QGridLayout *layout;
+    QFile *file;
+    QString *title;
+
+signals:
+
+public slots:
+    void save();
+    QString* saveAs(QString archivo);
+    QString* open(QString archivo);
+    void close();
+
 };
 
-#endif // MAINWINDOW_H
+#endif // DOCUMENT_H
