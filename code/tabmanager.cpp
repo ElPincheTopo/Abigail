@@ -28,7 +28,7 @@
 
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
-
+    newDoc();
 }
 
 TabManager::~TabManager()
