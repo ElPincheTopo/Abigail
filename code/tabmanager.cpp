@@ -46,7 +46,8 @@ void TabManager::newDoc()
 void TabManager::save(int index)
 {
     // Checar si no esta guardado
-    dynamic_cast<Document*>(widget(index))->save();
+    Document *doc = dynamic_cast<Document*>(widget(index));
+    doc->title == 0 ? saveAs() : doc->save();
 }
 
 void TabManager::saveCurrentDoc()

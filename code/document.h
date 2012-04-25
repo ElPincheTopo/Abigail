@@ -38,6 +38,8 @@ public:
 private:
     QGridLayout *layout;
     QFile *file;
+
+public:
     QString *title;
 
 signals:

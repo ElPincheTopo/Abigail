@@ -28,6 +28,7 @@
 Document::Document(QWidget *parent) : QWidget(parent)
 {
     this->file = 0;
+    this->title = 0;
     this->layout = new QGridLayout(this);
     this->layout->setSpacing(2);
     this->layout->setMargin(0);
