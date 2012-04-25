@@ -24,6 +24,8 @@
 #include <QTabBar>
 #include <algorithm>
 #include <QFileDialog>
+#include <iostream>
+
 
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
@@ -38,8 +40,10 @@ TabManager::~TabManager()
 void TabManager::newDoc()
 {
     Document *doc = new Document();
-    int index = this->addTab(doc, "New Tab");
+    int index = this->addTab(doc, "Untitled*");
     this->setCurrentIndex(index);
+    doc->tabIndex = index;
+    QObject::connect(doc, SIGNAL(textChanged(int)), this, SLOT(textChanges(int)));
     doc->textArea->setFocus();
 }
 
@@ -47,13 +51,17 @@ void TabManager::save(int index)
 {
     // Checar si no esta guardado
     Document *doc = dynamic_cast<Document*>(widget(index));
-    doc->title == 0 ? saveAs() : doc->save();
+    doc->title == 0 ? saveAs() : doc->save(); // If the document has no title it's an new document and 'saveAs()' should be called instead
+    QString str = *(doc->title);
+    std::cout << str.toStdString() << std::endl;
+    this->setTabText(index, str);
 }
 
 void TabManager::saveCurrentDoc()
 {
     int index = currentIndex();
     if (index >=0) save(index);
+
 }
 
 void TabManager::saveAll()
@@ -80,6 +88,8 @@ void TabManager::open(QString archivo)
     this->setCurrentIndex(index);
     QString* title = doc->open(archivo);
     this->setTabText(index, *title);
+    doc->tabIndex = index;
+    QObject::connect(doc, SIGNAL(textChanged(int)), this, SLOT(textChanges(int)));
     doc->textArea->setFocus();
 }
 
@@ -90,3 +100,8 @@ void TabManager::open()
         open(archivo);
 }
 
+void TabManager::textChanges(int index)
+{
+    Document* doc = dynamic_cast<Document*>(widget(index));
+    this->setTabText(index, QString(*(doc->title)).append("*"));
+}

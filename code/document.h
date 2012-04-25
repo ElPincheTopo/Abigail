@@ -35,20 +35,25 @@ public:
     explicit Document(QWidget *parent = 0);
     ~Document();
     QTextEdit *textArea;
+    QString *title;
+    int tabIndex;
+
 private:
     QGridLayout *layout;
     QFile *file;
-
-public:
-    QString *title;
+    bool docHasChanged;
 
 signals:
+    void textChanged(int index);
 
 public slots:
     void save();
     QString* saveAs(QString archivo);
     QString* open(QString archivo);
     void close();
+
+private slots:
+    void textChanges();
 
 };
 

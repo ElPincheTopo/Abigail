@@ -36,6 +36,7 @@ private:
     void save(int index);
     void open(QString archivo);
 signals:
+    void textChanged(int index);
 
 public slots:
     void newDoc();
@@ -43,6 +44,9 @@ public slots:
     void saveAll();
     void saveAs();
     void open();
+
+private slots:
+    void textChanges(int index);
 
 };
 

@@ -24,11 +24,14 @@
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
+#include <iostream>
 
 Document::Document(QWidget *parent) : QWidget(parent)
 {
     this->file = 0;
     this->title = 0;
+    this->tabIndex = 0;
+    this->docHasChanged = true;
     this->layout = new QGridLayout(this);
     this->layout->setSpacing(2);
     this->layout->setMargin(0);
@@ -42,6 +45,8 @@ Document::Document(QWidget *parent) : QWidget(parent)
     this->layout->addWidget(textArea);
     this->textArea->show();
     this->textArea->setFocus();
+    QObject::connect(textArea, SIGNAL(textChanged()), this, SLOT(textChanges()));
+
 }
 
 Document::~Document()
@@ -61,6 +66,7 @@ QString* Document::saveAs(QString archivo)
     file->close();
     QStringList list = archivo.split("/");
     this->title = new QString(list[list.size()-1]);
+    this->docHasChanged = false;
     return this->title;
 }
 
@@ -70,6 +76,7 @@ void Document::save()
     QTextStream stream(file);
     stream << textArea->document()->toPlainText();
     file->close();
+    this->docHasChanged = false;
 }
 
 QString* Document::open(QString archivo)
@@ -81,10 +88,19 @@ QString* Document::open(QString archivo)
     file->close();
     QStringList list = archivo.split("/");
     this->title = new QString(list[list.size()-1]);
+    this->docHasChanged = false;
     return this->title;
 }
 
 void Document::close()
 {
 
+}
+
+void Document::textChanges()
+{
+    if (!docHasChanged) {
+        docHasChanged = true;
+        emit textChanged(tabIndex);
+    }
 }
