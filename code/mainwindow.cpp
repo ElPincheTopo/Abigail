@@ -23,7 +23,6 @@
 #include "ui_mainwindow.h"
 #include <QDesktopServices>
 #include <QUrl>
-#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -77,8 +76,7 @@ void MainWindow::on_actionSave_All_triggered()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    QStringList archivos = QFileDialog::getOpenFileNames(this, "Select a file to open...", "/home");
-    ui->tabsManager->open(archivos);
+    ui->tabsManager->open();
 }
 
 void MainWindow::on_actionSave_triggered()
@@ -98,8 +96,7 @@ void MainWindow::on_tabsManager_tabCloseRequested(int index)
 
 void MainWindow::on_actionSave_As_triggered()
 {
-    QString archivo = QFileDialog::getSaveFileName(this, "Choose a file name...", "/home");
-    ui->tabsManager->saveAs(archivo);
+    ui->tabsManager->saveAs();
 }
 
 void MainWindow::on_actionFile_triggered()

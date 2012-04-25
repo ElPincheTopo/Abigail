@@ -33,17 +33,16 @@ public:
     explicit TabManager(QWidget *parent = 0);
     ~TabManager();
 private:
-
+    void save(int index);
+    void open(QString archivo);
 signals:
 
 public slots:
     void newDoc();
     void saveCurrentDoc();
-    void save(int index);
     void saveAll();
-    void saveAs(QString archivo);
-    void open(QString archivo);
-    void open(QStringList archivos);
+    void saveAs();
+    void open();
 
 };
 

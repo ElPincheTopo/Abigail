@@ -23,6 +23,7 @@
 #include "tabmanager.h"
 #include <QTabBar>
 #include <algorithm>
+#include <QFileDialog>
 
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
@@ -51,7 +52,7 @@ void TabManager::save(int index)
 void TabManager::saveCurrentDoc()
 {
     int index = currentIndex();
-    save(index);
+    if (index >=0) save(index);
 }
 
 void TabManager::saveAll()
@@ -61,15 +62,19 @@ void TabManager::saveAll()
     }
 }
 
-void TabManager::saveAs(QString archivo)
+void TabManager::saveAs()
 {
-    QString* title = dynamic_cast<Document*>(currentWidget())->saveAs(archivo);
-    this->setTabText(this->currentIndex(), *title);
+    Document* doc = dynamic_cast<Document*>(currentWidget());
+    if (doc != 0) {
+        QString archivo = QFileDialog::getSaveFileName(this, "Choose a file name...", "/home");
+        QString* title = doc->saveAs(archivo);
+        this->setTabText(this->currentIndex(), *title);
+    }
 }
 
 void TabManager::open(QString archivo)
 {
-    Document *doc = new Document();
+    Document* doc = new Document();
     int index = this->addTab(doc, "");
     this->setCurrentIndex(index);
     QString* title = doc->open(archivo);
@@ -77,8 +82,9 @@ void TabManager::open(QString archivo)
     doc->textArea->setFocus();
 }
 
-void TabManager::open(QStringList archivos)
+void TabManager::open()
 {
+    QStringList archivos = QFileDialog::getOpenFileNames(this, "Select a file to open...", "/home");
     foreach (QString archivo, archivos)
         open(archivo);
 }
