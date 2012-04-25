@@ -136,3 +136,38 @@ void MainWindow::closeEvent(QCloseEvent *event)
     // Here it must check if the tabs are already saved
     event->accept();
 }
+
+void MainWindow::on_actionUndo_triggered()
+{
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    doc->textArea->undo();
+}
+
+void MainWindow::on_actionRedo_triggered()
+{
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    doc->textArea->redo();
+}
+
+void MainWindow::on_actionCopy_triggered()
+{
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    doc->textArea->copy();
+}
+
+void MainWindow::on_actionCut_triggered()
+{
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    doc->textArea->cut();
+}
+
+void MainWindow::on_actionPaste_triggered()
+{
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    doc->textArea->paste();
+}
+
+void MainWindow::on_actionDelete_triggered()
+{
+    // Erase current selected text or object in project manager
+}
