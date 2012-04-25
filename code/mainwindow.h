@@ -23,6 +23,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QCloseEvent>
 #include "about.h"
 
 namespace Ui {
@@ -45,20 +46,15 @@ private slots:
     void on_actionQuit_activated();
     void on_actionAbigail_Home_Page_activated();
     void on_actionGet_Involved_activated();
-
     void on_actionSave_All_triggered();
-
     void on_actionOpen_triggered();
-
     void on_actionSave_triggered();
-
     void on_tabsManager_tabCloseRequested(int index);
-
     void on_actionSave_As_triggered();
-
     void on_actionFile_triggered();
-
     void on_actionCloseFile_triggered();
+    void closeEvent(QCloseEvent *event);
+
 
 private:
     Ui::MainWindow *ui;

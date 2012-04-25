@@ -24,7 +24,6 @@
 #include <QTabBar>
 #include <algorithm>
 #include <QFileDialog>
-#include <iostream>
 
 
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
@@ -40,7 +39,7 @@ TabManager::~TabManager()
 void TabManager::newDoc()
 {
     Document *doc = new Document();
-    int index = this->addTab(doc, "Untitled*");
+    int index = this->addTab(doc, "Untitled");
     this->setCurrentIndex(index);
     doc->tabIndex = index;
     QObject::connect(doc, SIGNAL(textChanged(int)), this, SLOT(textChanges(int)));
@@ -51,9 +50,8 @@ void TabManager::save(int index)
 {
     // Checar si no esta guardado
     Document *doc = dynamic_cast<Document*>(widget(index));
-    doc->title == 0 ? saveAs() : doc->save(); // If the document has no title it's an new document and 'saveAs()' should be called instead
+    doc->title == 0 ? saveAs() : doc->save(); // If the document has no title it's a new document and 'saveAs()' should be called instead
     QString str = *(doc->title);
-    std::cout << str.toStdString() << std::endl;
     this->setTabText(index, str);
 }
 
@@ -103,5 +101,6 @@ void TabManager::open()
 void TabManager::textChanges(int index)
 {
     Document* doc = dynamic_cast<Document*>(widget(index));
-    this->setTabText(index, QString(*(doc->title)).append("*"));
+    QString title = doc->title == 0 ? "Untitled" : *(doc->title);
+    this->setTabText(index, title.append("*"));
 }

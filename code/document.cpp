@@ -24,14 +24,13 @@
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
-#include <iostream>
 
 Document::Document(QWidget *parent) : QWidget(parent)
 {
     this->file = 0;
     this->title = 0;
     this->tabIndex = 0;
-    this->docHasChanged = true;
+    this->docHasChanged = false;
     this->layout = new QGridLayout(this);
     this->layout->setSpacing(2);
     this->layout->setMargin(0);

@@ -37,11 +37,11 @@ public:
     QTextEdit *textArea;
     QString *title;
     int tabIndex;
+    bool docHasChanged;
 
 private:
     QGridLayout *layout;
     QFile *file;
-    bool docHasChanged;
 
 signals:
     void textChanged(int index);

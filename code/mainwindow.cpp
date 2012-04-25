@@ -19,10 +19,12 @@
     or send an e-mail to topo@asustin.net.
 */
 
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include <QDesktopServices>
 #include <QUrl>
+#include <QMessageBox>
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "document.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -87,9 +89,28 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_tabsManager_tabCloseRequested(int index)
 {
-    // Aqui hay que checar si el documento ya esta guardado
-    if (true) {
-        delete ui->tabsManager->widget(index);
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->widget(index));
+    int ret = QMessageBox::Discard;
+    // If the Document has changed since las save, ask the user what to do
+    if (doc->docHasChanged) {
+        QString msgText("The document '");
+        msgText.append(doc->title).append("'' has been modified.");
+        QMessageBox msgBox;
+        msgBox.setText(msgText);
+        msgBox.setInformativeText("Do you want to save your changes?");
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        ret = msgBox.exec();
+    }
+
+    // If the user clicked 'cancel' do nothing, else...
+    if (ret != QMessageBox::Cancel) {
+        // If the user clicked 'save' emit save signal, then...
+        if (ret == QMessageBox::Save)
+            emit ui->actionSave->trigger();
+        // No matter what, delte the doc and remove the tab
+        delete doc;
         ui->tabsManager->removeTab(index);
     }
 }
@@ -108,4 +129,10 @@ void MainWindow::on_actionCloseFile_triggered()
 {
     int index = ui->tabsManager->currentIndex();
     on_tabsManager_tabCloseRequested(index);
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    // Here it must check if the tabs are already saved
+    event->accept();
 }
