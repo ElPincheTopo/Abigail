@@ -302,6 +302,10 @@
    </widget>
   </widget>
   <action name="actionContents">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/icons/help</normaloff>:/resources/images/icons/help</iconset>
+   </property>
    <property name="text">
     <string>&amp;Contents</string>
    </property>
@@ -310,16 +314,28 @@
    </property>
   </action>
   <action name="actionAbigail_Home_Page">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/icons/web</normaloff>:/resources/images/icons/web</iconset>
+   </property>
    <property name="text">
     <string>Abigail &amp;Home Page</string>
    </property>
   </action>
   <action name="actionGet_Involved">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/icons/involved</normaloff>:/resources/images/icons/involved</iconset>
+   </property>
    <property name="text">
     <string>Get &amp;Involved</string>
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/icons/info</normaloff>:/resources/images/icons/info</iconset>
+   </property>
    <property name="text">
     <string>About &amp;Abigail...</string>
    </property>
@@ -328,20 +344,28 @@
    </property>
   </action>
   <action name="actionFile">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/icons/newDoc</normaloff>:/resources/images/icons/newDoc</iconset>
+   </property>
    <property name="text">
     <string>&amp;File</string>
    </property>
   </action>
   <action name="actionProject">
    <property name="icon">
-    <iconset>
-     <normaloff>:/resources/images/pack</normaloff>:/resources/images/pack</iconset>
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/icons/NewProyect</normaloff>:/resources/images/icons/NewProyect</iconset>
    </property>
    <property name="text">
     <string>&amp;Project</string>
    </property>
   </action>
   <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/icons/quit</normaloff>:/resources/images/icons/quit</iconset>
+   </property>
    <property name="text">
     <string>&amp;Quit</string>
    </property>
@@ -382,6 +406,10 @@
    </property>
   </action>
   <action name="actionPreferences">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/icons/preferences</normaloff>:/resources/images/icons/preferences</iconset>
+   </property>
    <property name="text">
     <string>P&amp;references</string>
    </property>
@@ -447,6 +475,10 @@
    </property>
   </action>
   <action name="actionDelete">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/icons/delete</normaloff>:/resources/images/icons/delete</iconset>
+   </property>
    <property name="text">
     <string>&amp;Delete</string>
    </property>
@@ -457,7 +489,7 @@
   <action name="actionSearch">
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
-     <normaloff>:/resources/images/icons/findReplace</normaloff>:/resources/images/icons/findReplace</iconset>
+     <normaloff>:/resources/images/icons/search</normaloff>:/resources/images/icons/search</iconset>
    </property>
    <property name="text">
     <string>&amp;Find and Replace</string>
@@ -469,7 +501,7 @@
   <action name="actionAdvanced_Search">
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
-     <normaloff>:/resources/images/icons/aSearch</normaloff>:/resources/images/icons/aSearch</iconset>
+     <normaloff>:/resources/images/icons/findReplace</normaloff>:/resources/images/icons/findReplace</iconset>
    </property>
    <property name="text">
     <string>Advanced &amp;Search</string>
@@ -506,6 +538,10 @@
    </property>
   </action>
   <action name="actionMore_Format_Options">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/icons/format</normaloff>:/resources/images/icons/format</iconset>
+   </property>
    <property name="text">
     <string>More Format Options</string>
    </property>
@@ -536,6 +572,10 @@
    </property>
   </action>
   <action name="actionCloseProject">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/icons/closeProject</normaloff>:/resources/images/icons/closeProject</iconset>
+   </property>
    <property name="text">
     <string>Project</string>
    </property>
@@ -543,7 +583,7 @@
   <action name="actionNew">
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
-     <normaloff>:/resources/images/icons/new</normaloff>:/resources/images/icons/new</iconset>
+     <normaloff>:/resources/images/icons/newDoc</normaloff>:/resources/images/icons/newDoc</iconset>
    </property>
    <property name="text">
     <string>New</string>

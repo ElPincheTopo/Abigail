@@ -1,16 +1,13 @@
 <RCC>
     <qresource prefix="/resources/images/icons">
         <file alias="craft">images/icons/minecraft.png</file>
-        <file alias="aSearch">images/icons/aSearch.png</file>
         <file alias="build">images/icons/build.png</file>
         <file alias="buildRun">images/icons/buildRun.jpg</file>
         <file alias="comment">images/icons/comment.png</file>
-        <file alias="copy">images/icons/copy.gif</file>
         <file alias="cut">images/icons/cut.png</file>
         <file alias="findReplace">images/icons/findReplace.png</file>
         <file alias="format">images/icons/format.png</file>
         <file alias="indent">images/icons/indent.png</file>
-        <file alias="new">images/icons/new.png</file>
         <file alias="open">images/icons/open.png</file>
         <file alias="paste">images/icons/paste.png</file>
         <file alias="redo">images/icons/redo.png</file>
@@ -19,5 +16,20 @@
         <file alias="saveAll">images/icons/saveAll.png</file>
         <file alias="undo">images/icons/undo.png</file>
         <file alias="unindent">images/icons/unindent.png</file>
+        <file alias="closeProject">images/icons/closeProject.png</file>
+        <file alias="copy">images/icons/copy.png</file>
+        <file alias="help">images/icons/help.png</file>
+        <file alias="info">images/icons/info.png</file>
+        <file alias="newDoc">images/icons/newDoc.png</file>
+        <file alias="NewProyect">images/icons/newProject.png</file>
+        <file alias="refresh">images/icons/refresh.png</file>
+        <file alias="search">images/icons/search.png</file>
+        <file alias="zoomIn">images/icons/zoomIn.png</file>
+        <file alias="zoomOut">images/icons/zoomOut.png</file>
+        <file alias="web">images/icons/web.png</file>
+        <file alias="delete">images/icons/delete.png</file>
+        <file alias="involved">images/icons/getInvolved.png</file>
+        <file alias="preferences">images/icons/preferences.png</file>
+        <file alias="quit">images/icons/quit.png</file>
     </qresource>
 </RCC>
