@@ -39,6 +39,6 @@ Please report any bugs you find here: https://github.com/ElPincheTopo/Abigail/is
 Or by e-mail to this adress: topo@asustin.net
 
 ## Licensing
-Abigail is currently licensed under the GNU GPL v3 but it may be licensed in other ways upon request. All the artwork(Icons, Logos, etc...) is property of their authors and could be licensed with other conditions. 
+Abigail is currently licensed under the [GNU GPL v3](https://github.com/ElPincheTopo/Abigail/blob/master/COPYING) but it may be licensed in other ways upon request. All the artwork(Icons, Logos, etc...) is property of their authors and could be licensed with other conditions. 
 
 For more information please e-mail me at: topo@asustin.net
