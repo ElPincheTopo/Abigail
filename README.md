@@ -26,7 +26,7 @@ More documentation is available [here](https://github.com/ElPincheTopo/Abigail/w
 Contributing
 ------------
 
-At this moment there are so many ways someone can contribute to the project. Not only the programming is important, we also are looking for people to help with the icons, the logo, the documentation, and optimizing the code. If you are intrested in helping out in any of this ways please visit the wiki and learn how to do it. If you are intrested in contrbuting code, please se the following:
+At this moment there are so many ways someone can contribute to the project. Not only the programming is important, we also are looking for people to help with the icons, the logo, the documentation, and optimizing the code. If you are intrested in helping out in any of this ways please visit the wiki and learn how to do it. If you are intrested in contrbuting code, please read the [Coding, Committing & Stuffing Style](https://github.com/ElPincheTopo/Abigail/wiki/Coding,-Committing-&-Stuffing-Style)section and do the following:
 
 1. Choose or create an issue.
 2. Fork it.
