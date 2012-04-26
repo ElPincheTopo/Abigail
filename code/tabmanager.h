@@ -35,6 +35,7 @@ public:
 private:
     void save(int index);
     void open(QString archivo);
+
 signals:
     void textChanged(int index);
 
@@ -44,6 +45,7 @@ public slots:
     void saveAll();
     void saveAs();
     void open();
+    void tabMoved(int from, int to);
 
 private slots:
     void textChanges(int index);

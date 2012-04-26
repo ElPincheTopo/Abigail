@@ -24,11 +24,13 @@
 #include <QTabBar>
 #include <algorithm>
 #include <QFileDialog>
+#include <QMessageBox>
 
 
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
     newDoc();
+    QObject::connect(this->tabBar(), SIGNAL(tabMoved(int, int)), this, SLOT(tabMoved(int,int)));
 }
 
 TabManager::~TabManager()
@@ -103,4 +105,12 @@ void TabManager::textChanges(int index)
     Document* doc = dynamic_cast<Document*>(widget(index));
     QString title = doc->title == 0 ? "Untitled" : *(doc->title);
     this->setTabText(index, title.append("*"));
+}
+
+void TabManager::tabMoved(int from, int to)
+{
+    Document* leftDoc = dynamic_cast<Document*>(widget(to));
+    Document* rightDoc = dynamic_cast<Document*>(widget(from));
+    leftDoc->tabIndex = to;
+    rightDoc->tabIndex = from;
 }
