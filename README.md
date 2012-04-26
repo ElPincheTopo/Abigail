@@ -21,9 +21,8 @@ Although still in early development, Abigail aims to provide a fast, lightweight
 For more informtion please visit the project [home page](http://elpinchetopo.github.com/Abigail/).
 More documentation is available [here](https://github.com/ElPincheTopo/Abigail/wiki).
 
-
 ## Contributing
-At this moment there are so many ways someone can contribute to the project. Not only the programming is important, we also are looking for people to help with the icons, the logo, the documentation, and optimizing the code. If you are intrested in helping out in any of this ways please visit the wiki and learn how to do it. If you are intrested in contrbuting code, please read the [Coding, Committing & Stuffing Style](https://github.com/ElPincheTopo/Abigail/wiki/Coding,-Committing-&-Stuffing-Style) section of the [wiki](https://github.com/ElPincheTopo/Abigail/wiki) and do the following:
+At this moment there are so many ways someone can contribute to the project. Not only the programming is important, we also are looking for people to help with the icons, the logo, the documentation, and optimizing the code. If you are intrested in helping out in any of this ways please visit the wiki and learn how to do it. If you are intrested in contrbuting code, please read the [Coding, Committing & Stuffing Style](https://github.com/ElPincheTopo/Abigail/wiki/Coding,-Committing-&-Stuffing-Style) section of the [wiki](https://github.com/ElPincheTopo/Abigail/wiki) and then do the following:
 
 1. Choose or create an issue.
 2. Fork it.
