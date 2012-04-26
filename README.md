@@ -1,5 +1,4 @@
-Abigail
-=============
+# Abigail
 
     Abigail, A lightweight, powerful and customizable cross-platform IDE. 
     Copyright (C) 2012  Roberto Lapuente
@@ -23,10 +22,8 @@ For more informtion please visit the project [home page](http://elpinchetopo.git
 More documentation is available [here](https://github.com/ElPincheTopo/Abigail/wiki).
 
 
-Contributing
-------------
-
-At this moment there are so many ways someone can contribute to the project. Not only the programming is important, we also are looking for people to help with the icons, the logo, the documentation, and optimizing the code. If you are intrested in helping out in any of this ways please visit the wiki and learn how to do it. If you are intrested in contrbuting code, please read the [Coding, Committing & Stuffing Style](https://github.com/ElPincheTopo/Abigail/wiki/Coding,-Committing-&-Stuffing-Style)section and do the following:
+## Contributing
+At this moment there are so many ways someone can contribute to the project. Not only the programming is important, we also are looking for people to help with the icons, the logo, the documentation, and optimizing the code. If you are intrested in helping out in any of this ways please visit the wiki and learn how to do it. If you are intrested in contrbuting code, please read the [Coding, Committing & Stuffing Style](https://github.com/ElPincheTopo/Abigail/wiki/Coding,-Committing-&-Stuffing-Style) section of the [wiki](https://github.com/ElPincheTopo/Abigail/wiki) and do the following:
 
 1. Choose or create an issue.
 2. Fork it.
@@ -36,9 +33,12 @@ At this moment there are so many ways someone can contribute to the project. Not
 6. Make a Pull Request.
 7. Enjoy a refreshing Coke and wait.
 
-Bug Reports
-------------
-
+## Bug Reports
 Please report any bugs you find here: https://github.com/ElPincheTopo/Abigail/issues
 
 Or by e-mail to this adress: topo@asustin.net
+
+## Licensing
+Abigail is currently licensed under the GNU GPL v3 but it may be licensed in other ways upon request. All the artwork(Icons, Logos, etc...) is property of their authors and could be licensed with other conditions. 
+
+For more information please e-mail me at: topo@asustin.net
