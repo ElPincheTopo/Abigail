@@ -38,6 +38,5 @@ int main(int argc, char *argv[])
     int exec = a.exec();
 
     std::cout << "Goodbye!" << std::endl;
-
     return exec;
 }

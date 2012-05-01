@@ -1,6 +1,6 @@
 # Abigail
 
-    Abigail, A lightweight, powerful and customizable cross-platform IDE. 
+    Abigail, A lightweight, powerful and customizable cross-platform IDE.
     Copyright (C) 2012  Roberto Lapuente
 
     This program is free software: you can redistribute it and/or modify
@@ -34,10 +34,11 @@ At this moment there are so many ways someone can contribute to the project. Not
 
 ## Bug Reports
 Please report any bugs you find here: https://github.com/ElPincheTopo/Abigail/issues
+The current known issues can be found here: http://asust.in/006z
 
 Or by e-mail to this adress: topo@asustin.net
 
 ## Licensing
-Abigail is currently licensed under the [GNU GPL v3](https://github.com/ElPincheTopo/Abigail/blob/master/COPYING) but it may be licensed in other ways upon request. All the artwork(Icons, Logos, etc...) is property of their authors and could be licensed with other conditions. 
+Abigail is currently licensed under the [GNU GPL v3](https://github.com/ElPincheTopo/Abigail/blob/master/COPYING) but it may be licensed in other ways upon request. All the artwork(Icons, Logos, etc...) is property of their authors and could be licensed with other conditions.
 
 For more information please e-mail me at: topo@asustin.net
