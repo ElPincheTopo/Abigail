@@ -106,11 +106,13 @@ void MainWindow::on_tabsManager_tabCloseRequested(int index)
     }
 
     // If the user clicked 'cancel' do nothing, else...
-    if (ret != QMessageBox::Cancel) {
-        // If the user clicked 'save' emit save signal, then...
-        if (ret == QMessageBox::Save)
-            emit ui->actionSave->trigger();
-        // No matter what, delte the doc and remove the tab
+    // If the user clicked 'save' call 'save' and retry closing tab
+    if (ret == QMessageBox::Save) {
+        ui->tabsManager->save(index);
+        on_tabsManager_tabCloseRequested(index);
+    }
+    // If the user clicked 'discard' or if the document was saved delete the tab
+    if (ret == QMessageBox::Discard) {
         delete doc;
         ui->tabsManager->removeTab(index);
     }
@@ -171,4 +173,10 @@ void MainWindow::on_actionPaste_triggered()
 void MainWindow::on_actionDelete_triggered()
 {
     // Erase current selected text or object in project manager
+}
+
+void MainWindow::on_tabsManager_currentChanged(QWidget *arg1)
+{
+    Document* doc = dynamic_cast<Document*>(arg1);
+    doc->textArea->setFocus();
 }
