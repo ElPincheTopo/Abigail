@@ -34,7 +34,7 @@ At this moment there are so many ways someone can contribute to the project. Not
 
 ## Bug Reports
 Please report any bugs you find here: https://github.com/ElPincheTopo/Abigail/issues
-The current known issues can be found here: http://asust.in/006z
+. The current known issues can be found here: http://asust.in/006z
 
 Or by e-mail to this adress: topo@asustin.net
 
