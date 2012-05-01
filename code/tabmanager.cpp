@@ -22,7 +22,6 @@
 
 #include "tabmanager.h"
 #include <QTabBar>
-#include <algorithm>
 #include <QFileDialog>
 #include <QMessageBox>
 

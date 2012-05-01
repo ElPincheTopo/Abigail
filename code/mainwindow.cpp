@@ -93,8 +93,9 @@ void MainWindow::on_tabsManager_tabCloseRequested(int index)
     int ret = QMessageBox::Discard;
     // If the Document has changed since las save, ask the user what to do
     if (doc->docHasChanged) {
+        QString title = (doc->title == 0 ? QString("Untitled") : *(doc->title));
         QString msgText("The document '");
-        msgText.append(doc->title).append("'' has been modified.");
+        msgText.append(title).append("' has been modified.");
         QMessageBox msgBox;
         msgBox.setText(msgText);
         msgBox.setInformativeText("Do you want to save your changes?");

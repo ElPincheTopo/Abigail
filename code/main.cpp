@@ -32,12 +32,18 @@ int main(int argc, char *argv[])
               << "     under certain conditions.\n\n"
               << "     Visit http://elpinchetopo.github.com/Abigail/ for more information." << std::endl;
 
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    int exec = a.exec();
+    int exec = 1;
+
+    try {
+        QApplication a(argc, argv);
+        MainWindow w;
+        w.show();
+        exec = a.exec();
+    } catch (int e) {
+        std::cout << "Error: " << e << std::endl;
+        exec = e;
+    }
 
     std::cout << "Goodbye!" << std::endl;
-
     return exec;
 }
