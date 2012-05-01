@@ -25,7 +25,6 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
     newDoc();
@@ -74,9 +73,11 @@ void TabManager::saveAs()
 {
     Document* doc = dynamic_cast<Document*>(currentWidget());
     if (doc != 0) {
-        QString archivo = QFileDialog::getSaveFileName(this, "Choose a file name...", "/home");
-        QString* title = doc->saveAs(archivo);
-        this->setTabText(this->currentIndex(), *title);
+        QString archivo = QFileDialog::getSaveFileName(this, "Save As", "/home/Untitled.txt");
+        if (archivo != "") {
+            QString* title = doc->saveAs(archivo);
+            this->setTabText(this->currentIndex(), *title);
+        }
     }
 }
 
