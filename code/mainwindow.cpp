@@ -137,6 +137,9 @@ void MainWindow::on_actionCloseFile_triggered()
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     // Here it must check if the tabs are already saved
+    for (int i=0; i<ui->tabsManager->count(); ++i)
+        on_tabsManager_tabCloseRequested(i);
+
     event->accept();
 }
 

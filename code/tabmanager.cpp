@@ -66,9 +66,8 @@ void TabManager::saveCurrentDoc()
 
 void TabManager::saveAll()
 {
-    for (int i=0; i<count(); ++i) {
+    for (int i=0; i<count(); ++i)
         save(i);
-    }
 }
 
 void TabManager::saveAs()
