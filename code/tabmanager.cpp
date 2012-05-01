@@ -22,10 +22,8 @@
 
 #include "tabmanager.h"
 #include <QTabBar>
-#include <algorithm>
 #include <QFileDialog>
 #include <QMessageBox>
-
 
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
@@ -53,8 +51,10 @@ void TabManager::save(int index)
     // Checar si no esta guardado
     Document *doc = dynamic_cast<Document*>(widget(index));
     doc->title == 0 ? saveAs() : doc->save(); // If the document has no title it's a new document and 'saveAs()' should be called instead
-    QString str = *(doc->title);
-    this->setTabText(index, str);
+    if (doc->title != 0) { // If the Save as was canceled then end
+        QString str = *(doc->title);
+        this->setTabText(index, str);
+    }
 }
 
 void TabManager::saveCurrentDoc()
@@ -66,18 +66,19 @@ void TabManager::saveCurrentDoc()
 
 void TabManager::saveAll()
 {
-    for (int i=0; i<count(); ++i) {
+    for (int i=0; i<count(); ++i)
         save(i);
-    }
 }
 
 void TabManager::saveAs()
 {
     Document* doc = dynamic_cast<Document*>(currentWidget());
     if (doc != 0) {
-        QString archivo = QFileDialog::getSaveFileName(this, "Choose a file name...", "/home");
-        QString* title = doc->saveAs(archivo);
-        this->setTabText(this->currentIndex(), *title);
+        QString archivo = QFileDialog::getSaveFileName(this, "Save As", "/home/Untitled.txt");
+        if (archivo != "") {
+            QString* title = doc->saveAs(archivo);
+            this->setTabText(this->currentIndex(), *title);
+        }
     }
 }
 
