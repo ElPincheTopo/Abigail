@@ -34,7 +34,6 @@ At this moment there are so many ways someone can contribute to the project. Not
 6. Make a Pull Request.
 7. Enjoy a refreshing Coke and wait.
 
-## Bug Reports
 ### Bug Reports
 If you wish to learn how to submit a bug report please go to the [Submitting a Bug Report](https://github.com/ElPincheTopo/Abigail/wiki/Bug-Reports) page of the wiki. Before submitting a bug report please check the [Known Issues](http://asust.in/006z) list here: http://asust.in/006z
 
