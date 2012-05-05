@@ -19,10 +19,11 @@
     or send an e-mail to topo@asustin.net.
 */
 
+#include <QDesktopServices>
+#include <QUrl>
+
 #include "about.h"
 #include "ui_about.h"
-#include "QDesktopServices"
-#include "QUrl"
 
 About::About(QWidget *parent) :
     QDialog(parent),

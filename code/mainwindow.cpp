@@ -22,11 +22,11 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QMessageBox>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "document.h"
 
-#include <iostream>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -117,13 +117,10 @@ void MainWindow::on_tabsManager_tabCloseRequested(int index)
         ui->tabsManager->save(index);
         on_tabsManager_tabCloseRequested(index);
     }
+
     // If the user clicked 'discard' or if the document was saved already delete the tab
-    if (ret == QMessageBox::Discard) {
-        //delete doc;
-        //std::cout << "No es el delete" << std::endl;
-        //ui->tabsManager->removeTab(index);
+    if (ret == QMessageBox::Discard)
         doc->deleteLater();
-    }
 }
 
 void MainWindow::on_actionSave_As_triggered()
@@ -188,6 +185,8 @@ void MainWindow::on_actionDelete_triggered()
 
 void MainWindow::on_tabsManager_currentChanged(QWidget *arg1)
 {
-    Document* doc = dynamic_cast<Document*>(arg1);
-    doc->textArea->setFocus();
+    if (arg1 != 0) {
+        Document* doc = dynamic_cast<Document*>(arg1);
+        doc->textArea->setFocus();
+    }
 }

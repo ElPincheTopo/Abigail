@@ -24,6 +24,7 @@
 #define TABMANAGER_H
 
 #include <QTabWidget>
+
 #include "document.h"
 
 class TabManager : public QTabWidget

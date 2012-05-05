@@ -19,11 +19,11 @@
     or send an e-mail to topo@asustin.net.
 */
 
-
-#include "document.h"
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
+
+#include "document.h"
 
 Document::Document(QWidget *parent) : QWidget(parent)
 {

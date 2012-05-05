@@ -24,6 +24,7 @@
 
 #include <QMainWindow>
 #include <QCloseEvent>
+
 #include "about.h"
 
 namespace Ui {

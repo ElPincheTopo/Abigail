@@ -19,9 +19,11 @@
     or send an e-mail to topo@asustin.net.
 */
 
-#include <QtGui/QApplication>
-#include "mainwindow.h"
 #include <iostream>
+
+#include <QtGui/QApplication>
+
+#include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {

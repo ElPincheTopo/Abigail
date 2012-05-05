@@ -19,12 +19,11 @@
     or send an e-mail to topo@asustin.net.
 */
 
-
-#include "tabmanager.h"
 #include <QTabBar>
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QDebug>
+
+#include "tabmanager.h"
 
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
@@ -88,7 +87,7 @@ void TabManager::open(QString archivo)
     this->setCurrentIndex(index);
     QString* title = doc->open(archivo);
     this->setTabText(index, *title);
-    QObject::connect(doc, SIGNAL(textChanged(int)), this, SLOT(textChanges(int)));
+    QObject::connect(doc, SIGNAL(textChanged(Document*)), this, SLOT(textChanges(Document*)));
     doc->textArea->setFocus();
 }
 
