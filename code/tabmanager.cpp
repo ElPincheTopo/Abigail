@@ -24,11 +24,11 @@
 #include <QTabBar>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QDebug>
 
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
     newDoc();
-    QObject::connect(this->tabBar(), SIGNAL(tabMoved(int, int)), this, SLOT(tabMoved(int,int)));
 }
 
 TabManager::~TabManager()
@@ -41,8 +41,7 @@ void TabManager::newDoc()
     Document *doc = new Document();
     int index = this->addTab(doc, "Untitled");
     this->setCurrentIndex(index);
-    doc->tabIndex = index;
-    QObject::connect(doc, SIGNAL(textChanged(int)), this, SLOT(textChanges(int)));
+    QObject::connect(doc, SIGNAL(textChanged(Document*)), this, SLOT(textChanges(Document*)));
     doc->textArea->setFocus();
 }
 
@@ -89,7 +88,6 @@ void TabManager::open(QString archivo)
     this->setCurrentIndex(index);
     QString* title = doc->open(archivo);
     this->setTabText(index, *title);
-    doc->tabIndex = index;
     QObject::connect(doc, SIGNAL(textChanged(int)), this, SLOT(textChanges(int)));
     doc->textArea->setFocus();
 }
@@ -101,17 +99,13 @@ void TabManager::open()
         open(archivo);
 }
 
-void TabManager::textChanges(int index)
+void TabManager::textChanges(Document* doc)
 {
-    Document* doc = dynamic_cast<Document*>(widget(index));
     QString title = doc->title == 0 ? "Untitled" : *(doc->title);
-    this->setTabText(index, title.append("*"));
+    this->setTabText(this->indexOf(doc), title.append("*"));
 }
 
-void TabManager::tabMoved(int from, int to)
+void TabManager::tabRemoved(int index)
 {
-    Document* leftDoc = dynamic_cast<Document*>(widget(to));
-    Document* rightDoc = dynamic_cast<Document*>(widget(from));
-    leftDoc->tabIndex = to;
-    rightDoc->tabIndex = from;
+
 }

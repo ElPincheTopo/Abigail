@@ -29,8 +29,6 @@ Document::Document(QWidget *parent) : QWidget(parent)
 {
     this->file = 0;
     this->title = 0;
-    //this->title = new QString("Untitled");
-    this->tabIndex = 0;
     this->docHasChanged = false;
     this->layout = new QGridLayout(this);
     this->layout->setSpacing(2);
@@ -101,6 +99,6 @@ void Document::textChanges()
 {
     if (!docHasChanged) {
         docHasChanged = true;
-        emit textChanged(tabIndex);
+        emit textChanged(this);
     }
 }

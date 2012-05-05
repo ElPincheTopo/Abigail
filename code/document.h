@@ -36,7 +36,6 @@ public:
     ~Document();
     QTextEdit *textArea;
     QString *title;
-    int tabIndex;
     bool docHasChanged;
 
 private:
@@ -44,7 +43,7 @@ private:
     QFile *file;
 
 signals:
-    void textChanged(int index);
+    void textChanged(Document* doc);
 
 public slots:
     void save();

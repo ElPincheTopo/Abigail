@@ -34,6 +34,7 @@ public:
     ~TabManager();
 private:
     void open(QString archivo);
+    void tabRemoved(int index);
 
 signals:
     void textChanged(int index);
@@ -45,10 +46,9 @@ public slots:
     void saveAll();
     void saveAs();
     void open();
-    void tabMoved(int from, int to);
 
 private slots:
-    void textChanges(int index);
+    void textChanges(Document* doc);
 
 };
 
