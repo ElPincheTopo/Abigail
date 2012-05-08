@@ -37,7 +37,7 @@ Document::Document(QWidget *parent) : QWidget(parent)
     this->textArea = new CodeEditor(this);
     this->textArea->setLineWrapMode(CodeEditor::NoWrap);
     this->textArea->setAcceptDrops(true);
-    this->textArea->setFont(QFont("Mono" , 11));
+    this->textArea->setFont(QFont("Mono", 11));
     this->layout->addWidget(textArea);
     this->textArea->show();
     this->textArea->setFocus();
