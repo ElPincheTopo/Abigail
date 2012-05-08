@@ -106,7 +106,7 @@ void TabManager::textChanges(Document* doc)
     this->setTabText(this->indexOf(doc), title.append("*"));
 }
 
-void TabManager::tabRemoved(int index)
+void TabManager::tabRemoved(int /*index*/)
 {
 
 }

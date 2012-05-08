@@ -35,7 +35,7 @@ public:
     ~TabManager();
 private:
     void openFile(QString archivo);
-    void tabRemoved(int index);
+    void tabRemoved(int );
 
 signals:
     void textChanged(int index);
