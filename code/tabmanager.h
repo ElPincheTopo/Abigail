@@ -36,6 +36,8 @@ public:
 private:
     void openFile(QString archivo);
     void tabRemoved(int );
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
 
 signals:
     void textChanged(int index);

@@ -22,12 +22,14 @@
 #include <QTabBar>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QUrl>
 
 #include "tabmanager.h"
 
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
     newDoc();
+    this->setAcceptDrops(true);
 }
 
 TabManager::~TabManager()
@@ -109,4 +111,21 @@ void TabManager::textChanges(Document* doc)
 void TabManager::tabRemoved(int /*index*/)
 {
 
+}
+
+void TabManager::dragEnterEvent(QDragEnterEvent *event)
+{
+    if (event->mimeData()->hasFormat("text/uri-list")) event->acceptProposedAction();
+}
+
+void TabManager::dropEvent(QDropEvent *event)
+{
+    foreach (QUrl url, event->mimeData()->urls()) {
+        QStringList list = url.toString().split("file://");
+        if (list.count() == 2) {
+            QString archivo = list[1];
+            this->openFile(archivo);
+        }
+    }
+    event->acceptProposedAction();
 }
