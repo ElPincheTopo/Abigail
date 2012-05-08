@@ -28,7 +28,7 @@
 #include <QGridLayout>
 #include <QFile>
 
-#include "linenumber.h"
+#include "codeeditor.h"
 
 class Document : public QWidget
 {
@@ -36,7 +36,7 @@ class Document : public QWidget
 public:
     explicit Document(QWidget *parent = 0);
     ~Document();
-    QPlainTextEdit *textArea;
+    CodeEditor *textArea;
     QString *title;
     bool docHasChanged;
 

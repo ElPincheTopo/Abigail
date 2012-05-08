@@ -34,8 +34,8 @@ Document::Document(QWidget *parent) : QWidget(parent)
     this->layout->setSpacing(2);
     this->layout->setMargin(0);
     this->setLayout(layout);
-    this->textArea = new QPlainTextEdit(this);
-    this->textArea->setLineWrapMode(QPlainTextEdit::NoWrap);
+    this->textArea = new CodeEditor(this);
+    this->textArea->setLineWrapMode(CodeEditor::NoWrap);
     this->textArea->setAcceptDrops(true);
     this->textArea->setFont(QFont("Mono" , 11));
     this->layout->addWidget(textArea);
