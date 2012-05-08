@@ -35,13 +35,15 @@ TabManager::~TabManager()
 
 }
 
-void TabManager::newDoc()
+Document* TabManager::newDoc(QString title)
 {
     Document *doc = new Document();
-    int index = this->addTab(doc, "Untitled");
+    int index = this->addTab(doc, title);
     this->setCurrentIndex(index);
     QObject::connect(doc, SIGNAL(textChanged(Document*)), this, SLOT(textChanges(Document*)));
     doc->textArea->setFocus();
+
+    return doc;
 }
 
 void TabManager::save(int index)
@@ -70,7 +72,7 @@ void TabManager::saveAll()
 
 void TabManager::saveAs()
 {
-    Document* doc = dynamic_cast<Document*>(currentWidget());
+    Document* doc = dynamic_cast<Document*>(this->currentWidget());
     if (doc != 0) {
         QString archivo = QFileDialog::getSaveFileName(this, "Save As", "/home/Untitled.txt");
         if (archivo != "") {
@@ -80,22 +82,22 @@ void TabManager::saveAs()
     }
 }
 
-void TabManager::open(QString archivo)
+void TabManager::openFile(QString archivo)
 {
-    Document* doc = new Document();
-    int index = this->addTab(doc, "");
-    this->setCurrentIndex(index);
-    QString* title = doc->open(archivo);
-    this->setTabText(index, *title);
-    QObject::connect(doc, SIGNAL(textChanged(Document*)), this, SLOT(textChanges(Document*)));
-    doc->textArea->setFocus();
+    Document* currentDoc = dynamic_cast<Document*>(this->currentWidget());
+
+    Document* doc = (this->count() == 1 && currentDoc->title == 0 && !currentDoc->docHasChanged) ?
+                dynamic_cast<Document*>(this->currentWidget()) :
+                this->newDoc(archivo);
+    this->setTabText(this->currentIndex(), *doc->open(archivo));
+
 }
 
 void TabManager::open()
 {
     QStringList archivos = QFileDialog::getOpenFileNames(this, "Select a file to open...", "/home");
     foreach (QString archivo, archivos)
-        open(archivo);
+        openFile(archivo);
 }
 
 void TabManager::textChanges(Document* doc)

@@ -34,14 +34,14 @@ public:
     explicit TabManager(QWidget *parent = 0);
     ~TabManager();
 private:
-    void open(QString archivo);
+    void openFile(QString archivo);
     void tabRemoved(int index);
 
 signals:
     void textChanged(int index);
 
 public slots:
-    void newDoc();
+    Document *newDoc(QString title = QString("Untitled"));
     void save(int index);
     void saveCurrentDoc();
     void saveAll();

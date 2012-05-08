@@ -24,9 +24,11 @@
 #define DOCUMENT_H
 
 #include <QWidget>
-#include <QTextEdit>
+#include <QPlainTextEdit>
 #include <QGridLayout>
 #include <QFile>
+
+#include "linenumber.h"
 
 class Document : public QWidget
 {
@@ -34,7 +36,7 @@ class Document : public QWidget
 public:
     explicit Document(QWidget *parent = 0);
     ~Document();
-    QTextEdit *textArea;
+    QPlainTextEdit *textArea;
     QString *title;
     bool docHasChanged;
 

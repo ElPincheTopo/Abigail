@@ -79,11 +79,6 @@ void MainWindow::on_actionSave_All_triggered()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    /*Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
-    if (doc->title == 0 && doc->docHasChanged == false) {
-        delete doc;
-        ui->tabsManager->removeTab(doc->tabIndex);
-    }*/
     ui->tabsManager->open();
 }
 

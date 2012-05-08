@@ -34,11 +34,9 @@ Document::Document(QWidget *parent) : QWidget(parent)
     this->layout->setSpacing(2);
     this->layout->setMargin(0);
     this->setLayout(layout);
-    this->textArea = new QTextEdit(this);
-    this->textArea->setLineWrapMode(QTextEdit::NoWrap);
+    this->textArea = new QPlainTextEdit(this);
+    this->textArea->setLineWrapMode(QPlainTextEdit::NoWrap);
     this->textArea->setAcceptDrops(true);
-    this->textArea->setAcceptRichText(true);
-    this->textArea->setUndoRedoEnabled(true);
     this->textArea->setFont(QFont("Mono" , 11));
     this->layout->addWidget(textArea);
     this->textArea->show();
@@ -82,7 +80,7 @@ QString* Document::open(QString archivo)
     this->file = new QFile(archivo);
     this->file->open(QIODevice::ReadOnly);
     QTextStream stream(file);
-    this->textArea->setText(stream.readAll());
+    this->textArea->setPlainText(stream.readAll());
     file->close();
     QStringList list = archivo.split("/");
     this->title = new QString(list[list.size()-1]);
