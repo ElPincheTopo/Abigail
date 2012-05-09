@@ -22,6 +22,8 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QMessageBox>
+#include <QTextCursor>
+#include <QTextDocumentFragment>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -184,4 +186,126 @@ void MainWindow::on_tabsManager_currentChanged(QWidget *arg1)
         Document* doc = dynamic_cast<Document*>(arg1);
         doc->textArea->setFocus();
     }
+}
+
+void MainWindow::on_action_Indent_triggered()
+{
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    QTextCursor cursor = doc->textArea->textCursor();
+
+    cursor.beginEditBlock();
+    int start = cursor.selectionStart();
+    int end = cursor.selectionEnd();
+    cursor.clearSelection();
+
+    cursor.setPosition(end);
+    cursor.movePosition(QTextCursor::EndOfLine);
+    end = cursor.position();
+
+    cursor.setPosition(start);
+    cursor.movePosition(QTextCursor::StartOfLine);
+    start = cursor.position();
+
+    do {
+        cursor.movePosition(QTextCursor::StartOfLine);
+        cursor.insertText("    ");
+        cursor.movePosition(QTextCursor::EndOfLine);
+        end += 4;
+    } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
+
+    cursor.movePosition(QTextCursor::StartOfLine);
+    cursor.endEditBlock();
+    doc->textArea->setTextCursor(cursor);
+}
+
+void MainWindow::on_action_Unindent_triggered()
+{
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    QTextCursor cursor = doc->textArea->textCursor();
+
+    cursor.beginEditBlock();
+    int start = cursor.selectionStart();
+    int end = cursor.selectionEnd();
+    cursor.clearSelection();
+
+    cursor.setPosition(end);
+    cursor.movePosition(QTextCursor::EndOfLine);
+    end = cursor.position();
+
+    cursor.setPosition(start);
+    cursor.movePosition(QTextCursor::StartOfLine);
+    start = cursor.position();
+
+    do {
+        cursor.movePosition(QTextCursor::StartOfLine);
+        cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor, 4);
+        if (cursor.selectedText() == "    ") cursor.removeSelectedText();
+        cursor.movePosition(QTextCursor::EndOfLine);
+        end -= 4;
+    } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
+
+    cursor.movePosition(QTextCursor::StartOfLine);
+    cursor.endEditBlock();
+    doc->textArea->setTextCursor(cursor);
+}
+
+void MainWindow::on_actionComment_triggered()
+{
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    QTextCursor cursor = doc->textArea->textCursor();
+
+    cursor.beginEditBlock();
+    int start = cursor.selectionStart();
+    int end = cursor.selectionEnd();
+    cursor.clearSelection();
+
+    cursor.setPosition(end);
+    cursor.movePosition(QTextCursor::EndOfLine);
+    end = cursor.position();
+
+    cursor.setPosition(start);
+    cursor.movePosition(QTextCursor::StartOfLine);
+    start = cursor.position();
+
+    do {
+        cursor.movePosition(QTextCursor::StartOfLine);
+        cursor.insertText("// ");
+        cursor.movePosition(QTextCursor::EndOfLine);
+        end += 3;
+    } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
+
+    cursor.movePosition(QTextCursor::StartOfLine);
+    cursor.endEditBlock();
+    doc->textArea->setTextCursor(cursor);
+}
+
+void MainWindow::on_actionUncomment_triggered()
+{
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    QTextCursor cursor = doc->textArea->textCursor();
+
+    cursor.beginEditBlock();
+    int start = cursor.selectionStart();
+    int end = cursor.selectionEnd();
+    cursor.clearSelection();
+
+    cursor.setPosition(end);
+    cursor.movePosition(QTextCursor::EndOfLine);
+    end = cursor.position();
+
+    cursor.setPosition(start);
+    cursor.movePosition(QTextCursor::StartOfLine);
+    start = cursor.position();
+
+    do {
+        cursor.movePosition(QTextCursor::StartOfLine);
+        cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor, 3);
+        if (cursor.selectedText() == "// ") cursor.removeSelectedText();
+        cursor.movePosition(QTextCursor::EndOfLine);
+        end -= 3;
+    } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
+
+    cursor.movePosition(QTextCursor::StartOfLine);
+    cursor.endEditBlock();
+    doc->textArea->setTextCursor(cursor);
 }
