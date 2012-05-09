@@ -127,7 +127,7 @@
     <addaction name="separator"/>
     <addaction name="action_Indent"/>
     <addaction name="action_Unindent"/>
-    <addaction name="actionComment_Uncomment"/>
+    <addaction name="actionUncomment"/>
     <addaction name="actionAuto_format"/>
     <addaction name="menuF_ormat"/>
     <addaction name="separator"/>
@@ -236,8 +236,9 @@
    </attribute>
    <addaction name="action_Indent"/>
    <addaction name="action_Unindent"/>
-   <addaction name="actionComment_Uncomment"/>
+   <addaction name="actionComment"/>
    <addaction name="actionAuto_format"/>
+   <addaction name="actionUncomment"/>
   </widget>
   <widget class="QToolBar" name="buildToolBar">
    <property name="windowTitle">
@@ -537,13 +538,16 @@
     <string>&amp;Indent</string>
    </property>
   </action>
-  <action name="actionComment_Uncomment">
+  <action name="actionUncomment">
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/comment</normaloff>:/resources/images/icons/comment</iconset>
    </property>
    <property name="text">
-    <string>&amp;Comment/Uncomment</string>
+    <string>Uncomment</string>
+   </property>
+   <property name="toolTip">
+    <string>Uncomment</string>
    </property>
   </action>
   <action name="actionAuto_format">
@@ -668,6 +672,18 @@
    </property>
    <property name="toolTip">
     <string>Unindent</string>
+   </property>
+  </action>
+  <action name="actionComment">
+   <property name="icon">
+    <iconset resource="../resources/icons.qrc">
+     <normaloff>:/resources/images/icons/comment</normaloff>:/resources/images/icons/comment</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Comment</string>
+   </property>
+   <property name="toolTip">
+    <string>Ccomment</string>
    </property>
   </action>
  </widget>

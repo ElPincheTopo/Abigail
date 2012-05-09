@@ -62,6 +62,10 @@ private slots:
     void on_actionPaste_triggered();
     void on_actionDelete_triggered();
     void on_tabsManager_currentChanged(QWidget *arg1);
+    void on_action_Indent_triggered();
+    void on_action_Unindent_triggered();
+    void on_actionComment_triggered();
+    void on_actionUncomment_triggered();
 
 private:
     Ui::MainWindow *ui;
