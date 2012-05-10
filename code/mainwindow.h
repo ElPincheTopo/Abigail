@@ -52,7 +52,7 @@ private slots:
     void on_actionSave_All_triggered();
     void on_actionOpen_triggered();
     void on_actionSave_triggered();
-    void on_tabsManager_tabCloseRequested(int index);
+    bool on_tabsManager_tabCloseRequested(int index);
     void on_actionSave_As_triggered();
     void on_actionFile_triggered();
     void on_actionCloseFile_triggered();
