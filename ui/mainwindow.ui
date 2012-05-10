@@ -429,6 +429,13 @@
        </property>
       </widget>
      </item>
+     <item row="2" column="2" colspan="2">
+      <widget class="QPushButton" name="replace">
+       <property name="text">
+        <string>Replace</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -505,6 +512,9 @@
    </property>
   </action>
   <action name="actionSave">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/save</normaloff>:/resources/images/icons/save</iconset>
@@ -546,6 +556,9 @@
    </property>
   </action>
   <action name="actionUndo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/undo</normaloff>:/resources/images/icons/undo</iconset>
@@ -558,6 +571,9 @@
    </property>
   </action>
   <action name="actionRedo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/redo</normaloff>:/resources/images/icons/redo</iconset>
@@ -570,6 +586,9 @@
    </property>
   </action>
   <action name="actionCopy">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/copy</normaloff>:/resources/images/icons/copy</iconset>
@@ -582,6 +601,9 @@
    </property>
   </action>
   <action name="actionCut">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/cut</normaloff>:/resources/images/icons/cut</iconset>
@@ -823,22 +845,6 @@
   <include location="../resources/icons.qrc"/>
  </resources>
  <connections>
-  <connection>
-   <sender>actionSave</sender>
-   <signal>triggered()</signal>
-   <receiver>tabsManager</receiver>
-   <slot>saveCurrentDoc()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>770</x>
-     <y>381</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>actionNew</sender>
    <signal>triggered()</signal>

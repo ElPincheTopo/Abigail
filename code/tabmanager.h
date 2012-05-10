@@ -41,6 +41,10 @@ private:
 
 signals:
     void textChanged(int index);
+    void copyAvailable(bool);
+    void cutAvailable(bool);
+    void undoAvailable(bool available);
+    void redoAvailable(bool available);
 
 public slots:
     Document *newDoc(QString title = QString("Untitled"));
@@ -49,6 +53,10 @@ public slots:
     void saveAll();
     void saveAs();
     void open();
+    void changeCopyAvailability(bool available);
+    void changeCutAvailability(bool available);
+    void changeUndoAvailability(bool available);
+    void changeRedoAvailability(bool available);
 
 private slots:
     void textChanges(Document* doc);

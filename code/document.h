@@ -46,6 +46,10 @@ private:
 
 signals:
     void textChanged(Document* doc);
+    void copyAvailable(bool available);
+    void cutAvailable(bool available);
+    void undoAvailable(bool available);
+    void redoAvailable(bool available);
 
 public slots:
     void save();
@@ -55,6 +59,10 @@ public slots:
 
 private slots:
     void textChanges();
+    void changeCopyAvailability(bool available);
+    void changeCutAvailability(bool available);
+    void changeUndoAvailability(bool available);
+    void changeRedoAvailability(bool available);
 
 };
 

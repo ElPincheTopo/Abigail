@@ -42,6 +42,11 @@ Document::Document(QWidget *parent) : QWidget(parent)
     this->textArea->show();
     this->textArea->setFocus();
     QObject::connect(textArea, SIGNAL(textChanged()), this, SLOT(textChanges()));
+    QObject::connect(textArea, SIGNAL(copyAvailable(bool)), this, SLOT(changeCutAvailability(bool)));
+    QObject::connect(textArea, SIGNAL(copyAvailable(bool)), this, SLOT(changeCopyAvailability(bool)));
+    QObject::connect(textArea, SIGNAL(undoAvailable(bool)), this, SLOT(changeUndoAvailability(bool)));
+    QObject::connect(textArea, SIGNAL(redoAvailable(bool)), this, SLOT(changeRedoAvailability(bool)));
+
 
 }
 
@@ -99,4 +104,24 @@ void Document::textChanges()
         docHasChanged = true;
         emit textChanged(this);
     }
+}
+
+void Document::changeCopyAvailability(bool available)
+{
+    emit this->copyAvailable(available);
+}
+
+void Document::changeCutAvailability(bool available)
+{
+    emit this->cutAvailable(available);
+}
+
+void Document::changeUndoAvailability(bool available)
+{
+    emit this->undoAvailable(available);
+}
+
+void Document::changeRedoAvailability(bool available)
+{
+    emit this->redoAvailable(available);
 }

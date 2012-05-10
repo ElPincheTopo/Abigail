@@ -31,14 +31,16 @@
 #include "ui_mainwindow.h"
 #include "document.h"
 
-#include <QDebug>
-
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->projectExplorer->close();
     ui->searchBar->close();
     ui->statusBar->showMessage(QString("Hi! Welcome to Abigail"), 10000);
+    connect(ui->tabsManager, SIGNAL(copyAvailable(bool)), ui->actionCopy, SLOT(setEnabled(bool)));
+    connect(ui->tabsManager, SIGNAL(cutAvailable(bool)), ui->actionCut, SLOT(setEnabled(bool)));
+    connect(ui->tabsManager, SIGNAL(undoAvailable(bool)), ui->actionUndo, SLOT(setEnabled(bool)));
+    connect(ui->tabsManager, SIGNAL(redoAvailable(bool)), ui->actionRedo, SLOT(setEnabled(bool)));
 }
 
 MainWindow::~MainWindow()
@@ -321,15 +323,6 @@ void MainWindow::on_actionSearch_triggered()
     ui->searchTextEdit->setFocus();
 }
 
-void MainWindow::on_searchTextEdit_textChanged(const QString &arg1)
-{
-    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
-    QRegExp regExp(arg1);
-    regExp.setPatternSyntax(QRegExp::RegExp2); // In Qt4, in Qt5 it should be RegExp
-    QTextCursor findResult = doc->textArea->document()->find(regExp);
-    doc->textArea->setTextCursor(findResult);
-}
-
 void MainWindow::on_action_Print_triggered()
 {
     QPrinter printer;
@@ -338,4 +331,40 @@ void MainWindow::on_action_Print_triggered()
         return;
     Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
     doc->textArea->document()->print(&printer);
+}
+
+void MainWindow::on_searchTextEdit_textChanged(const QString &arg1)
+{
+    Document *doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    QTextCursor *docCursor = new QTextCursor(doc->textArea->textCursor());
+    docCursor->movePosition(QTextCursor::Start);
+    this->search(docCursor);
+}
+
+void MainWindow::on_searchNext_clicked()
+{
+    Document *doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    QTextCursor *docCursor = new QTextCursor(doc->textArea->textCursor());
+    this->search(docCursor);
+}
+
+void MainWindow::on_searchPrev_clicked()
+{
+    Document *doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    QTextCursor *docCursor = new QTextCursor(doc->textArea->textCursor());
+    this->search(docCursor, QTextDocument::FindBackward);
+}
+
+void MainWindow::search(QTextCursor *docCursor, QTextDocument::FindFlags flags)
+{
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    QRegExp regExp(ui->searchTextEdit->text());
+    regExp.setPatternSyntax(QRegExp::RegExp2); // In Qt4, in Qt5 it should be RegExp
+    QTextCursor findResult = doc->textArea->document()->find(regExp, *docCursor, flags);
+    if (findResult.isNull()) {
+        docCursor->clearSelection();
+        flags == QTextDocument::FindBackward ? docCursor->movePosition(QTextCursor::Start) : docCursor->movePosition(QTextCursor::End);
+        doc->textArea->setTextCursor(*docCursor);
+    } else
+        doc->textArea->setTextCursor(findResult);
 }

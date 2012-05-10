@@ -43,6 +43,10 @@ Document* TabManager::newDoc(QString title)
     int index = this->addTab(doc, title);
     this->setCurrentIndex(index);
     QObject::connect(doc, SIGNAL(textChanged(Document*)), this, SLOT(textChanges(Document*)));
+    QObject::connect(doc, SIGNAL(cutAvailable(bool)), this, SLOT(changeCutAvailability(bool)));
+    QObject::connect(doc, SIGNAL(copyAvailable(bool)), this, SLOT(changeCopyAvailability(bool)));
+    QObject::connect(doc, SIGNAL(undoAvailable(bool)), this, SLOT(changeUndoAvailability(bool)));
+    QObject::connect(doc, SIGNAL(redoAvailable(bool)), this, SLOT(changeRedoAvailability(bool)));
     doc->textArea->setFocus();
 
     return doc;
@@ -76,7 +80,7 @@ void TabManager::saveAs()
 {
     Document* doc = dynamic_cast<Document*>(this->currentWidget());
     if (doc != 0) {
-        QString archivo = QFileDialog::getSaveFileName(this, "Save As", "/home/Untitled.txt");
+        QString archivo = QFileDialog::getSaveFileName(this, "Save As", "~/Untitled.txt");
         if (archivo != "") {
             QString* title = doc->saveAs(archivo);
             this->setTabText(this->currentIndex(), *title);
@@ -128,4 +132,24 @@ void TabManager::dropEvent(QDropEvent *event)
         }
     }
     event->acceptProposedAction();
+}
+
+void TabManager::changeCopyAvailability(bool available)
+{
+    emit this->copyAvailable(available);
+}
+
+void TabManager::changeCutAvailability(bool available)
+{
+    emit this->cutAvailable(available);
+}
+
+void TabManager::changeUndoAvailability(bool available)
+{
+    emit this->undoAvailable(available);
+}
+
+void TabManager::changeRedoAvailability(bool available)
+{
+    emit this->redoAvailable(available);
 }
