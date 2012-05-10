@@ -66,6 +66,11 @@ private slots:
     void on_action_Unindent_triggered();
     void on_actionComment_triggered();
     void on_actionUncomment_triggered();
+    void on_actionSearch_triggered();
+
+    void on_searchTextEdit_textChanged(const QString &arg1);
+
+    void on_action_Print_triggered();
 
 private:
     Ui::MainWindow *ui;

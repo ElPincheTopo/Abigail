@@ -24,15 +24,20 @@
 #include <QMessageBox>
 #include <QTextCursor>
 #include <QTextDocumentFragment>
+#include <QPrinter>
+#include <QPrintDialog>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "document.h"
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->projectExplorer->close();
+    ui->searchBar->close();
     ui->statusBar->showMessage(QString("Hi! Welcome to Abigail"), 10000);
 }
 
@@ -308,4 +313,29 @@ void MainWindow::on_actionUncomment_triggered()
     cursor.movePosition(QTextCursor::StartOfLine);
     cursor.endEditBlock();
     doc->textArea->setTextCursor(cursor);
+}
+
+void MainWindow::on_actionSearch_triggered()
+{
+    if (!ui->searchBar->isVisible()) ui->searchBar->setVisible(true);
+    ui->searchTextEdit->setFocus();
+}
+
+void MainWindow::on_searchTextEdit_textChanged(const QString &arg1)
+{
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    QRegExp regExp(arg1);
+    regExp.setPatternSyntax(QRegExp::RegExp2); // In Qt4, in Qt5 it should be RegExp
+    QTextCursor findResult = doc->textArea->document()->find(regExp);
+    doc->textArea->setTextCursor(findResult);
+}
+
+void MainWindow::on_action_Print_triggered()
+{
+    QPrinter printer;
+    QPrintDialog *dlg = new QPrintDialog(&printer, this);
+    if (dlg->exec() != QDialog::Accepted)
+        return;
+    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    doc->textArea->document()->print(&printer);
 }
