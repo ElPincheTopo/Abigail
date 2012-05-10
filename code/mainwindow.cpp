@@ -31,8 +31,6 @@
 #include "ui_mainwindow.h"
 #include "document.h"
 
-#include <QDebug>
-
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -159,7 +157,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
     for (int i=0; i<ui->tabsManager->count(); ++i)
         if (!on_tabsManager_tabCloseRequested(i))
             tabsClosed = false;
-    qDebug() << tabsClosed;
     (tabsClosed) ? event->accept() : event->ignore();
 }
 
