@@ -97,9 +97,10 @@ void MainWindow::on_actionSave_triggered()
     ui->tabsManager->saveCurrentDoc();
 }
 
-void MainWindow::on_tabsManager_tabCloseRequested(int index)
+bool MainWindow::on_tabsManager_tabCloseRequested(int index)
 {
     Document* doc = dynamic_cast<Document*>(ui->tabsManager->widget(index));
+    bool closed = true;
     int ret = QMessageBox::Discard; // If the document hasn't been changed discard the changes(thar are non-existant)
     // If the Document has changed since las save, ask the user what to do
     if (doc->docHasChanged) {
@@ -113,6 +114,7 @@ void MainWindow::on_tabsManager_tabCloseRequested(int index)
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         msgBox.setDefaultButton(QMessageBox::Save);
         ret = msgBox.exec();
+        closed = false;
     }
 
     // If the user clicked 'cancel' do nothing, else...
@@ -120,11 +122,16 @@ void MainWindow::on_tabsManager_tabCloseRequested(int index)
     if (ret == QMessageBox::Save) {
         ui->tabsManager->save(index);
         on_tabsManager_tabCloseRequested(index);
+        closed = true;
     }
 
     // If the user clicked 'discard' or if the document was saved already delete the tab
-    if (ret == QMessageBox::Discard)
+    if (ret == QMessageBox::Discard) {
         doc->deleteLater();
+        closed = true;
+    }
+
+    return closed;
 }
 
 void MainWindow::on_actionSave_As_triggered()
@@ -145,11 +152,12 @@ void MainWindow::on_actionCloseFile_triggered()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    // Here it must check if the tabs are already saved
-    for (int i=0; i<ui->tabsManager->count(); ++i)
-        on_tabsManager_tabCloseRequested(i);
+    bool tabsClosed = true;
 
-    event->accept();
+    for (int i=0; i<ui->tabsManager->count(); ++i)
+        if (!on_tabsManager_tabCloseRequested(i))
+            tabsClosed = false;
+    (tabsClosed) ? event->accept() : event->ignore();
 }
 
 void MainWindow::on_actionUndo_triggered()
@@ -187,10 +195,10 @@ void MainWindow::on_actionDelete_triggered()
     // Erase current selected text or object in project manager
 }
 
-void MainWindow::on_tabsManager_currentChanged(QWidget *arg1)
+void MainWindow::on_tabsManager_currentChanged(QWidget *widget)
 {
-    if (arg1 != 0) {
-        Document* doc = dynamic_cast<Document*>(arg1);
+    if (widget != 0) {
+        Document* doc = dynamic_cast<Document*>(widget);
         doc->textArea->setFocus();
     }
 }
