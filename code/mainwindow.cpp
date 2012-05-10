@@ -333,7 +333,7 @@ void MainWindow::on_action_Print_triggered()
     doc->textArea->document()->print(&printer);
 }
 
-void MainWindow::on_searchTextEdit_textChanged(const QString &arg1)
+void MainWindow::on_searchTextEdit_textChanged(const QString)
 {
     Document *doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
     QTextCursor *docCursor = new QTextCursor(doc->textArea->textCursor());

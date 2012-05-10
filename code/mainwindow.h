@@ -69,7 +69,7 @@ private slots:
     void on_actionComment_triggered();
     void on_actionUncomment_triggered();
     void on_actionSearch_triggered();
-    void on_searchTextEdit_textChanged(const QString &arg1);
+    void on_searchTextEdit_textChanged(const QString);
     void on_action_Print_triggered();
     void on_searchNext_clicked();
     void search(QTextCursor *docCursor, QTextDocument::FindFlags flags = 0);

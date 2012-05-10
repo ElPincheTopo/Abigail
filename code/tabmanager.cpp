@@ -101,7 +101,7 @@ void TabManager::openFile(QString archivo)
 
 void TabManager::open()
 {
-    QStringList archivos = QFileDialog::getOpenFileNames(this, "Select a file to open...", "/home");
+    QStringList archivos = QFileDialog::getOpenFileNames(this, "Select a file to open...", "~/");
     foreach (QString archivo, archivos)
         openFile(archivo);
 }
