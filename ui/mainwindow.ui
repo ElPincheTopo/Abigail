@@ -22,6 +22,10 @@
   <property name="windowTitle">
    <string>Abigail IDE</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources/logos.qrc">
+    <normaloff>:/resources/images/logos/logo</normaloff>:/resources/images/logos/logo</iconset>
+  </property>
   <property name="dockNestingEnabled">
    <bool>true</bool>
   </property>
@@ -843,6 +847,7 @@
  </tabstops>
  <resources>
   <include location="../resources/icons.qrc"/>
+  <include location="../resources/logos.qrc"/>
  </resources>
  <connections>
   <connection>
