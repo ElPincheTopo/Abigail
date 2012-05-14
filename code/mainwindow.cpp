@@ -31,11 +31,14 @@
 #include "ui_mainwindow.h"
 #include "document.h"
 
+#include "QDebug"
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->projectExplorer->close();
     ui->searchBar->close();
+    this->replaceMode = false;
     ui->statusBar->showMessage(QString("Hi! Welcome to Abigail"), 10000);
     connect(ui->tabsManager, SIGNAL(copyAvailable(bool)), ui->actionCopy, SLOT(setEnabled(bool)));
     connect(ui->tabsManager, SIGNAL(cutAvailable(bool)), ui->actionCut, SLOT(setEnabled(bool)));
@@ -327,7 +330,10 @@ void MainWindow::on_actionUncomment_triggered()
 
 void MainWindow::on_actionSearch_triggered()
 {
-    if (!ui->searchBar->isVisible()) ui->searchBar->setVisible(true);
+    if (!ui->searchBar->isVisible()) {
+        replaceMode = false;
+        ui->searchBar->setVisible(true);
+    }
     ui->searchTextEdit->setFocus();
 }
 
@@ -375,4 +381,32 @@ void MainWindow::search(QTextCursor *docCursor, QTextDocument::FindFlags flags)
         doc->textArea->setTextCursor(*docCursor);
     } else
         doc->textArea->setTextCursor(findResult);
+}
+
+void MainWindow::on_searchBar_visibilityChanged(bool visible)
+{
+    if (visible)
+        if (replaceMode) {
+            ui->replaceLabel->show();
+            ui->replaceTextEdit->show();
+            ui->replace->show();
+        } else {
+            ui->replaceLabel->hide();
+            ui->replaceTextEdit->hide();
+            ui->replace->hide();
+        }
+
+    if (ui->searchBar->isFloating()) {
+        int x = (this->x() + this->width()) - 410;
+        int y = (this->y() + this->height()) - 70;
+        ui->searchBar->setGeometry(QRect(x,y,400,60));
+    }
+}
+
+void MainWindow::on_actionReplace_triggered()
+{
+    replaceMode = true;
+    on_searchBar_visibilityChanged(true);
+    if (!ui->searchBar->isVisible()) ui->searchBar->setVisible(true);
+    ui->searchTextEdit->setFocus();
 }

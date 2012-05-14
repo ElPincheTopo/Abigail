@@ -77,8 +77,15 @@ private slots:
 
     void on_searchPrev_clicked();
 
+    void on_searchBar_visibilityChanged(bool visible);
+
+    void on_actionReplace_triggered();
+
+    void on_searchBar_dockLocationChanged(const Qt::DockWidgetArea &area);
+
 private:
     Ui::MainWindow *ui;
+    bool replaceMode;
 };
 
 #endif // MAINWINDOW_H
