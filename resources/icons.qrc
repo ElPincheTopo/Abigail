@@ -31,5 +31,9 @@
         <file alias="involved">images/icons/getInvolved.png</file>
         <file alias="preferences">images/icons/preferences.png</file>
         <file alias="quit">images/icons/quit.png</file>
+        <file alias="closeFile">images/icons/closeFile.png</file>
+        <file alias="print">images/icons/print.png</file>
+        <file alias="replace">images/icons/replace.png</file>
+        <file alias="saveAs">images/icons/saveAs.png</file>
     </qresource>
 </RCC>
