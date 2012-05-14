@@ -1,3 +1,23 @@
+/*
+    Abigail, A lightweight, powerful and customizable cross-platform IDE.
+    Copyright (C) 2012 Roberto Lapuente topo@asustin.net
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+    For more information visit https://github.com/ElPincheTopo/Abigail
+    or send an e-mail to topo@asustin.net.
+*/
 /****************************************************************************
 **
 ** Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).
@@ -42,7 +62,6 @@
 
 #include "codeeditor.h"
 
-//![constructor]
 
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
@@ -55,10 +74,6 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
 }
-
-//![constructor]
-
-//![extraAreaWidth]
 
 int CodeEditor::lineNumberAreaWidth()
 {
@@ -74,18 +89,10 @@ int CodeEditor::lineNumberAreaWidth()
     return space;
 }
 
-//![extraAreaWidth]
-
-//![slotUpdateExtraAreaWidth]
-
-void CodeEditor::updateLineNumberAreaWidth(int /* newBlockCount */)
+void CodeEditor::updateLineNumberAreaWidth(int)
 {
     setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);
 }
-
-//![slotUpdateExtraAreaWidth]
-
-//![slotUpdateRequest]
 
 void CodeEditor::updateLineNumberArea(const QRect &rect, int dy)
 {
@@ -98,10 +105,6 @@ void CodeEditor::updateLineNumberArea(const QRect &rect, int dy)
         updateLineNumberAreaWidth(0);
 }
 
-//![slotUpdateRequest]
-
-//![resizeEvent]
-
 void CodeEditor::resizeEvent(QResizeEvent *e)
 {
     QPlainTextEdit::resizeEvent(e);
@@ -109,10 +112,6 @@ void CodeEditor::resizeEvent(QResizeEvent *e)
     QRect cr = contentsRect();
     lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
 }
-
-//![resizeEvent]
-
-//![cursorPositionChanged]
 
 void CodeEditor::highlightCurrentLine()
 {
@@ -133,25 +132,16 @@ void CodeEditor::highlightCurrentLine()
     setExtraSelections(extraSelections);
 }
 
-//![cursorPositionChanged]
-
-//![extraAreaPaintEvent_0]
-
 void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(lineNumberArea);
     painter.fillRect(event->rect(), QColor(Qt::lightGray).lighter(125));
 
-//![extraAreaPaintEvent_0]
-
-//![extraAreaPaintEvent_1]
     QTextBlock block = firstVisibleBlock();
     int blockNumber = block.blockNumber();
     int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
     int bottom = top + (int) blockBoundingRect(block).height();
-//![extraAreaPaintEvent_1]
 
-//![extraAreaPaintEvent_2]
     while (block.isValid() && top <= event->rect().bottom()) {
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
@@ -167,4 +157,3 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
         ++blockNumber;
     }
 }
-//![extraAreaPaintEvent_2]

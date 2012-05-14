@@ -27,6 +27,7 @@
 QT       += core gui
 
 TARGET = Abigail
+#QMAKE_CXXFLAGS += -m64
 TEMPLATE = app
 
 
