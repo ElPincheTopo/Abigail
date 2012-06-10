@@ -444,19 +444,18 @@ int MainWindow::search(QTextCursor *docCursor, QTextDocument::FindFlags flags)
 }
 
 void MainWindow::on_replace_clicked()
-{/*
-    QList<CodeEditor::ExtraSelection> extraSelections;
-    CodeEditor::ExtraSelection selection;
-    QColor lineColor = QColor(Qt::blue).lighter(193);
+{
     CodeEditor* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget())->textArea;
 
-    selection.format.setBackground(lineColor);
-    selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-    selection.cursor = textCursor();
-    selection.cursor.clearSelection();
-    extraSelections.append(selection);
+    QList<QTextEdit::ExtraSelection> list = doc->extraSelections();
 
-    doc->setExtraSelections(extraSelections);*/
+    foreach(QTextEdit::ExtraSelection selection, list) {
+        selection.cursor.removeSelectedText();
+        selection.cursor.insertText(ui->replaceTextEdit->text());
+    }
+
+    on_searchNext_clicked();
+
 }
 
 void MainWindow::on_searchBar_visibilityChanged(bool visible)
