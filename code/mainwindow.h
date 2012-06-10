@@ -72,20 +72,16 @@ private slots:
     void on_searchTextEdit_textChanged(const QString);
     void on_action_Print_triggered();
     void on_searchNext_clicked();
-    void search(QTextCursor *docCursor, QTextDocument::FindFlags flags = 0);
-
-
+    int search(QTextCursor *docCursor, QTextDocument::FindFlags flags = 0);
+    void on_replace_clicked();
     void on_searchPrev_clicked();
-
     void on_searchBar_visibilityChanged(bool visible);
-
     void on_actionReplace_triggered();
-
-    void on_searchBar_dockLocationChanged(const Qt::DockWidgetArea &area);
 
 private:
     Ui::MainWindow *ui;
     bool replaceMode;
+    QTextCursor *cursor;
 };
 
 #endif // MAINWINDOW_H

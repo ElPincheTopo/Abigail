@@ -30,6 +30,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "document.h"
+#include "document.h"
 
 #include "QDebug"
 
@@ -44,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->tabsManager, SIGNAL(cutAvailable(bool)), ui->actionCut, SLOT(setEnabled(bool)));
     connect(ui->tabsManager, SIGNAL(undoAvailable(bool)), ui->actionUndo, SLOT(setEnabled(bool)));
     connect(ui->tabsManager, SIGNAL(redoAvailable(bool)), ui->actionRedo, SLOT(setEnabled(bool)));
+    this->cursor = 0;
 }
 
 MainWindow::~MainWindow()
@@ -357,35 +359,109 @@ void MainWindow::on_searchTextEdit_textChanged(const QString)
 
 void MainWindow::on_searchNext_clicked()
 {
-    Document *doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
-    QTextCursor *docCursor = new QTextCursor(doc->textArea->textCursor());
-    this->search(docCursor);
+    QTextCursor *docCursor;
+    int ret = QMessageBox::No;
+
+    if (this->cursor == 0) {
+        CodeEditor* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget())->textArea;
+        docCursor = new QTextCursor(doc->textCursor());
+    } else {
+        docCursor = this->cursor;
+    }
+    int pos = this->search(docCursor);
+    if (pos < 0) {
+        // Avisar que no se encontro.
+        ret = QMessageBox::warning(this, "Abigail",
+                                       "Your search reached the end of the document.\nDo you want to search from the top?",
+                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+        pos = 0;
+    }
+    docCursor->setPosition(pos);
+    this->cursor = docCursor;
+    if (ret == QMessageBox::Yes) on_searchNext_clicked();
 }
 
 void MainWindow::on_searchPrev_clicked()
 {
-    Document *doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
-    QTextCursor *docCursor = new QTextCursor(doc->textArea->textCursor());
-    this->search(docCursor, QTextDocument::FindBackward);
+    QTextCursor *docCursor;
+    int ret = QMessageBox::No;
+
+    if (this->cursor == 0) {
+        CodeEditor* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget())->textArea;
+        docCursor = new QTextCursor(doc->textCursor());
+    } else {
+        docCursor = this->cursor;
+    }
+    int pos = this->search(docCursor, QTextDocument::FindBackward);
+    int len = ui->searchTextEdit->text().size();
+    docCursor->movePosition(QTextCursor::End);
+    int max = docCursor->position();
+
+    pos = pos - len;
+    if (pos < 0) {
+        // Avisar que no se encontro.
+        ret = QMessageBox::warning(this, "Abigail",
+                                       "Your search reached the beginning of the document.\nDo you want to search from the bottom?",
+                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+        pos = max;
+    }
+    docCursor->setPosition(pos);
+    this->cursor = docCursor;
+    if (ret == QMessageBox::Yes) on_searchPrev_clicked();
 }
 
-void MainWindow::search(QTextCursor *docCursor, QTextDocument::FindFlags flags)
+int MainWindow::search(QTextCursor *docCursor, QTextDocument::FindFlags flags)
 {
-    Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    CodeEditor* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget())->textArea;
+    QList<QTextEdit::ExtraSelection> extraSelections;
+    QTextEdit::ExtraSelection selection;
     QRegExp regExp(ui->searchTextEdit->text());
+    QColor selectionColor = QColor(Qt::yellow);
+
     regExp.setPatternSyntax(QRegExp::RegExp2); // In Qt4, in Qt5 it should be RegExp
-    QTextCursor findResult = doc->textArea->document()->find(regExp, *docCursor, flags);
+
+    QTextCursor findResult = doc->document()->find(regExp, *docCursor, flags);
+    selection.cursor = findResult;
+    int posFound = findResult.position();
+
     if (findResult.isNull()) {
-        docCursor->clearSelection();
-        flags == QTextDocument::FindBackward ? docCursor->movePosition(QTextCursor::Start) : docCursor->movePosition(QTextCursor::End);
-        doc->textArea->setTextCursor(*docCursor);
-    } else
-        doc->textArea->setTextCursor(findResult);
+        selection.cursor.clearSelection();
+        //flags == QTextDocument::FindBackward ? docCursor->movePosition(QTextCursor::Start) : docCursor->movePosition(QTextCursor::End);
+        //docCursor->setPosition(pos);
+    } else {
+        selection.format.setBackground(selectionColor);
+        extraSelections.append(selection);
+        if (this->cursor != 0)
+            this->cursor->setPosition(posFound);
+        else
+            this->cursor = new QTextCursor(findResult);
+    }
+    doc->setExtraSelections(extraSelections);
+    //docCursor->setPosition(pos);
+    //doc->setTextCursor(*docCursor);
+
+    return posFound;
+}
+
+void MainWindow::on_replace_clicked()
+{/*
+    QList<CodeEditor::ExtraSelection> extraSelections;
+    CodeEditor::ExtraSelection selection;
+    QColor lineColor = QColor(Qt::blue).lighter(193);
+    CodeEditor* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget())->textArea;
+
+    selection.format.setBackground(lineColor);
+    selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+    selection.cursor = textCursor();
+    selection.cursor.clearSelection();
+    extraSelections.append(selection);
+
+    doc->setExtraSelections(extraSelections);*/
 }
 
 void MainWindow::on_searchBar_visibilityChanged(bool visible)
 {
-    if (visible)
+    if (visible) {
         if (replaceMode) {
             ui->replaceLabel->show();
             ui->replaceTextEdit->show();
@@ -395,7 +471,7 @@ void MainWindow::on_searchBar_visibilityChanged(bool visible)
             ui->replaceTextEdit->hide();
             ui->replace->hide();
         }
-
+    }
     if (ui->searchBar->isFloating()) {
         int x = (this->x() + this->width()) - 410;
         int y = (this->y() + this->height()) - 70;
