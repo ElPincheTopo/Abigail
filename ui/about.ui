@@ -106,7 +106,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>v0.04</string>
+    <string>v0.5</string>
    </property>
   </widget>
   <widget class="QLabel" name="logoLabel">
