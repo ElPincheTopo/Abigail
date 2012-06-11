@@ -46,6 +46,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->tabsManager, SIGNAL(undoAvailable(bool)), ui->actionUndo, SLOT(setEnabled(bool)));
     connect(ui->tabsManager, SIGNAL(redoAvailable(bool)), ui->actionRedo, SLOT(setEnabled(bool)));
     this->cursor = 0;
+    int argc= QApplication::argc();
+    QStringList argv= QApplication::arguments();
+    for (int i=1; i<argc; ++i)
+        ui->tabsManager->openFile(argv[i]);
 }
 
 MainWindow::~MainWindow()

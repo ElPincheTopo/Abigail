@@ -33,8 +33,9 @@ class TabManager : public QTabWidget
 public:
     explicit TabManager(QWidget *parent = 0);
     ~TabManager();
-private:
     void openFile(QString archivo);
+
+private:
     void tabRemoved(int );
     void dragEnterEvent(QDragEnterEvent *event);
     void dropEvent(QDropEvent *event);
