@@ -25,6 +25,9 @@
 #include <QUrl>
 
 #include "tabmanager.h"
+#include "strings.h"
+
+#include <QDebug>
 
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
@@ -80,7 +83,7 @@ void TabManager::saveAs()
 {
     Document* doc = dynamic_cast<Document*>(this->currentWidget());
     if (doc != 0) {
-        QString archivo = QFileDialog::getSaveFileName(this, "Save As", "~/Untitled.txt");
+        QString archivo = QFileDialog::getSaveFileName(this, "Save As", tr(HOME, "Untitled.txt"));
         if (archivo != "") {
             QString* title = doc->saveAs(archivo);
             this->setTabText(this->currentIndex(), *title);
@@ -101,7 +104,7 @@ void TabManager::openFile(QString archivo)
 
 void TabManager::open()
 {
-    QStringList archivos = QFileDialog::getOpenFileNames(this, "Select a file to open...", "~/");
+    QStringList archivos = QFileDialog::getOpenFileNames(this, "Select a file to open...", HOME);
     foreach (QString archivo, archivos)
         openFile(archivo);
 }
@@ -125,9 +128,13 @@ void TabManager::dragEnterEvent(QDragEnterEvent *event)
 void TabManager::dropEvent(QDropEvent *event)
 {
     foreach (QUrl url, event->mimeData()->urls()) {
-        QStringList list = url.toString().split("file://");
+        QStringList list = url.toString().split(FILESTR);
         if (list.count() == 2) {
             QString archivo = list[1];
+            #ifdef WINDOWS
+                archivo = archivo.replace("/", "\\");
+            #endif
+            qDebug() << archivo;
             this->openFile(archivo);
         }
     }

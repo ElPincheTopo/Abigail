@@ -42,7 +42,8 @@ HEADERS  += code/mainwindow.h \
     code/about.h \
     code/document.h \
     code/tabmanager.h \
-    code/codeeditor.h
+    code/codeeditor.h \
+    code/strings.h
 
 FORMS    += ui/mainwindow.ui \
     ui/about.ui

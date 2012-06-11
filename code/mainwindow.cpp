@@ -31,6 +31,7 @@
 #include "ui_mainwindow.h"
 #include "document.h"
 #include "document.h"
+#include "strings.h"
 
 #include "QDebug"
 
@@ -82,12 +83,12 @@ void MainWindow::on_actionQuit_activated()
 
 void MainWindow::on_actionAbigail_Home_Page_activated()
 {
-    QDesktopServices::openUrl(QUrl("http://elpinchetopo.github.com/Abigail/"));
+    QDesktopServices::openUrl(QUrl(HOMEPAGE));
 }
 
 void MainWindow::on_actionGet_Involved_activated()
 {
-    QDesktopServices::openUrl(QUrl("https://github.com/ElPincheTopo/Abigail"));
+    QDesktopServices::openUrl(QUrl(REPO));
 }
 
 void MainWindow::on_actionSave_All_triggered()
@@ -422,7 +423,11 @@ int MainWindow::search(QTextCursor *docCursor, QTextDocument::FindFlags flags)
     QRegExp regExp(ui->searchTextEdit->text());
     QColor selectionColor = QColor(Qt::yellow);
 
-    regExp.setPatternSyntax(QRegExp::RegExp2); // In Qt4, in Qt5 it should be RegExp
+    #ifdef QT5
+        regExp.setPatternSyntax(QRegExp::RegExp); // In Qt4, in Qt5 it should be RegExp
+    #else
+        regExp.setPatternSyntax(QRegExp::RegExp2); // In Qt4, in Qt5 it should be RegExp
+    #endif
 
     QTextCursor findResult = doc->document()->find(regExp, *docCursor, flags);
     selection.cursor = findResult;

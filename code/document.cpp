@@ -24,6 +24,7 @@
 #include <QStringList>
 
 #include "document.h"
+#include "strings.h"
 
 Document::Document(QWidget *parent) : QWidget(parent)
 {
@@ -66,7 +67,7 @@ QString* Document::saveAs(QString archivo)
     QTextStream stream(file);
     stream << textArea->document()->toPlainText();
     file->close();
-    QStringList list = archivo.split("/");
+    QStringList list = archivo.split(SLASH);
     this->title = new QString(list[list.size()-1]);
     this->docHasChanged = false;
     return this->title;
@@ -88,7 +89,7 @@ QString* Document::open(QString archivo)
     QTextStream stream(file);
     this->textArea->setPlainText(stream.readAll());
     file->close();
-    QStringList list = archivo.split("/");
+    QStringList list = archivo.split(SLASH);
     this->title = new QString(list[list.size()-1]);
     this->docHasChanged = false;
     return this->title;
