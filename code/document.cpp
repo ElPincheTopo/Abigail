@@ -26,6 +26,8 @@
 #include "document.h"
 #include "strings.h"
 
+#include <QDebug>
+
 Document::Document(QWidget *parent) : QWidget(parent)
 {
     this->file = 0;
@@ -67,7 +69,7 @@ QString* Document::saveAs(QString archivo)
     QTextStream stream(file);
     stream << textArea->document()->toPlainText();
     file->close();
-    QStringList list = archivo.split(SLASH);
+    QStringList list = archivo.split("/");
     this->title = new QString(list[list.size()-1]);
     this->docHasChanged = false;
     return this->title;
