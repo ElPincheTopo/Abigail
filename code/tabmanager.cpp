@@ -83,7 +83,7 @@ void TabManager::saveAs()
 {
     Document* doc = dynamic_cast<Document*>(this->currentWidget());
     if (doc != 0) {
-        QString archivo = QFileDialog::getSaveFileName(this, "Save As", tr(HOME, "Untitled.txt"));
+        QString archivo = QFileDialog::getSaveFileName(this, "Save As", DEFAULTFILENAME);
         if (archivo != "") {
             QString* title = doc->saveAs(archivo);
             this->setTabText(this->currentIndex(), *title);
