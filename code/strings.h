@@ -26,14 +26,14 @@
     #define WINDOWS
     #define SLASH "\\"
     #define FILESTR "file:///"
-    #define HOME "~/"
 #else
     #define UNIX
     #define SLASH "/"
     #define FILESTR "file://"
-    #define HOME "~/"
 #endif
 
+#define HOME QDir::homePath()
+#define DEFAULTFILENAME QDir::homePath() + "/Untitled.txt"
 #define QT4
 #define HOMEPAGE "http://elpinchetopo.github.com/Abigail/"
 #define WIKI "https://github.com/ElPincheTopo/Abigail/wiki"

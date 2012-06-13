@@ -24,6 +24,7 @@
 #include <QtGui/QApplication>
 
 #include "mainwindow.h"
+#include "strings.h"
 
 int main(int argc, char *argv[])
 {
@@ -32,7 +33,7 @@ int main(int argc, char *argv[])
               << "     This program comes with ABSOLUTELY NO WARRANTY.\n"
               << "     This is free software, and you are welcome to redistribute it\n"
               << "     under certain conditions.\n\n"
-              << "     Visit http://elpinchetopo.github.com/Abigail/ for more information." << std::endl;
+              << "     Visit " << HOMEPAGE << " for more information." << std::endl;
 
     QApplication a(argc, argv);
     MainWindow w;
