@@ -113,6 +113,20 @@ void CodeEditor::resizeEvent(QResizeEvent *e)
     lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
 }
 
+void CodeEditor::paintEvent(QPaintEvent * ev)
+{
+    QPlainTextEdit::paintEvent(ev);
+    const QRect rect = ev->rect();
+    const QFont font = currentCharFormat().font();
+    int x80 = round(QFontMetricsF(font).averageCharWidth() * 80.0)
+            + contentOffset().x()
+            + document()->documentMargin();
+    QPainter p(viewport());
+    p.setPen(QColor(Qt::lightGray).lighter(100));
+    p.drawLine(x80, rect.top(), x80, rect.bottom());
+    qDebug() << x80 << contentOffset() << document()->documentMargin() << font << endl;
+}
+
 void CodeEditor::highlightCurrentLine()
 {
     QList<QTextEdit::ExtraSelection> extraSelections;

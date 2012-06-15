@@ -64,6 +64,7 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent *event);
+    void paintEvent(QPaintEvent * ev);
 
 private slots:
     void updateLineNumberAreaWidth(int);
