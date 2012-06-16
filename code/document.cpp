@@ -24,7 +24,7 @@
 #include <QStringList>
 
 #include "document.h"
-#include "strings.h"
+#include "preferences.h"
 
 #include <QDebug>
 

@@ -24,7 +24,7 @@
 #include <QtGui/QApplication>
 
 #include "mainwindow.h"
-#include "strings.h"
+#include "preferences.h"
 
 int main(int argc, char *argv[])
 {

@@ -43,7 +43,8 @@ HEADERS  += code/mainwindow.h \
     code/document.h \
     code/tabmanager.h \
     code/codeeditor.h \
-    code/strings.h
+    code/preferences.h \
+    code/preferences.h
 
 FORMS    += ui/mainwindow.ui \
     ui/about.ui

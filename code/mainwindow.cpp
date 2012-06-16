@@ -31,7 +31,7 @@
 #include "ui_mainwindow.h"
 #include "document.h"
 #include "document.h"
-#include "strings.h"
+#include "preferences.h"
 
 #include "QDebug"
 

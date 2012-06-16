@@ -25,7 +25,7 @@
 #include <QUrl>
 
 #include "tabmanager.h"
-#include "strings.h"
+#include "preferences.h"
 
 #include <QDebug>
 
