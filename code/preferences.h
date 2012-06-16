@@ -22,6 +22,8 @@
 #ifndef STRINGS_H
 #define STRINGS_H
 
+#define QT4 // Define the Qt version in use.
+
 #if defined(_WIN32) || defined(__WIN32)
     #define WINDOWS
     #define SLASH "\\"
@@ -34,9 +36,10 @@
 
 #define HOME QDir::homePath()
 #define DEFAULTFILENAME QDir::homePath() + "/Untitled.txt"
-#define QT4
 #define HOMEPAGE "http://elpinchetopo.github.com/Abigail/"
 #define WIKI "https://github.com/ElPincheTopo/Abigail/wiki"
 #define REPO "https://github.com/ElPincheTopo/Abigail"
+#define DEFAULTFONT "Mono"
+#define DEFAULTFONTSIZE 10
 
 #endif // STRINGS_H

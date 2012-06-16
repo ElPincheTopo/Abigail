@@ -61,6 +61,7 @@
 #include <QtGui>
 
 #include "codeeditor.h"
+#include "preferences.h"
 
 
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
@@ -124,7 +125,6 @@ void CodeEditor::paintEvent(QPaintEvent * ev)
     QPainter p(viewport());
     p.setPen(QColor(Qt::lightGray).lighter(100));
     p.drawLine(x80, rect.top(), x80, rect.bottom());
-    qDebug() << x80 << contentOffset() << document()->documentMargin() << font << endl;
 }
 
 void CodeEditor::highlightCurrentLine()
@@ -156,7 +156,7 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
             painter.setPen(QColor(Qt::darkGray).darker(150));
-            painter.setFont(QFont("Mono", 11));
+            painter.setFont(QFont(DEFAULTFONT, DEFAULTFONTSIZE));
             painter.drawText(0, top, lineNumberArea->width()-3, fontMetrics().height(),
                              Qt::AlignRight, number);
         }
