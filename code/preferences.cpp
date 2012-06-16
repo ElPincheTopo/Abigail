@@ -57,6 +57,8 @@ void Preferences::readPreferences()
                         setLineNumberArea(list[1].toUInt());
                     else if (list[0] == "linenumbercolor")
                         setLineNumberColor(list[1].toUInt());
+                    else if (list[0] == "selectioncolor")
+                        setSelectionColor(list[1].toUInt());
                 }
             }
         }
@@ -136,6 +138,11 @@ void Preferences::setLineNumberColor(unsigned int color)
     Preferences::lineNumberColor = color;
 }
 
+void Preferences::setSelectionColor(unsigned int color)
+{
+    Preferences::selectionColor = color;
+}
+
 // Preferences Variables
 bool Preferences::lineWrap = false;
 bool Preferences::columnLine = true;
@@ -146,6 +153,7 @@ unsigned int Preferences::vLineColor = 4290822336;
 unsigned int Preferences::currentLineColor = 4293848831;
 unsigned int Preferences::lineNumberArea = 4293980400;
 unsigned int Preferences::lineNumberColor = 4283782485;
+unsigned int Preferences::selectionColor = 4294967040;
 
 // Constants
 const QString Preferences::SLASH = _SLASH;

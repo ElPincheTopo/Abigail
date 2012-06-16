@@ -33,6 +33,8 @@
 #include "document.h"
 #include "preferences.h"
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -384,6 +386,7 @@ void MainWindow::on_searchNext_clicked()
     docCursor->setPosition(pos);
     this->cursor = docCursor;
     if (ret == QMessageBox::Yes) on_searchNext_clicked();
+    ui->searchTextEdit->setFocus();
 }
 
 void MainWindow::on_searchPrev_clicked()
@@ -413,6 +416,7 @@ void MainWindow::on_searchPrev_clicked()
     docCursor->setPosition(pos);
     this->cursor = docCursor;
     if (ret == QMessageBox::Yes) on_searchPrev_clicked();
+    ui->searchTextEdit->setFocus();
 }
 
 int MainWindow::search(QTextCursor *docCursor, QTextDocument::FindFlags flags)
@@ -421,7 +425,7 @@ int MainWindow::search(QTextCursor *docCursor, QTextDocument::FindFlags flags)
     QList<QTextEdit::ExtraSelection> extraSelections;
     QTextEdit::ExtraSelection selection;
     QRegExp regExp(ui->searchTextEdit->text());
-    QColor selectionColor = QColor(Qt::yellow);
+    QColor selectionColor = QColor(QRgb(Preferences::selectionColor));
 
     #ifdef QT5
         regExp.setPatternSyntax(QRegExp::RegExp); // In Qt4, in Qt5 it should be RegExp

@@ -57,6 +57,7 @@ public:
     static void setCurrentLineColor(unsigned int color);
     static void setLineNumberArea(unsigned int color);
     static void setLineNumberColor(unsigned int color);
+    static void setSelectionColor(unsigned int color);
 
     // Preference variables
     static bool lineWrap;
@@ -68,6 +69,7 @@ public:
     static unsigned int currentLineColor;
     static unsigned int lineNumberArea;
     static unsigned int lineNumberColor;
+    static unsigned int selectionColor;
 
     // Constants
     static const QString SLASH;
