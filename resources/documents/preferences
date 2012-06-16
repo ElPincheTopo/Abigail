@@ -2,16 +2,18 @@
 # DON'T EDIT the file by yourself.
 
 # When LineWrap is set to TRUE all the tabs start with the Line Wrap option on
+# the default option is FALSE
 Line Wrap = FALSE
 
-# Determines if a vertical line appears in the document
+# Determines if a vertical line appears in the document. The default option is
+# TRUE
 Column Line = TRUE
 
-# The column where you want the above line to appear
+# The column where you want the above line to appear. The default value is 80
 Column Of Line = 80
 
-# The Font for the editor
-Font = Mono
+# The Font for the editor. The default value is MONO
+Font = MONO
 
-# The size of the font
+# The size of the font. The default value is 10
 Font Size = 10

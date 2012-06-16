@@ -59,7 +59,6 @@ void Preferences::readPreferences()
         }
         file.close();
     } else {
-        qDebug() << "No encontró el archivo";
         generatePreferencesFile();
     }
 
@@ -78,8 +77,6 @@ void Preferences::generatePreferencesFile()
     QTextStream in(&inFile);
     QString text = in.readAll();
     inFile.close();
-
-    qDebug() << text;
 
     // Write in user home
     QFile outFile(PREFERENCESDIR + "/.abigail/preferences");
