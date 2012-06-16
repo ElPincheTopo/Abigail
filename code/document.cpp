@@ -41,7 +41,7 @@ Document::Document(QWidget *parent) : QWidget(parent)
     this->textArea->setLineWrapMode(CodeEditor::NoWrap);
     //this->textArea->setLineWrapMode(CodeEditor::WidgetWidth);
     this->textArea->setAcceptDrops(true);
-    this->textArea->setFont(QFont(DEFAULTFONT, DEFAULTFONTSIZE));
+    this->textArea->setFont(QFont(Preferences::DEFAULTFONT, Preferences::DEFAULTFONTSIZE));
     this->layout->addWidget(textArea);
     this->textArea->show();
     this->textArea->setFocus();
@@ -91,7 +91,7 @@ QString* Document::open(QString archivo)
     QTextStream stream(file);
     this->textArea->setPlainText(stream.readAll());
     file->close();
-    QStringList list = archivo.split(SLASH);
+    QStringList list = archivo.split(Preferences::SLASH);
     this->title = new QString(list[list.size()-1]);
     this->docHasChanged = false;
     return this->title;

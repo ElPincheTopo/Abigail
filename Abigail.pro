@@ -36,14 +36,14 @@ SOURCES += code/main.cpp\
     code/about.cpp \
     code/document.cpp \
     code/tabmanager.cpp \
-    code/codeeditor.cpp
+    code/codeeditor.cpp \
+    code/preferences.cpp
 
 HEADERS  += code/mainwindow.h \
     code/about.h \
     code/document.h \
     code/tabmanager.h \
     code/codeeditor.h \
-    code/preferences.h \
     code/preferences.h
 
 FORMS    += ui/mainwindow.ui \

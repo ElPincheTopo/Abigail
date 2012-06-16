@@ -78,6 +78,8 @@ private slots:
     void on_searchBar_visibilityChanged(bool visible);
     void on_actionReplace_triggered();
 
+    void on_actionLine_Wrap_triggered();
+
 private:
     Ui::MainWindow *ui;
     bool replaceMode;

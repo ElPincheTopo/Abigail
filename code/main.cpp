@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
               << "     This program comes with ABSOLUTELY NO WARRANTY.\n"
               << "     This is free software, and you are welcome to redistribute it\n"
               << "     under certain conditions.\n\n"
-              << "     Visit " << HOMEPAGE << " for more information." << std::endl;
+              << "     Visit " << Preferences::HOMEPAGE.toStdString() << " for more information." << std::endl;
 
     QApplication a(argc, argv);
     MainWindow w;

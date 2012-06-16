@@ -83,12 +83,12 @@ void MainWindow::on_actionQuit_activated()
 
 void MainWindow::on_actionAbigail_Home_Page_activated()
 {
-    QDesktopServices::openUrl(QUrl(HOMEPAGE));
+    QDesktopServices::openUrl(QUrl(Preferences::HOMEPAGE));
 }
 
 void MainWindow::on_actionGet_Involved_activated()
 {
-    QDesktopServices::openUrl(QUrl(REPO));
+    QDesktopServices::openUrl(QUrl(Preferences::REPO));
 }
 
 void MainWindow::on_actionSave_All_triggered()
@@ -493,4 +493,13 @@ void MainWindow::on_actionReplace_triggered()
     on_searchBar_visibilityChanged(true);
     if (!ui->searchBar->isVisible()) ui->searchBar->setVisible(true);
     ui->searchTextEdit->setFocus();
+}
+
+void MainWindow::on_actionLine_Wrap_triggered()
+{
+    CodeEditor* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget())->textArea;
+    if (ui->actionLine_Wrap->isChecked())
+        doc->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+    else
+        doc->setLineWrapMode(QPlainTextEdit::NoWrap);
 }

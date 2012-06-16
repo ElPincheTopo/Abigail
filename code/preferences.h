@@ -22,24 +22,41 @@
 #ifndef STRINGS_H
 #define STRINGS_H
 
+#include <QString>
+
 #define QT4 // Define the Qt version in use.
 
 #if defined(_WIN32) || defined(__WIN32)
     #define WINDOWS
-    #define SLASH "\\"
-    #define FILESTR "file:///"
+    #define _SLASH "\\"
+    #define _FILESTR "file:///"
 #else
     #define UNIX
-    #define SLASH "/"
-    #define FILESTR "file://"
+    #define _SLASH "/"
+    #define _FILESTR "file://"
 #endif
 
-#define HOME QDir::homePath()
-#define DEFAULTFILENAME QDir::homePath() + "/Untitled.txt"
-#define HOMEPAGE "http://elpinchetopo.github.com/Abigail/"
-#define WIKI "https://github.com/ElPincheTopo/Abigail/wiki"
-#define REPO "https://github.com/ElPincheTopo/Abigail"
-#define DEFAULTFONT "Mono"
-#define DEFAULTFONTSIZE 10
+class Preferences
+{
+public:
+    Preferences();
+
+    // Preference variables
+    static bool lineWrap;
+    static bool columnLine;
+    static int columnOfLine;
+
+    // Constants
+    static const QString SLASH;
+    static const QString FILESTR;
+    static const QString HOME;
+    static const QString DEFAULTFILENAME;
+    static const QString HOMEPAGE;
+    static const QString WIKI;
+    static const QString REPO;
+    static const QString DEFAULTFONT;
+    static const int DEFAULTFONTSIZE;
+
+};
 
 #endif // STRINGS_H

@@ -27,12 +27,21 @@
 
 Preferences::Preferences()
 {
-    QString SLASH = _SLASH;
-    QString FILESTR = _FILESTR;
-    QString HOME = QDir::homePath();
-    QString DEFAULTFILENAME = HOME + "/Untitled.txt";
-    QString HOMEPAGE = "http://elpinchetopo.github.com/Abigail/";
-    QString WIKI = "https://github.com/ElPincheTopo/Abigail/wiki";
-    QString REPO = "https://github.com/ElPincheTopo/Abigail";
+
 }
 
+// Preferences Variables
+bool Preferences::lineWrap = false;
+bool Preferences::columnLine = true;
+int Preferences::columnOfLine = 80;
+
+// Constants
+const QString Preferences::SLASH = _SLASH;
+const QString Preferences::FILESTR = _FILESTR;
+const QString Preferences::HOME = QDir::homePath();
+const QString Preferences::DEFAULTFILENAME = HOME + "/Untitled.txt";
+const QString Preferences::HOMEPAGE = "http://elpinchetopo.github.com/Abigail/";
+const QString Preferences::WIKI = "https://github.com/ElPincheTopo/Abigail/wiki";
+const QString Preferences::REPO = "https://github.com/ElPincheTopo/Abigail";
+const QString Preferences::DEFAULTFONT = "Mono";
+const int Preferences::DEFAULTFONTSIZE = 10;

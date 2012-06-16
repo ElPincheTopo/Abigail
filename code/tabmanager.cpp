@@ -83,7 +83,7 @@ void TabManager::saveAs()
 {
     Document* doc = dynamic_cast<Document*>(this->currentWidget());
     if (doc != 0) {
-        QString archivo = QFileDialog::getSaveFileName(this, "Save As", DEFAULTFILENAME);
+        QString archivo = QFileDialog::getSaveFileName(this, "Save As", Preferences::DEFAULTFILENAME);
         if (archivo != "") {
             QString* title = doc->saveAs(archivo);
             this->setTabText(this->currentIndex(), *title);
@@ -104,7 +104,7 @@ void TabManager::openFile(QString archivo)
 
 void TabManager::open()
 {
-    QStringList archivos = QFileDialog::getOpenFileNames(this, "Select a file to open...", HOME);
+    QStringList archivos = QFileDialog::getOpenFileNames(this, "Select a file to open...", Preferences::HOME);
     foreach (QString archivo, archivos)
         openFile(archivo);
 }
@@ -128,7 +128,7 @@ void TabManager::dragEnterEvent(QDragEnterEvent *event)
 void TabManager::dropEvent(QDropEvent *event)
 {
     foreach (QUrl url, event->mimeData()->urls()) {
-        QStringList list = url.toString().split(FILESTR);
+        QStringList list = url.toString().split(Preferences::FILESTR);
         if (list.count() == 2) {
             QString archivo = list[1];
             #ifdef WINDOWS

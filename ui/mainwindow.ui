@@ -168,6 +168,7 @@
     <property name="title">
      <string>View</string>
     </property>
+    <addaction name="actionLine_Wrap"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -335,7 +336,7 @@
    <property name="minimumSize">
     <size>
      <width>363</width>
-     <height>25</height>
+     <height>60</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -853,6 +854,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+H</string>
+   </property>
+  </action>
+  <action name="actionLine_Wrap">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Line Wrap</string>
    </property>
   </action>
  </widget>
