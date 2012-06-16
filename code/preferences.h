@@ -53,6 +53,10 @@ public:
     static void setColumnOfLine(int column);
     static void setFont(QString font);
     static void setFontSize(int size);
+    static void setVLineColor(unsigned int color);
+    static void setCurrentLineColor(unsigned int color);
+    static void setLineNumberArea(unsigned int color);
+    static void setLineNumberColor(unsigned int color);
 
     // Preference variables
     static bool lineWrap;
@@ -60,6 +64,10 @@ public:
     static int columnOfLine;
     static QString font;
     static int fontSize;
+    static unsigned int vLineColor;
+    static unsigned int currentLineColor;
+    static unsigned int lineNumberArea;
+    static unsigned int lineNumberColor;
 
     // Constants
     static const QString SLASH;

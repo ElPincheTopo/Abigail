@@ -1,10 +1,14 @@
 # This file contains the Abigail IDE Preferences and it IS RECOMENDED that you
 # DON'T EDIT the file by yourself.
 
+# The preferences in this document are divided by sections
+
+# Utilities Section ------------------------------------------------------------
 # When LineWrap is set to TRUE all the tabs start with the Line Wrap option on
 # the default option is FALSE
 Line Wrap = FALSE
 
+# Text Area Section ------------------------------------------------------------
 # Determines if a vertical line appears in the document. The default option is
 # TRUE
 Column Line = TRUE
@@ -12,8 +16,21 @@ Column Line = TRUE
 # The column where you want the above line to appear. The default value is 80
 Column Of Line = 80
 
+# The RGBA color of the vertical line. Default value 4290822336
+Vertical Line Color = 4290822336
+
+# Current Line Highlightning color. Default value 4293848831
+Current Line Color = 4293848831
+
+# The color of the line number area. Default value 4293980400
+Line Number Area = 4293980400
+
+# The color of the number in the line number area. Default value 4283782485
+Line Number Color = 4283782485
+
 # The Font for the editor. The default value is MONO
 Font = MONO
 
 # The size of the font. The default value is 10
 Font Size = 10
+

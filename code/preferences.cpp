@@ -21,10 +21,9 @@
 
 #include <QDir>
 #include <QFile>
+#include <QTextStream>
 
 #include "preferences.h"
-
-#include <QDebug>
 
 Preferences::Preferences()
 {
@@ -50,12 +49,16 @@ void Preferences::readPreferences()
                         setColumnOfLine(list[1].toInt());
                     else if (list[0] == "font")
                         setFont(list[1]);
-                    else if (list[0] == "fontsize")
-                        setFontSize(list[1].toInt());
+                    else if (list[0] == "verticallinecolor")
+                        setVLineColor(list[1].toUInt());
+                    else if (list[0] == "currentlinecolor")
+                        setCurrentLineColor(list[1].toUInt());
+                    else if (list[0] == "linenumberarea")
+                        setLineNumberArea(list[1].toUInt());
+                    else if (list[0] == "linenumbercolor")
+                        setLineNumberColor(list[1].toUInt());
                 }
             }
-
-
         }
         file.close();
     } else {
@@ -113,12 +116,36 @@ void Preferences::setFontSize(int size)
     Preferences::fontSize = size;
 }
 
+void Preferences::setVLineColor(unsigned int color)
+{
+    Preferences::vLineColor = color;
+}
+
+void Preferences::setCurrentLineColor(unsigned int color)
+{
+    Preferences::currentLineColor = color;
+}
+
+void Preferences::setLineNumberArea(unsigned int color)
+{
+    Preferences::lineNumberArea = color;
+}
+
+void Preferences::setLineNumberColor(unsigned int color)
+{
+    Preferences::lineNumberColor = color;
+}
+
 // Preferences Variables
 bool Preferences::lineWrap = false;
 bool Preferences::columnLine = true;
 int Preferences::columnOfLine = 80;
 QString Preferences::font = "Mono";
 int Preferences::fontSize = 10;
+unsigned int Preferences::vLineColor = 4290822336;
+unsigned int Preferences::currentLineColor = 4293848831;
+unsigned int Preferences::lineNumberArea = 4293980400;
+unsigned int Preferences::lineNumberColor = 4283782485;
 
 // Constants
 const QString Preferences::SLASH = _SLASH;
