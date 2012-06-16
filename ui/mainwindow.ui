@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>720</height>
+    <width>850</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="baseSize">
@@ -75,7 +75,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1280</width>
+     <width>850</width>
      <height>25</height>
     </rect>
    </property>
@@ -113,6 +113,9 @@
      <string>&amp;Edit</string>
     </property>
     <widget class="QMenu" name="menuF_ormat">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="title">
       <string>F&amp;ormat</string>
      </property>
@@ -139,6 +142,9 @@
     <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menuTools">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>&amp;Tools</string>
     </property>
@@ -155,11 +161,17 @@
     <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuBuild">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>&amp;Build</string>
     </property>
    </widget>
    <widget class="QMenu" name="menu_Window">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>&amp;Window</string>
     </property>
@@ -497,6 +509,9 @@
    </property>
   </action>
   <action name="actionProject">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/NewProyect</normaloff>:/resources/images/icons/NewProyect</iconset>
@@ -638,6 +653,9 @@
    </property>
   </action>
   <action name="actionDelete">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/delete</normaloff>:/resources/images/icons/delete</iconset>
@@ -655,7 +673,7 @@
      <normaloff>:/resources/images/icons/search</normaloff>:/resources/images/icons/search</iconset>
    </property>
    <property name="text">
-    <string>&amp;Find and Replace</string>
+    <string>&amp;Find</string>
    </property>
    <property name="toolTip">
     <string>Find</string>
@@ -665,6 +683,9 @@
    </property>
   </action>
   <action name="actionAdvanced_Search">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/findReplace</normaloff>:/resources/images/icons/findReplace</iconset>
@@ -698,6 +719,9 @@
    </property>
   </action>
   <action name="actionAuto_format">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/format</normaloff>:/resources/images/icons/format</iconset>
@@ -749,6 +773,9 @@
    </property>
   </action>
   <action name="actionCloseProject">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/closeProject</normaloff>:/resources/images/icons/closeProject</iconset>
@@ -773,6 +800,9 @@
    </property>
   </action>
   <action name="actionRun">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/run</normaloff>:/resources/images/icons/run</iconset>
@@ -788,6 +818,9 @@
    </property>
   </action>
   <action name="actionBuild">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/build</normaloff>:/resources/images/icons/build</iconset>
@@ -803,6 +836,9 @@
    </property>
   </action>
   <action name="actionBuild_then_Run">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/buildRun</normaloff>:/resources/images/icons/buildRun</iconset>
