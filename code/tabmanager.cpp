@@ -27,11 +27,8 @@
 #include "tabmanager.h"
 #include "preferences.h"
 
-#include <QDebug>
-
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
-    newDoc();
     this->setAcceptDrops(true);
 }
 
@@ -134,7 +131,6 @@ void TabManager::dropEvent(QDropEvent *event)
             #ifdef WINDOWS
                 archivo = archivo.replace("/", "\\");
             #endif
-            qDebug() << archivo;
             this->openFile(archivo);
         }
     }

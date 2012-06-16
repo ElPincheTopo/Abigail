@@ -77,8 +77,9 @@ private slots:
     void on_searchPrev_clicked();
     void on_searchBar_visibilityChanged(bool visible);
     void on_actionReplace_triggered();
-
     void on_actionLine_Wrap_triggered();
+
+    void on_actionNew_triggered();
 
 private:
     Ui::MainWindow *ui;

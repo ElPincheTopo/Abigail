@@ -26,8 +26,6 @@
 #include "document.h"
 #include "preferences.h"
 
-#include <QDebug>
-
 Document::Document(QWidget *parent) : QWidget(parent)
 {
     this->file = 0;
@@ -38,10 +36,8 @@ Document::Document(QWidget *parent) : QWidget(parent)
     this->layout->setMargin(0);
     this->setLayout(layout);
     this->textArea = new CodeEditor(this);
-    this->textArea->setLineWrapMode(CodeEditor::NoWrap);
-    //this->textArea->setLineWrapMode(CodeEditor::WidgetWidth);
+    this->textArea->setFont(QFont(Preferences::font, Preferences::fontSize));
     this->textArea->setAcceptDrops(true);
-    this->textArea->setFont(QFont(Preferences::DEFAULTFONT, Preferences::DEFAULTFONTSIZE));
     this->layout->addWidget(textArea);
     this->textArea->show();
     this->textArea->setFocus();

@@ -63,7 +63,6 @@
 #include "codeeditor.h"
 #include "preferences.h"
 
-
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
     lineNumberArea = new LineNumberArea(this);
@@ -117,11 +116,10 @@ void CodeEditor::resizeEvent(QResizeEvent *e)
 
 void CodeEditor::paintEvent(QPaintEvent * ev)
 {
+    QPlainTextEdit::paintEvent(ev);
     if (Preferences::columnLine) {
-        QPlainTextEdit::paintEvent(ev);
         const QRect rect = ev->rect();
-        const QFont font = currentCharFormat().font();
-        int position = round(QFontMetricsF(font).averageCharWidth() * Preferences::columnOfLine)
+        int position = (QFontMetricsF(QFont(Preferences::font, Preferences::fontSize)).size(Qt::TextSingleLine, "a").toSize().width() * Preferences::columnOfLine)
                 + contentOffset().x()
                 + document()->documentMargin();
         QPainter p(viewport());
@@ -159,7 +157,7 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
             painter.setPen(QColor(Qt::darkGray).darker(150));
-            painter.setFont(QFont(Preferences::DEFAULTFONT, Preferences::DEFAULTFONTSIZE));
+            painter.setFont(QFont(Preferences::font, Preferences::fontSize));
             painter.drawText(0, top, lineNumberArea->width()-3, fontMetrics().height(),
                              Qt::AlignRight, number);
         }

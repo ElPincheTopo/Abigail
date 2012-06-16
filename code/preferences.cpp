@@ -20,28 +20,99 @@
 */
 
 #include <QDir>
+#include <QFile>
 
 #include "preferences.h"
 
-
+#include <QDebug>
 
 Preferences::Preferences()
 {
 
 }
 
+void Preferences::readPreferences()
+{
+    QFile file(PREFERENCESDIR + "/.abigail/preferences");
+    if(file.open(QIODevice::ReadOnly)) {
+        QTextStream in(&file);
+        while (!in.atEnd()) {
+            QString line = in.readLine().replace(" ", "");
+            if (line[0] != '#') {
+                line = line.toLower();
+                QStringList list = line.split("=");
+                if (list.length() == 2) {
+                    if(list[0] == "linewrap")
+                        setLineWrap(list[1] == "true" ? true : false);
+                    else if (list[0] == "columnline")
+                        setColumnLine(list[1] == "true" ? true : false);
+                    else if (list[0] == "columnofline")
+                        setColumnOfLine(list[1].toInt());
+                    else if (list[0] == "font")
+                        setFont(list[1]);
+                    else if (list[0] == "fontsize")
+                        setFontSize(list[1].toInt());
+                }
+            }
+
+
+        }
+    } else {
+        generatePreferencesFile();
+        qDebug() << "No encontró el archivo";
+    }
+
+}
+
+void Preferences::writePreferences()
+{
+
+}
+
+void Preferences::generatePreferencesFile()
+{
+
+}
+
+void Preferences::setLineWrap(bool value)
+{
+    // Call Tabs Manager set line wrap
+    Preferences::lineWrap = value;
+}
+
+void Preferences::setColumnLine(bool value)
+{
+    Preferences::columnLine = value;
+}
+
+void Preferences::setColumnOfLine(int column)
+{
+    Preferences::columnOfLine = column;
+}
+
+void Preferences::setFont(QString font)
+{
+    Preferences::font = font;
+}
+
+void Preferences::setFontSize(int size)
+{
+    Preferences::fontSize = size;
+}
+
 // Preferences Variables
 bool Preferences::lineWrap = false;
 bool Preferences::columnLine = true;
 int Preferences::columnOfLine = 80;
+QString Preferences::font = "Mono";
+int Preferences::fontSize = 10;
 
 // Constants
 const QString Preferences::SLASH = _SLASH;
 const QString Preferences::FILESTR = _FILESTR;
 const QString Preferences::HOME = QDir::homePath();
-const QString Preferences::DEFAULTFILENAME = HOME + "/Untitled.txt";
+const QString Preferences::DEFAULTFILENAME = Preferences::HOME + "/Untitled.txt";
 const QString Preferences::HOMEPAGE = "http://elpinchetopo.github.com/Abigail/";
 const QString Preferences::WIKI = "https://github.com/ElPincheTopo/Abigail/wiki";
 const QString Preferences::REPO = "https://github.com/ElPincheTopo/Abigail";
-const QString Preferences::DEFAULTFONT = "Mono";
-const int Preferences::DEFAULTFONTSIZE = 10;
+const QString Preferences::PREFERENCESDIR = _PREFERENCESDIR;

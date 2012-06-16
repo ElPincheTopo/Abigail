@@ -33,8 +33,6 @@
 #include "document.h"
 #include "preferences.h"
 
-#include "QDebug"
-
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -46,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->tabsManager, SIGNAL(cutAvailable(bool)), ui->actionCut, SLOT(setEnabled(bool)));
     connect(ui->tabsManager, SIGNAL(undoAvailable(bool)), ui->actionUndo, SLOT(setEnabled(bool)));
     connect(ui->tabsManager, SIGNAL(redoAvailable(bool)), ui->actionRedo, SLOT(setEnabled(bool)));
+    ui->tabsManager->newDoc();
     this->cursor = 0;
     int argc= QApplication::argc();
     QStringList argv= QApplication::arguments();
@@ -210,6 +209,7 @@ void MainWindow::on_tabsManager_currentChanged(QWidget *widget)
     if (widget != 0) {
         Document* doc = dynamic_cast<Document*>(widget);
         doc->textArea->setFocus();
+        ui->actionLine_Wrap->setChecked(doc->textArea->lineWrapMode() == QPlainTextEdit::WidgetWidth? true : false);
     }
 }
 
@@ -502,4 +502,9 @@ void MainWindow::on_actionLine_Wrap_triggered()
         doc->setLineWrapMode(QPlainTextEdit::WidgetWidth);
     else
         doc->setLineWrapMode(QPlainTextEdit::NoWrap);
+}
+
+void MainWindow::on_actionNew_triggered()
+{
+
 }

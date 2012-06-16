@@ -30,21 +30,36 @@
     #define WINDOWS
     #define _SLASH "\\"
     #define _FILESTR "file:///"
+    #define _PREFERENCESDIR QCoreApplication::applicationDirPath();
 #else
     #define UNIX
     #define _SLASH "/"
     #define _FILESTR "file://"
+    #define _PREFERENCESDIR Preferences::HOME
 #endif
 
 class Preferences
 {
 public:
     Preferences();
+    ~Preferences();
+    static void readPreferences();
+    static void writePreferences();
+    static void generatePreferencesFile();
+
+    // Setters
+    static void setLineWrap(bool value);
+    static void setColumnLine(bool value);
+    static void setColumnOfLine(int column);
+    static void setFont(QString font);
+    static void setFontSize(int size);
 
     // Preference variables
     static bool lineWrap;
     static bool columnLine;
     static int columnOfLine;
+    static QString font;
+    static int fontSize;
 
     // Constants
     static const QString SLASH;
@@ -54,9 +69,7 @@ public:
     static const QString HOMEPAGE;
     static const QString WIKI;
     static const QString REPO;
-    static const QString DEFAULTFONT;
-    static const int DEFAULTFONTSIZE;
-
+    static const QString PREFERENCESDIR;
 };
 
 #endif // STRINGS_H

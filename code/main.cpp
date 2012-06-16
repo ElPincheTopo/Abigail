@@ -28,6 +28,8 @@
 
 int main(int argc, char *argv[])
 {
+    Preferences::readPreferences();
+
     std::cout << "     Abigail, A lightweight, powerful and customizable cross-platform IDE.\n"
               << "     Copyright (C) 2012  Roberto Lapuente\n\n"
               << "     This program comes with ABSOLUTELY NO WARRANTY.\n"
