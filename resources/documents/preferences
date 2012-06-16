@@ -1,0 +1,17 @@
+# This file contains the Abigail IDE Preferences and it IS RECOMENDED that you
+# DON'T EDIT the file by yourself.
+
+# When LineWrap is set to TRUE all the tabs start with the Line Wrap option on
+Line Wrap = FALSE
+
+# Determines if a vertical line appears in the document
+Column Line = TRUE
+
+# The column where you want the above line to appear
+Column Of Line = 80
+
+# The Font for the editor
+Font = Mono
+
+# The size of the font
+Font Size = 10

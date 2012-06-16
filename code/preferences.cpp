@@ -57,9 +57,10 @@ void Preferences::readPreferences()
 
 
         }
+        file.close();
     } else {
-        generatePreferencesFile();
         qDebug() << "No encontró el archivo";
+        generatePreferencesFile();
     }
 
 }
@@ -71,6 +72,21 @@ void Preferences::writePreferences()
 
 void Preferences::generatePreferencesFile()
 {
+    // Read preference files
+    QFile inFile(":/resources/documents/preferences");
+    inFile.open(QIODevice::ReadOnly);
+    QTextStream in(&inFile);
+    QString text = in.readAll();
+    inFile.close();
+
+    qDebug() << text;
+
+    // Write in user home
+    QFile outFile(PREFERENCESDIR + "/.abigail/preferences");
+    outFile.open(QIODevice::WriteOnly);
+    QTextStream out(&outFile);
+    out << text;
+    outFile.close();
 
 }
 

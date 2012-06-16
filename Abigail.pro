@@ -52,8 +52,10 @@ FORMS    += ui/mainwindow.ui \
 OTHER_FILES += \
     README.md \
     COPYING \
-    resources/images/logos/abigail.png
+    resources/images/logos/abigail.png \
+    resources/documents/preferences
 
 RESOURCES += \
     resources/icons.qrc \
-    resources/logos.qrc
+    resources/logos.qrc \
+    resources/documents.qrc

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/resources/documents">
+        <file alias="preferences">documents/preferences</file>
+    </qresource>
+</RCC>
