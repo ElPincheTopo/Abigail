@@ -26,6 +26,7 @@
 #include <QTabWidget>
 
 #include "document.h"
+#include "preferencestab.h"
 
 class TabManager : public QTabWidget
 {
@@ -34,6 +35,7 @@ public:
     explicit TabManager(QWidget *parent = 0);
     ~TabManager();
     void openFile(QString archivo);
+    void openPreferences();
 
 private:
     void tabRemoved(int );

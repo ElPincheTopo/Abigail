@@ -37,17 +37,22 @@ SOURCES += code/main.cpp\
     code/document.cpp \
     code/tabmanager.cpp \
     code/codeeditor.cpp \
-    code/preferences.cpp
+    code/preferences.cpp \
+    code/tab.cpp \
+    code/preferencestab.cpp
 
 HEADERS  += code/mainwindow.h \
     code/about.h \
     code/document.h \
     code/tabmanager.h \
     code/codeeditor.h \
-    code/preferences.h
+    code/preferences.h \
+    code/tab.h \
+    code/preferencestab.h
 
 FORMS    += ui/mainwindow.ui \
-    ui/about.ui
+    ui/about.ui \
+    ui/preferencestab.ui
 
 OTHER_FILES += \
     README.md \

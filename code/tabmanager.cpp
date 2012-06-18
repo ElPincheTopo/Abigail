@@ -27,6 +27,8 @@
 #include "tabmanager.h"
 #include "preferences.h"
 
+#include <QDebug>
+
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
     this->setAcceptDrops(true);
@@ -92,11 +94,9 @@ void TabManager::openFile(QString archivo)
 {
     Document* currentDoc = dynamic_cast<Document*>(this->currentWidget());
 
-    Document* doc = (this->count() == 1 && currentDoc->title == 0 && !currentDoc->docHasChanged) ?
-                dynamic_cast<Document*>(this->currentWidget()) :
-                this->newDoc(archivo);
+    Document* doc = dynamic_cast<Document*> ((this->count() >= 1 && currentDoc->title == 0 && !currentDoc->docHasChanged) ? this->currentWidget() :
+                                                                                                                            this->newDoc(archivo));
     this->setTabText(this->currentIndex(), *doc->open(archivo));
-
 }
 
 void TabManager::open()
@@ -155,4 +155,13 @@ void TabManager::changeUndoAvailability(bool available)
 void TabManager::changeRedoAvailability(bool available)
 {
     emit this->redoAvailable(available);
+}
+
+void TabManager::openPreferences()
+{
+    QString title("Edit Preferences");
+    PreferencesTab *pref = new PreferencesTab();
+    int index = this->addTab(pref, title);
+    this->setCurrentIndex(index);
+    this->setTabText(this->currentIndex(), title);
 }

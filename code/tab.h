@@ -19,48 +19,23 @@
     or send an e-mail to topo@asustin.net.
 */
 
-#ifndef DOCUMENT_H
-#define DOCUMENT_H
+#ifndef TAB_H
+#define TAB_H
 
-#include <QPlainTextEdit>
-#include <QFile>
+#include <QWidget>
+#include <QGridLayout>
 
-#include "tab.h"
-#include "codeeditor.h"
+#include "preferences.h"
 
-class Document : public Tab
+class Tab : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Document(Tab *parent = 0);
-    ~Document();
-    CodeEditor *textArea;
-    bool docHasChanged;
+    Tab(QWidget *parent = 0);
+    virtual ~Tab();
+    QString *title;
 
-private:
-    QFile *file;
-    QGridLayout *layout;
-
-signals:
-    void textChanged(Document* doc);
-    void copyAvailable(bool available);
-    void cutAvailable(bool available);
-    void undoAvailable(bool available);
-    void redoAvailable(bool available);
-
-public slots:
-    void save();
-    QString* saveAs(QString archivo);
-    QString* open(QString archivo);
-    void close();
-
-private slots:
-    void textChanges();
-    void changeCopyAvailability(bool available);
-    void changeCutAvailability(bool available);
-    void changeUndoAvailability(bool available);
-    void changeRedoAvailability(bool available);
-
+protected:
 };
 
-#endif // DOCUMENT_H
+#endif // TAB_H

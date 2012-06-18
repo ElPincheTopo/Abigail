@@ -19,48 +19,14 @@
     or send an e-mail to topo@asustin.net.
 */
 
-#ifndef DOCUMENT_H
-#define DOCUMENT_H
-
-#include <QPlainTextEdit>
-#include <QFile>
-
 #include "tab.h"
-#include "codeeditor.h"
 
-class Document : public Tab
+Tab::Tab(QWidget *parent) : QWidget(parent)
 {
-    Q_OBJECT
-public:
-    explicit Document(Tab *parent = 0);
-    ~Document();
-    CodeEditor *textArea;
-    bool docHasChanged;
+    this->title = 0;
+}
 
-private:
-    QFile *file;
-    QGridLayout *layout;
-
-signals:
-    void textChanged(Document* doc);
-    void copyAvailable(bool available);
-    void cutAvailable(bool available);
-    void undoAvailable(bool available);
-    void redoAvailable(bool available);
-
-public slots:
-    void save();
-    QString* saveAs(QString archivo);
-    QString* open(QString archivo);
-    void close();
-
-private slots:
-    void textChanges();
-    void changeCopyAvailability(bool available);
-    void changeCutAvailability(bool available);
-    void changeUndoAvailability(bool available);
-    void changeRedoAvailability(bool available);
-
-};
-
-#endif // DOCUMENT_H
+Tab::~Tab()
+{
+    delete title;
+}

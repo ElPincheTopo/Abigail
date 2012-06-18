@@ -112,34 +112,45 @@ bool MainWindow::on_tabsManager_tabCloseRequested(int index)
 {
     Document* doc = dynamic_cast<Document*>(ui->tabsManager->widget(index));
     bool closed = true;
-    int ret = QMessageBox::Discard; // If the document hasn't been changed discard the changes(thar are non-existant)
-    // If the Document has changed since las save, ask the user what to do
-    if (doc->docHasChanged) {
-        QString title = (doc->title == 0 ? QString("Untitled") : *(doc->title));
-        QString msgText("The document '");
-        msgText.append(title).append("' has been modified.");
-        QMessageBox msgBox;
-        msgBox.setText(msgText);
-        msgBox.setInformativeText("Do you want to save your changes?");
-        msgBox.setIcon(QMessageBox::Warning);
-        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Save);
-        ret = msgBox.exec();
-        closed = false;
-    }
 
-    // If the user clicked 'cancel' do nothing, else...
-    // If the user clicked 'save' call 'save' and retry closing tab
-    if (ret == QMessageBox::Save) {
-        ui->tabsManager->save(index);
-        on_tabsManager_tabCloseRequested(index);
-        closed = true;
-    }
+    if (doc != 0) { // If the tab is a Document
+        int ret = QMessageBox::Discard; // If the document hasn't been changed discard the changes(thar are non-existant)
+        // If the Document has changed since las save, ask the user what to do
+        if (doc->docHasChanged) {
+            QString title = (doc->title == 0 ? QString("Untitled") : *(doc->title));
+            QString msgText("The document '");
+            msgText.append(title).append("' has been modified.");
+            QMessageBox msgBox;
+            msgBox.setText(msgText);
+            msgBox.setInformativeText("Do you want to save your changes?");
+            msgBox.setIcon(QMessageBox::Warning);
+            msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+            msgBox.setDefaultButton(QMessageBox::Save);
+            ret = msgBox.exec();
+            closed = false;
 
-    // If the user clicked 'discard' or if the document was saved already delete the tab
-    if (ret == QMessageBox::Discard) {
-        doc->deleteLater();
-        closed = true;
+        }
+
+        // If the user clicked 'cancel' do nothing, else...
+        // If the user clicked 'save' call 'save' and retry closing tab
+        if (ret == QMessageBox::Save) {
+            ui->tabsManager->save(index);
+            on_tabsManager_tabCloseRequested(index);
+            closed = true;
+        }
+
+        // If the user clicked 'discard' or if the document was saved already delete the tab
+        if (ret == QMessageBox::Discard) {
+            doc->deleteLater();
+            closed = true;
+        }
+    } else { // If the tab is not a document
+        // If the tab is a preferences tab
+        PreferencesTab* pref = dynamic_cast<PreferencesTab*>(ui->tabsManager->widget(index));
+        if (pref != 0) {
+            Preferences::writePreferences();
+            pref->deleteLater();
+        }
     }
 
     return closed;
@@ -206,12 +217,18 @@ void MainWindow::on_actionDelete_triggered()
     // Erase current selected text or object in project manager
 }
 
-void MainWindow::on_tabsManager_currentChanged(QWidget *widget)
+void MainWindow::on_tabsManager_currentChanged(QWidget *tab)
 {
-    if (widget != 0) {
-        Document* doc = dynamic_cast<Document*>(widget);
+    Document* doc = dynamic_cast<Document*>(tab);
+    if (doc != 0) { // If the tab is a document
         doc->textArea->setFocus();
         ui->actionLine_Wrap->setChecked(doc->textArea->lineWrapMode() == QPlainTextEdit::WidgetWidth? true : false);
+    } else { // If the tab is not a document
+        PreferencesTab* pref = dynamic_cast<PreferencesTab*>(tab);
+        if (pref != 0) { // If tab is a preferences tab
+            pref->loadPreferences();
+        }
+
     }
 }
 
@@ -515,5 +532,14 @@ void MainWindow::on_actionNew_triggered()
 
 void MainWindow::on_actionPreferences_triggered()
 {
-    ui->tabsManager->openFile(Preferences::PREFERENCESFILE);
+    ui->tabsManager->openPreferences();
+}
+
+void MainWindow::on_actionAdvanced_Search_triggered()
+{
+    Preferences::columnLine = !Preferences::columnLine;
+
+    Document *doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+    qDebug() << doc->textArea->updatesEnabled();
+    doc->textArea->update();
 }

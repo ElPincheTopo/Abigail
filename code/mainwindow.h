@@ -63,7 +63,7 @@ private slots:
     void on_actionCut_triggered();
     void on_actionPaste_triggered();
     void on_actionDelete_triggered();
-    void on_tabsManager_currentChanged(QWidget *arg1);
+    void on_tabsManager_currentChanged(QWidget *tab);
     void on_action_Indent_triggered();
     void on_action_Unindent_triggered();
     void on_actionComment_triggered();
@@ -80,6 +80,7 @@ private slots:
     void on_actionLine_Wrap_triggered();
     void on_actionNew_triggered();
     void on_actionPreferences_triggered();
+    void on_actionAdvanced_Search_triggered();
 
 private:
     Ui::MainWindow *ui;

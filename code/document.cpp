@@ -19,17 +19,14 @@
     or send an e-mail to topo@asustin.net.
 */
 
-#include <QFile>
 #include <QTextStream>
 #include <QStringList>
 
 #include "document.h"
-#include "preferences.h"
 
-Document::Document(QWidget *parent) : QWidget(parent)
+Document::Document(Tab *parent) : Tab(parent)
 {
     this->file = 0;
-    this->title = 0;
     this->docHasChanged = false;
     this->layout = new QGridLayout(this);
     this->layout->setSpacing(2);
@@ -46,16 +43,13 @@ Document::Document(QWidget *parent) : QWidget(parent)
     QObject::connect(textArea, SIGNAL(copyAvailable(bool)), this, SLOT(changeCopyAvailability(bool)));
     QObject::connect(textArea, SIGNAL(undoAvailable(bool)), this, SLOT(changeUndoAvailability(bool)));
     QObject::connect(textArea, SIGNAL(redoAvailable(bool)), this, SLOT(changeRedoAvailability(bool)));
-
-
 }
 
 Document::~Document()
 {
-    delete layout;
     delete file;
     delete textArea;
-    delete title;
+    delete layout;
 }
 
 QString* Document::saveAs(QString archivo)

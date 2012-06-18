@@ -19,48 +19,36 @@
     or send an e-mail to topo@asustin.net.
 */
 
-#ifndef DOCUMENT_H
-#define DOCUMENT_H
 
-#include <QPlainTextEdit>
-#include <QFile>
+#ifndef PREFERENCESTAB_H
+#define PREFERENCESTAB_H
 
 #include "tab.h"
-#include "codeeditor.h"
 
-class Document : public Tab
+namespace Ui {
+class PreferencesTab;
+}
+
+class PreferencesTab : public Tab
 {
     Q_OBJECT
+
 public:
-    explicit Document(Tab *parent = 0);
-    ~Document();
-    CodeEditor *textArea;
-    bool docHasChanged;
-
-private:
-    QFile *file;
-    QGridLayout *layout;
-
-signals:
-    void textChanged(Document* doc);
-    void copyAvailable(bool available);
-    void cutAvailable(bool available);
-    void undoAvailable(bool available);
-    void redoAvailable(bool available);
-
-public slots:
-    void save();
-    QString* saveAs(QString archivo);
-    QString* open(QString archivo);
-    void close();
+    explicit PreferencesTab(QWidget *parent = 0);
+    ~PreferencesTab();
+    void loadPreferences();
 
 private slots:
-    void textChanges();
-    void changeCopyAvailability(bool available);
-    void changeCutAvailability(bool available);
-    void changeUndoAvailability(bool available);
-    void changeRedoAvailability(bool available);
+    void on_lineWrapCheck_stateChanged(int state);
 
+    void on_columnLineCheck_stateChanged(int state);
+
+    void on_columnLineBox_valueChanged(int value);
+
+    void on_fontSizeCheck_valueChanged(int value);
+
+private:
+    Ui::PreferencesTab *ui;
 };
 
-#endif // DOCUMENT_H
+#endif // PREFERENCESTAB_H
