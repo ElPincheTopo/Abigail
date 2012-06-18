@@ -27,8 +27,6 @@
 #include "tabmanager.h"
 #include "preferences.h"
 
-#include <QDebug>
-
 TabManager::TabManager(QWidget *parent) : QTabWidget(parent)
 {
     this->setAcceptDrops(true);
