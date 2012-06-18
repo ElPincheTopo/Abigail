@@ -515,5 +515,5 @@ void MainWindow::on_actionNew_triggered()
 
 void MainWindow::on_actionPreferences_triggered()
 {
-    ui->tabsManager->openFile(Preferences::PREFERENCESDIR + "/.abigail/preferences");
+    ui->tabsManager->openFile(Preferences::PREFERENCESFILE);
 }

@@ -28,8 +28,7 @@
 
 int main(int argc, char *argv[])
 {
-    Preferences::readPreferences();
-
+    // License and info output to the terminal
     std::cout << "     Abigail, A lightweight, powerful and customizable cross-platform IDE.\n"
               << "     Copyright (C) 2012  Roberto Lapuente\n\n"
               << "     This program comes with ABSOLUTELY NO WARRANTY.\n"
@@ -37,10 +36,17 @@ int main(int argc, char *argv[])
               << "     under certain conditions.\n\n"
               << "     Visit " << Preferences::HOMEPAGE.toStdString() << " for more information." << std::endl;
 
+    // Load app preferences
+    Preferences::readPreferences();
+
+    // Run app
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
     int exec = a.exec();
+
+    // Save app preferences
+    Preferences::writePreferences();
 
     std::cout << "Goodbye!" << std::endl;
     return exec;

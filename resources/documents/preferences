@@ -34,6 +34,9 @@ Font = MONO
 # The size of the font. The default value is 10
 Font Size = 10
 
+#The color of the text
+
+
 # Find & Replace Section -------------------------------------------------------
 # The highlight color for the find function. Deafault value 4294967040
 Selection Color = 4294967040

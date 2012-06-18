@@ -123,7 +123,10 @@ void CodeEditor::paintEvent(QPaintEvent * ev)
                 + contentOffset().x()
                 + document()->documentMargin();
         QPainter p(viewport());
-        p.setPen(QColor::fromRgba(Preferences::vLineColor));
+        QPen pen(QColor::fromRgba(Preferences::vLineColor));
+        pen.setWidth(0);
+        p.setPen(pen);
+
         p.drawLine(position, rect.top(), position, rect.bottom());
     }
 }

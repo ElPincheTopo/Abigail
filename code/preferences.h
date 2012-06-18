@@ -80,6 +80,7 @@ public:
     static const QString WIKI;
     static const QString REPO;
     static const QString PREFERENCESDIR;
+    static const QString PREFERENCESFILE;
 };
 
 #endif // STRINGS_H
