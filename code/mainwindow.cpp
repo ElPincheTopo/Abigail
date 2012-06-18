@@ -537,9 +537,5 @@ void MainWindow::on_actionPreferences_triggered()
 
 void MainWindow::on_actionAdvanced_Search_triggered()
 {
-    Preferences::columnLine = !Preferences::columnLine;
 
-    Document *doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
-    qDebug() << doc->textArea->updatesEnabled();
-    doc->textArea->update();
 }
