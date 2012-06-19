@@ -23,6 +23,7 @@
 #define STRINGS_H
 
 #include <QString>
+#include <QApplication>
 
 #define QT4 // Define the Qt version in use.
 
@@ -30,12 +31,17 @@
     #define WINDOWS
     #define _SLASH "\\"
     #define _FILESTR "file:///"
-    #define _PREFERENCESDIR QCoreApplication::applicationDirPath();
+    #define _HOME QDir::homePath().replace("/", "\\")
+    //#define _PREFERENCESDIR QCoreApplication::applicationDirPath();
+    #define _PREFERENCESDIR Preferences::HOME+"\\abigail"
+    #define _PREFERENCESFILE Preferences::PREFERENCESDIR+"\\preferences"
 #else
     #define UNIX
     #define _SLASH "/"
     #define _FILESTR "file://"
-    #define _PREFERENCESDIR Preferences::HOME
+    #define _HOME QDir::homePath().replace("/", "\\")
+    #define _PREFERENCESDIR Preferences::HOME+"/.abigail"
+    #define _PREFERENCESFILE Preferences::PREFERENCESDIR+"/preferences"
 #endif
 
 class Preferences

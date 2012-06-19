@@ -25,6 +25,8 @@
 
 #include "preferences.h"
 
+#include <QDebug>
+
 Preferences::Preferences()
 {
 
@@ -32,7 +34,7 @@ Preferences::Preferences()
 
 void Preferences::readPreferences()
 {
-    QFile file(PREFERENCESFILE);
+    QFile file(Preferences::PREFERENCESFILE);
     if(file.open(QIODevice::ReadOnly)) {
         QTextStream in(&file);
         while (!in.atEnd()) {
@@ -71,6 +73,7 @@ void Preferences::readPreferences()
         }
         file.close();
     } else {
+        qDebug() << "error al leer el archivo" << Preferences::PREFERENCESFILE;
         generatePreferencesFile();
     }
 
@@ -78,8 +81,8 @@ void Preferences::readPreferences()
 
 void Preferences::writePreferences()
 {
-    QString preferencesFile = PREFERENCESFILE;
-    QString newPreferencesFile = PREFERENCESDIR + "/.abigail/preferences.tmp";
+    QString preferencesFile = Preferences::PREFERENCESFILE;
+    QString newPreferencesFile = Preferences::PREFERENCESDIR + "/preferences.tmp";
 
     QFile file(preferencesFile);
     QFile tmp(newPreferencesFile);
@@ -152,11 +155,14 @@ void Preferences::generatePreferencesFile()
     inFile.close();
 
     // Write in user home
-    QFile outFile(PREFERENCESFILE);
-    outFile.open(QIODevice::WriteOnly);
-    QTextStream out(&outFile);
-    out << text;
-    outFile.close();
+    QFile outFile(Preferences::PREFERENCESFILE);
+    if (outFile.open(QIODevice::WriteOnly)) {
+        QTextStream out(&outFile);
+        out << text;
+        outFile.close();
+    } else {
+        qDebug() << "Error al leer en generate" << Preferences::PREFERENCESFILE;
+    }
 }
 
 void Preferences::setLineWrap(bool value)
@@ -226,10 +232,10 @@ unsigned int Preferences::selectionColor = 4294967040;
 // Constants
 const QString Preferences::SLASH = _SLASH;
 const QString Preferences::FILESTR = _FILESTR;
-const QString Preferences::HOME = QDir::homePath();
+const QString Preferences::HOME = _HOME;
 const QString Preferences::DEFAULTFILENAME = Preferences::HOME + "/Untitled.txt";
 const QString Preferences::HOMEPAGE = "http://elpinchetopo.github.com/Abigail/";
 const QString Preferences::WIKI = "https://github.com/ElPincheTopo/Abigail/wiki";
 const QString Preferences::REPO = "https://github.com/ElPincheTopo/Abigail";
 const QString Preferences::PREFERENCESDIR = _PREFERENCESDIR;
-const QString Preferences::PREFERENCESFILE = PREFERENCESDIR + "/.abigail/preferences";
+const QString Preferences::PREFERENCESFILE = _PREFERENCESFILE;
