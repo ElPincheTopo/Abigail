@@ -459,6 +459,9 @@
    </widget>
   </widget>
   <action name="actionContents">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/help</normaloff>:/resources/images/icons/help</iconset>
@@ -685,7 +688,7 @@
   </action>
   <action name="actionAdvanced_Search">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
