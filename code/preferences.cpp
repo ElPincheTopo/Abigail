@@ -25,8 +25,6 @@
 
 #include "preferences.h"
 
-#include <QDebug>
-
 Preferences::Preferences()
 {
 
@@ -73,7 +71,6 @@ void Preferences::readPreferences()
         }
         file.close();
     } else {
-        qDebug() << "error al leer el archivo" << Preferences::PREFERENCESFILE;
         generatePreferencesFile();
     }
 
@@ -160,9 +157,6 @@ void Preferences::generatePreferencesFile()
         QTextStream out(&outFile);
         out << text;
         outFile.close();
-    } else {
-        qDebug() << "Error al leer en generate" << Preferences::PREFERENCESFILE;
-    }
 }
 
 // Preferences Variables
