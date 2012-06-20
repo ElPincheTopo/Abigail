@@ -29,6 +29,8 @@
 
 #if defined(_WIN32) || defined(__WIN32)
     #define WINDOWS
+    #define _FONT Consolas
+    #define __FONT "Consolas"
     #define _SLASH "\\"
     #define _FILESTR "file:///"
     #define _HOME QDir::homePath().replace("/", "\\")
@@ -37,6 +39,8 @@
     #define _PREFERENCESFILE Preferences::PREFERENCESDIR+"\\preferences"
 #else
     #define UNIX
+    #define _FONT Mono
+    #define __FONT "Mono"
     #define _SLASH "/"
     #define _FILESTR "file://"
     #define _HOME QDir::homePath().replace("/", "\\")
@@ -52,18 +56,6 @@ public:
     static void readPreferences();
     static void writePreferences();
     static void generatePreferencesFile();
-
-    // Setters
-    static void setLineWrap(bool value);
-    static void setColumnLine(bool value);
-    static void setColumnOfLine(int column);
-    static void setFont(QString font);
-    static void setFontSize(int size);
-    static void setVLineColor(unsigned int color);
-    static void setCurrentLineColor(unsigned int color);
-    static void setLineNumberArea(unsigned int color);
-    static void setLineNumberColor(unsigned int color);
-    static void setSelectionColor(unsigned int color);
 
     // Preference variables
     static bool lineWrap;

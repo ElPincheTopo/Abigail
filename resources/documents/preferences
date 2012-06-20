@@ -29,7 +29,7 @@ Line Number Area = 4293980400
 Line Number Color = 4283782485
 
 # The Font for the editor. The default value is MONO
-Font = MONO
+Font = _FONT
 
 # The size of the font. The default value is 10
 Font Size = 10
