@@ -157,6 +157,7 @@ void Preferences::generatePreferencesFile()
         QTextStream out(&outFile);
         out << text;
         outFile.close();
+    }
 }
 
 // Preferences Variables
