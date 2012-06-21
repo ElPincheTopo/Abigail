@@ -76,7 +76,7 @@
      <x>0</x>
      <y>0</y>
      <width>850</width>
-     <height>25</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -135,6 +135,7 @@
     <addaction name="separator"/>
     <addaction name="action_Indent"/>
     <addaction name="action_Unindent"/>
+    <addaction name="actionComment"/>
     <addaction name="actionUncomment"/>
     <addaction name="actionAuto_format"/>
     <addaction name="menuF_ormat"/>
@@ -458,6 +459,9 @@
    </widget>
   </widget>
   <action name="actionContents">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">
      <normaloff>:/resources/images/icons/help</normaloff>:/resources/images/icons/help</iconset>
@@ -589,7 +593,7 @@
      <normaloff>:/resources/images/icons/undo</normaloff>:/resources/images/icons/undo</iconset>
    </property>
    <property name="text">
-    <string>&amp;Undo</string>
+    <string>Undo</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Z</string>
@@ -604,7 +608,7 @@
      <normaloff>:/resources/images/icons/redo</normaloff>:/resources/images/icons/redo</iconset>
    </property>
    <property name="text">
-    <string>&amp;Redo</string>
+    <string>Redo</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Y</string>
@@ -684,7 +688,7 @@
   </action>
   <action name="actionAdvanced_Search">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="icon">
     <iconset resource="../resources/icons.qrc">

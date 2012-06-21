@@ -32,7 +32,7 @@ Preferences::Preferences()
 
 void Preferences::readPreferences()
 {
-    QFile file(PREFERENCESFILE);
+    QFile file(Preferences::PREFERENCESFILE);
     if(file.open(QIODevice::ReadOnly)) {
         QTextStream in(&file);
         while (!in.atEnd()) {
@@ -43,29 +43,29 @@ void Preferences::readPreferences()
                 if (list.length() == 2) {
                     // Utilities Section
                     if(list[0] == "linewrap")
-                        setLineWrap(list[1] == "true" ? true : false);
+                        Preferences::lineWrap = (list[1] == "true" ? true : false);
 
                     // Text Area Section
                     else if (list[0] == "columnline")
-                        setColumnLine(list[1] == "true" ? true : false);
+                        Preferences::columnLine = (list[1] == "true" ? true : false);
                     else if (list[0] == "columnofline")
-                        setColumnOfLine(list[1].toInt());
+                        Preferences::columnOfLine = (list[1].toInt());
                     else if (list[0] == "verticallinecolor")
-                        setVLineColor(list[1].toUInt());
+                        Preferences::vLineColor = (list[1].toUInt());
                     else if (list[0] == "currentlinecolor")
-                        setCurrentLineColor(list[1].toUInt());
+                        Preferences::currentLineColor = (list[1].toUInt());
                     else if (list[0] == "linenumberarea")
-                        setLineNumberArea(list[1].toUInt());
+                        Preferences::lineNumberArea = (list[1].toUInt());
                     else if (list[0] == "linenumbercolor")
-                        setLineNumberColor(list[1].toUInt());
+                        Preferences::lineNumberColor = (list[1].toUInt());
                     else if (list[0] == "font")
-                        setFont(list[1]);
+                        Preferences::font = (list[1]);
                     else if (list[0] == "fontsize")
-                        setFontSize(list[1].toInt());
+                        Preferences:: fontSize = (list[1].toInt());
 
                     // Find & Replace Section
                     else if (list[0] == "selectioncolor")
-                        setSelectionColor(list[1].toUInt());
+                        Preferences::selectionColor = (list[1].toUInt());
                 }
             }
         }
@@ -78,8 +78,8 @@ void Preferences::readPreferences()
 
 void Preferences::writePreferences()
 {
-    QString preferencesFile = PREFERENCESFILE;
-    QString newPreferencesFile = PREFERENCESDIR + "/.abigail/preferences.tmp";
+    QString preferencesFile = Preferences::PREFERENCESFILE;
+    QString newPreferencesFile = Preferences::PREFERENCESDIR + "/preferences.tmp";
 
     QFile file(preferencesFile);
     QFile tmp(newPreferencesFile);
@@ -152,84 +152,33 @@ void Preferences::generatePreferencesFile()
     inFile.close();
 
     // Write in user home
-    QFile outFile(PREFERENCESFILE);
-    outFile.open(QIODevice::WriteOnly);
-    QTextStream out(&outFile);
-    out << text;
-    outFile.close();
-}
-
-void Preferences::setLineWrap(bool value)
-{
-    // Call Tabs Manager set line wrap
-    Preferences::lineWrap = value;
-}
-
-void Preferences::setColumnLine(bool value)
-{
-    Preferences::columnLine = value;
-}
-
-void Preferences::setColumnOfLine(int column)
-{
-    Preferences::columnOfLine = column;
-}
-
-void Preferences::setFont(QString font)
-{
-    Preferences::font = font;
-}
-
-void Preferences::setFontSize(int size)
-{
-    Preferences::fontSize = size;
-}
-
-void Preferences::setVLineColor(unsigned int color)
-{
-    Preferences::vLineColor = color;
-
-}
-
-void Preferences::setCurrentLineColor(unsigned int color)
-{
-    Preferences::currentLineColor = color;
-}
-
-void Preferences::setLineNumberArea(unsigned int color)
-{
-    Preferences::lineNumberArea = color;
-}
-
-void Preferences::setLineNumberColor(unsigned int color)
-{
-    Preferences::lineNumberColor = color;
-}
-
-void Preferences::setSelectionColor(unsigned int color)
-{
-    Preferences::selectionColor = color;
+    QFile outFile(Preferences::PREFERENCESFILE);
+    if (outFile.open(QIODevice::WriteOnly)) {
+        QTextStream out(&outFile);
+        out << text;
+        outFile.close();
+    }
 }
 
 // Preferences Variables
 bool Preferences::lineWrap = false;
 bool Preferences::columnLine = true;
 int Preferences::columnOfLine = 80;
-QString Preferences::font = "Mono";
+QString Preferences::font = __FONT;
 int Preferences::fontSize = 10;
-unsigned int Preferences::vLineColor = 4290822336;
-unsigned int Preferences::currentLineColor = 4293848831;
-unsigned int Preferences::lineNumberArea = 4293980400;
-unsigned int Preferences::lineNumberColor = 4283782485;
-unsigned int Preferences::selectionColor = 4294967040;
+unsigned int Preferences::vLineColor = 4290822336u;
+unsigned int Preferences::currentLineColor = 4293848831u;
+unsigned int Preferences::lineNumberArea = 4293980400u;
+unsigned int Preferences::lineNumberColor = 4283782485u;
+unsigned int Preferences::selectionColor = 4294967040u;
 
 // Constants
 const QString Preferences::SLASH = _SLASH;
 const QString Preferences::FILESTR = _FILESTR;
-const QString Preferences::HOME = QDir::homePath();
+const QString Preferences::HOME = _HOME;
 const QString Preferences::DEFAULTFILENAME = Preferences::HOME + "/Untitled.txt";
 const QString Preferences::HOMEPAGE = "http://elpinchetopo.github.com/Abigail/";
 const QString Preferences::WIKI = "https://github.com/ElPincheTopo/Abigail/wiki";
 const QString Preferences::REPO = "https://github.com/ElPincheTopo/Abigail";
 const QString Preferences::PREFERENCESDIR = _PREFERENCESDIR;
-const QString Preferences::PREFERENCESFILE = PREFERENCESDIR + "/.abigail/preferences";
+const QString Preferences::PREFERENCESFILE = _PREFERENCESFILE;

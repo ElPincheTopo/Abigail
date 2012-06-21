@@ -24,9 +24,7 @@
 #include "ui_preferencestab.h"
 #include "preferences.h"
 
-PreferencesTab::PreferencesTab(QWidget *parent) :
-    Tab(parent),
-    ui(new Ui::PreferencesTab)
+PreferencesTab::PreferencesTab(QWidget *parent) : Tab(parent), ui(new Ui::PreferencesTab)
 {
     ui->setupUi(this);
 }
