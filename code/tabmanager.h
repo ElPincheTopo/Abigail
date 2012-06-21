@@ -55,6 +55,7 @@ public slots:
     void saveCurrentDoc();
     void saveAll();
     void saveAs();
+    void saveAs(int index);
     void open();
     void changeCopyAvailability(bool available);
     void changeCutAvailability(bool available);
