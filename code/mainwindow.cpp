@@ -183,31 +183,31 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::on_actionUndo_triggered()
 {
     Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
-    doc->textArea->undo();
+    if (doc != 0) doc->textArea->undo();
 }
 
 void MainWindow::on_actionRedo_triggered()
 {
     Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
-    doc->textArea->redo();
+    if (doc != 0) doc->textArea->redo();
 }
 
 void MainWindow::on_actionCopy_triggered()
 {
     Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
-    doc->textArea->copy();
+    if (doc != 0) doc->textArea->copy();
 }
 
 void MainWindow::on_actionCut_triggered()
 {
     Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
-    doc->textArea->cut();
+    if (doc != 0) doc->textArea->cut();
 }
 
 void MainWindow::on_actionPaste_triggered()
 {
     Document* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
-    doc->textArea->paste();
+    if (doc != 0) doc->textArea->paste();
 }
 
 void MainWindow::on_actionDelete_triggered()
