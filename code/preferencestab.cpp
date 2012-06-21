@@ -31,8 +31,7 @@ PreferencesTab::PreferencesTab(QWidget *parent) : Tab(parent), ui(new Ui::Prefer
 
 PreferencesTab::~PreferencesTab()
 {
-    // BUG here
-    //delete ui;
+    delete ui;
 }
 
 void PreferencesTab::loadPreferences()

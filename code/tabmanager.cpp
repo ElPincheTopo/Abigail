@@ -56,10 +56,12 @@ void TabManager::save(int index)
 {
     // Checar si no esta guardado
     Document *doc = dynamic_cast<Document*>(widget(index));
-    doc->title == 0 ? saveAs() : doc->save(); // If the document has no title it's a new document and 'saveAs()' should be called instead
-    if (doc->title != 0) { // If the Save as was canceled then end
-        QString str = *(doc->title);
-        this->setTabText(index, str);
+    if (doc != 0) {
+        doc->title == 0 ? saveAs(index) : doc->save(); // If the document has no title it's a new document and 'saveAs()' should be called instead
+        if (doc->title != 0) { // If the Save as was canceled then end
+            QString str = *(doc->title);
+            this->setTabText(index, str);
+        }
     }
 }
 
@@ -79,6 +81,17 @@ void TabManager::saveAll()
 void TabManager::saveAs()
 {
     Document* doc = dynamic_cast<Document*>(this->currentWidget());
+    if (doc != 0) {
+        QString archivo = QFileDialog::getSaveFileName(this, "Save As", Preferences::DEFAULTFILENAME);
+        if (archivo != "") {
+            QString* title = doc->saveAs(archivo);
+            this->setTabText(this->currentIndex(), *title);
+        }
+    }
+}
+
+void TabManager::saveAs(int index){
+    Document* doc = dynamic_cast<Document*>(this->widget(index));
     if (doc != 0) {
         QString archivo = QFileDialog::getSaveFileName(this, "Save As", Preferences::DEFAULTFILENAME);
         if (archivo != "") {
