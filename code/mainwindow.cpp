@@ -220,11 +220,13 @@ void MainWindow::on_tabsManager_currentChanged(QWidget *tab)
     Document* doc = dynamic_cast<Document*>(tab);
     if (doc != 0) { // If the tab is a document
         doc->textArea->setFocus();
+        if (!ui->menuTab->isEnabled()) ui->menuTab->setEnabled(true);
         ui->actionLine_Wrap->setChecked(doc->textArea->lineWrapMode() == QPlainTextEdit::WidgetWidth? true : false);
     } else { // If the tab is not a document
         PreferencesTab* pref = dynamic_cast<PreferencesTab*>(tab);
         if (pref != 0) { // If tab is a preferences tab
             pref->loadPreferences();
+            if (ui->menuTab->isEnabled()) ui->menuTab->setEnabled(false);
         }
 
     }

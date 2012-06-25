@@ -176,9 +176,9 @@
      <string>&amp;Window</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menuView">
+   <widget class="QMenu" name="menuTab">
     <property name="title">
-     <string>View</string>
+     <string>Tab</string>
     </property>
     <addaction name="actionLine_Wrap"/>
    </widget>
@@ -187,7 +187,7 @@
    <addaction name="menuBuild"/>
    <addaction name="menuTools"/>
    <addaction name="menu_Window"/>
-   <addaction name="menuView"/>
+   <addaction name="menuTab"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="fileToolBar">
