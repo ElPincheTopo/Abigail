@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->searchBar->close();
     this->replaceMode = false;
     ui->statusBar->showMessage(QString("Hi! Welcome to Abigail"), 10000);
+    connect(ui->tabsManager, SIGNAL(tabContextMenuEvent(QContextMenuEvent*)), this, SLOT(tabMenuRequested(QContextMenuEvent*)));
     connect(ui->tabsManager, SIGNAL(copyAvailable(bool)), ui->actionCopy, SLOT(setEnabled(bool)));
     connect(ui->tabsManager, SIGNAL(cutAvailable(bool)), ui->actionCut, SLOT(setEnabled(bool)));
     connect(ui->tabsManager, SIGNAL(undoAvailable(bool)), ui->actionUndo, SLOT(setEnabled(bool)));
@@ -538,4 +539,9 @@ void MainWindow::on_actionPreferences_triggered()
 void MainWindow::on_actionAdvanced_Search_triggered()
 {
 
+}
+
+void MainWindow::tabMenuRequested(QContextMenuEvent *event)
+{
+    ui->menuTab->exec(event->globalPos());
 }

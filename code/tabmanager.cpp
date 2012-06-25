@@ -177,3 +177,8 @@ void TabManager::openPreferences()
     this->setCurrentIndex(index);
     this->setTabText(this->currentIndex(), title);
 }
+
+void TabManager::contextMenuEvent(QContextMenuEvent *event)
+{
+    emit tabContextMenuEvent(event);
+}
