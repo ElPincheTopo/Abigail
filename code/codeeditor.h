@@ -72,7 +72,7 @@ private slots:
     void updateLineNumberArea(const QRect &, int);
 
 signals:
-    void dropAcceptedEvent(QString archivo);
+    void dropAcceptedEvent(QDropEvent *event);
 
 private:
     QWidget *lineNumberArea;

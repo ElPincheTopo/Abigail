@@ -39,6 +39,7 @@ public:
     explicit TabManager(QWidget *parent = 0);
     ~TabManager();
     void openPreferences();
+    void openFile(QString archivo);
 
 private:
     void tabRemoved(int );
@@ -62,11 +63,13 @@ public slots:
     void saveAs();
     void saveAs(int index);
     void open();
-    void openFile(QString archivo);
+
     void changeCopyAvailability(bool available);
     void changeCutAvailability(bool available);
     void changeUndoAvailability(bool available);
     void changeRedoAvailability(bool available);
+
+    void codeEditorDropEvent(QDropEvent *event);
 
 private slots:
     void textChanges(Document* doc);

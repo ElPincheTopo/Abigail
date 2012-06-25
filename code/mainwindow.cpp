@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->cursor = 0;
     int argc= QApplication::argc();
     QStringList argv= QApplication::arguments();
+    this->searchDirection = MainWindow::SearchNext;
     for (int i=1; i<argc; ++i)
         ui->tabsManager->openFile(argv[i]);
 }
@@ -342,26 +343,37 @@ void MainWindow::on_actionUncomment_triggered()
     cursor.movePosition(QTextCursor::StartOfLine);
     start = cursor.position();
 
+    QString selection;
+    int spaces = 2;
+    int pos = 0;
+
     do {
         cursor.movePosition(QTextCursor::StartOfLine);
-        cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor, 3);
-        if (cursor.selectedText() == "// ") cursor.removeSelectedText();
+        do {
+            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+            selection = cursor.selectedText();
+            if (selection == "/") {
+                pos = cursor.position() - 1;
+                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+                if (cursor.selectedText() == "//") {
+                    cursor.removeSelectedText();
+                    cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+                    spaces = 2;
+                    if (cursor.selectedText() == " ") {
+                        cursor.removeSelectedText();
+                        spaces = 3;
+                    }
+                }
+            }
+            cursor.clearSelection();
+        } while (selection == " " || selection == "\t");
         cursor.movePosition(QTextCursor::EndOfLine);
-        end -= 3;
+        end -= spaces;
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
-    cursor.movePosition(QTextCursor::StartOfLine);
+    cursor.setPosition(pos);
     cursor.endEditBlock();
     doc->textArea->setTextCursor(cursor);
-}
-
-void MainWindow::on_actionSearch_triggered()
-{
-    if (!ui->searchBar->isVisible()) {
-        replaceMode = false;
-        ui->searchBar->setVisible(true);
-    }
-    ui->searchTextEdit->setFocus();
 }
 
 void MainWindow::on_action_Print_triggered()
@@ -374,8 +386,18 @@ void MainWindow::on_action_Print_triggered()
     doc->textArea->document()->print(&printer);
 }
 
+void MainWindow::on_actionSearch_triggered()
+{
+    if (!ui->searchBar->isVisible()) {
+        replaceMode = false;
+        ui->searchBar->setVisible(true);
+    }
+    ui->searchTextEdit->setFocus();
+}
+
 void MainWindow::on_searchTextEdit_textChanged(const QString)
 {
+
     Document *doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
     QTextCursor *docCursor = new QTextCursor(doc->textArea->textCursor());
     docCursor->movePosition(QTextCursor::Start);
@@ -405,6 +427,11 @@ void MainWindow::on_searchNext_clicked()
     this->cursor = docCursor;
     if (ret == QMessageBox::Yes) on_searchNext_clicked();
     ui->searchTextEdit->setFocus();
+
+    if (this->searchDirection == MainWindow::SearchPrevious) {
+        this->searchDirection = MainWindow::SearchNext;
+        this->on_searchNext_clicked();
+    }
 }
 
 void MainWindow::on_searchPrev_clicked()
@@ -435,6 +462,11 @@ void MainWindow::on_searchPrev_clicked()
     this->cursor = docCursor;
     if (ret == QMessageBox::Yes) on_searchPrev_clicked();
     ui->searchTextEdit->setFocus();
+
+    if (this->searchDirection == MainWindow::SearchNext) {
+        this->searchDirection = MainWindow::SearchPrevious;
+        this->on_searchPrev_clicked();
+    }
 }
 
 int MainWindow::search(QTextCursor *docCursor, QTextDocument::FindFlags flags)
@@ -486,7 +518,6 @@ void MainWindow::on_replace_clicked()
     }
 
     on_searchNext_clicked();
-
 }
 
 void MainWindow::on_searchBar_visibilityChanged(bool visible)
@@ -496,6 +527,7 @@ void MainWindow::on_searchBar_visibilityChanged(bool visible)
             ui->replaceLabel->show();
             ui->replaceTextEdit->show();
             ui->replace->show();
+            this->searchDirection = MainWindow::SearchNext;
         } else {
             ui->replaceLabel->hide();
             ui->replaceTextEdit->hide();
