@@ -33,6 +33,8 @@
 #include "document.h"
 #include "preferences.h"
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -343,14 +345,31 @@ void MainWindow::on_actionUncomment_triggered()
     start = cursor.position();
 
     do {
+        QString selection;
+        int spaces = 2;
         cursor.movePosition(QTextCursor::StartOfLine);
-        cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor, 3);
-        if (cursor.selectedText() == "// ") cursor.removeSelectedText();
+        do {
+            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+            selection = cursor.selectedText();
+            if (selection == "/") {
+                cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+                if (cursor.selectedText() == "//") {
+                    cursor.removeSelectedText();
+                    cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+                    spaces = 2;
+                    if (cursor.selectedText() == " ") {
+                        cursor.removeSelectedText();
+                        spaces = 3;
+                    }
+                }
+            }
+            cursor.clearSelection();
+        } while (selection == " " || selection == "\t");
         cursor.movePosition(QTextCursor::EndOfLine);
-        end -= 3;
+        end -= spaces;
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
-    cursor.movePosition(QTextCursor::StartOfLine);
+    cursor.movePosition(QTextCursor::EndOfLine);
     cursor.endEditBlock();
     doc->textArea->setTextCursor(cursor);
 }
