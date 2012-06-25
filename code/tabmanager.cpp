@@ -42,7 +42,8 @@ Document* TabManager::newDoc(QString title)
     Document *doc = new Document();
     int index = this->addTab(doc, title);
     this->setCurrentIndex(index);
-    QObject::connect(doc->textArea, SIGNAL(dropAcceptedEvent(QString)), this, SLOT(openFile(QString)));
+
+    QObject::connect(doc->textArea, SIGNAL(dropAcceptedEvent(QDropEvent*)), this, SLOT(codeEditorDropEvent(QDropEvent*)));
     QObject::connect(doc, SIGNAL(textChanged(Document*)), this, SLOT(textChanges(Document*)));
     QObject::connect(doc, SIGNAL(cutAvailable(bool)), this, SLOT(changeCutAvailability(bool)));
     QObject::connect(doc, SIGNAL(copyAvailable(bool)), this, SLOT(changeCopyAvailability(bool)));
@@ -106,8 +107,8 @@ void TabManager::openFile(QString archivo)
 {
     Document* currentDoc = dynamic_cast<Document*>(this->currentWidget());
 
-    Document* doc = dynamic_cast<Document*> ((this->count() >= 1 && currentDoc->title == 0 && !currentDoc->docHasChanged) ? this->currentWidget() :
-                                                                                                                            this->newDoc(archivo));
+    Document* doc = dynamic_cast<Document*> ((this->count() >= 1 && currentDoc->title == 0 && !currentDoc->docHasChanged) ?
+                                                                            this->currentWidget() : this->newDoc(archivo));
     this->setTabText(this->currentIndex(), *doc->open(archivo));
 }
 
@@ -181,4 +182,8 @@ void TabManager::openPreferences()
 void TabManager::contextMenuEvent(QContextMenuEvent *event)
 {
     emit tabContextMenuEvent(event);
+}
+
+void TabManager::codeEditorDropEvent(QDropEvent *event){
+    this->dropEvent(event);
 }
