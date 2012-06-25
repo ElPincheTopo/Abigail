@@ -34,7 +34,6 @@ class TabManager : public QTabWidget
 public:
     explicit TabManager(QWidget *parent = 0);
     ~TabManager();
-    void openFile(QString archivo);
     void openPreferences();
 
 private:
@@ -57,6 +56,7 @@ public slots:
     void saveAs();
     void saveAs(int index);
     void open();
+    void openFile(QString archivo);
     void changeCopyAvailability(bool available);
     void changeCutAvailability(bool available);
     void changeUndoAvailability(bool available);
