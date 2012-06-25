@@ -344,14 +344,17 @@ void MainWindow::on_actionUncomment_triggered()
     cursor.movePosition(QTextCursor::StartOfLine);
     start = cursor.position();
 
+    QString selection;
+    int spaces = 2;
+    int pos = 0;
+
     do {
-        QString selection;
-        int spaces = 2;
         cursor.movePosition(QTextCursor::StartOfLine);
         do {
             cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
             selection = cursor.selectedText();
             if (selection == "/") {
+                pos = cursor.position() - 1;
                 cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
                 if (cursor.selectedText() == "//") {
                     cursor.removeSelectedText();
@@ -369,7 +372,7 @@ void MainWindow::on_actionUncomment_triggered()
         end -= spaces;
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
-    cursor.movePosition(QTextCursor::EndOfLine);
+    cursor.setPosition(pos);
     cursor.endEditBlock();
     doc->textArea->setTextCursor(cursor);
 }
