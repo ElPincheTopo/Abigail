@@ -171,3 +171,24 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
         ++blockNumber;
     }
 }
+
+void CodeEditor::dragEnterEvent(QDragEnterEvent *event)
+{
+    if (event->mimeData()->hasFormat("text/uri-list")) event->acceptProposedAction();
+
+}
+
+void CodeEditor::dropEvent(QDropEvent *event)
+{
+    foreach (QUrl url, event->mimeData()->urls()) {
+        QStringList list = url.toString().split(Preferences::FILESTR);
+        if (list.count() == 2) {
+            QString archivo = list[1];
+            #ifdef WINDOWS
+                archivo = archivo.replace("/", "\\");
+            #endif
+            emit dropAcceptedEvent(archivo);
+        }
+    }
+    event->acceptProposedAction();
+}

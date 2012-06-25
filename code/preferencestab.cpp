@@ -27,6 +27,7 @@
 PreferencesTab::PreferencesTab(QWidget *parent) : Tab(parent), ui(new Ui::PreferencesTab)
 {
     ui->setupUi(this);
+    this->setAcceptDrops(false);
 }
 
 PreferencesTab::~PreferencesTab()

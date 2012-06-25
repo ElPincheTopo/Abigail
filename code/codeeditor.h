@@ -71,8 +71,13 @@ private slots:
     void highlightCurrentLine();
     void updateLineNumberArea(const QRect &, int);
 
+signals:
+    void dropAcceptedEvent(QString archivo);
+
 private:
     QWidget *lineNumberArea;
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
 };
 
 

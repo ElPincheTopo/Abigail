@@ -28,19 +28,23 @@
 #include "document.h"
 #include "preferencestab.h"
 
+namespace Ui {
+class TabManager;
+}
+
 class TabManager : public QTabWidget
 {
     Q_OBJECT
 public:
     explicit TabManager(QWidget *parent = 0);
     ~TabManager();
-    void openFile(QString archivo);
     void openPreferences();
 
 private:
     void tabRemoved(int );
     void dragEnterEvent(QDragEnterEvent *event);
     void dropEvent(QDropEvent *event);
+    void contextMenuEvent(QContextMenuEvent *event);
 
 signals:
     void textChanged(int index);
@@ -48,6 +52,7 @@ signals:
     void cutAvailable(bool);
     void undoAvailable(bool available);
     void redoAvailable(bool available);
+    void tabContextMenuEvent(QContextMenuEvent *event);
 
 public slots:
     Document *newDoc(QString title = QString("Untitled"));
@@ -57,6 +62,7 @@ public slots:
     void saveAs();
     void saveAs(int index);
     void open();
+    void openFile(QString archivo);
     void changeCopyAvailability(bool available);
     void changeCutAvailability(bool available);
     void changeUndoAvailability(bool available);

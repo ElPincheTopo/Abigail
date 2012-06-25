@@ -39,6 +39,9 @@
     </property>
     <item row="0" column="0">
      <widget class="TabManager" name="tabsManager">
+      <property name="contextMenuPolicy">
+       <enum>Qt::DefaultContextMenu</enum>
+      </property>
       <property name="acceptDrops">
        <bool>true</bool>
       </property>
@@ -177,18 +180,21 @@
      <string>&amp;Window</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menuView">
+   <widget class="QMenu" name="menuTab">
     <property name="title">
-     <string>View</string>
+     <string>Tab</string>
     </property>
     <addaction name="actionLine_Wrap"/>
+    <addaction name="separator"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionCloseFile"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuBuild"/>
    <addaction name="menuTools"/>
    <addaction name="menu_Window"/>
-   <addaction name="menuView"/>
+   <addaction name="menuTab"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="fileToolBar">
@@ -773,7 +779,7 @@
      <normaloff>:/resources/images/icons/closeFile</normaloff>:/resources/images/icons/closeFile</iconset>
    </property>
    <property name="text">
-    <string>File</string>
+    <string>Close File</string>
    </property>
   </action>
   <action name="actionCloseProject">
@@ -785,7 +791,7 @@
      <normaloff>:/resources/images/icons/closeProject</normaloff>:/resources/images/icons/closeProject</iconset>
    </property>
    <property name="text">
-    <string>Project</string>
+    <string>Close Project</string>
    </property>
   </action>
   <action name="actionNew">
