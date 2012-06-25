@@ -40,6 +40,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    enum SearchDirection {SearchNext, SearchPrevious};
 
 protected:
     void changeEvent(QEvent *e);
@@ -87,6 +88,8 @@ private:
     Ui::MainWindow *ui;
     bool replaceMode;
     QTextCursor *cursor;
+    SearchDirection searchDirection;
+
 };
 
 #endif // MAINWINDOW_H
