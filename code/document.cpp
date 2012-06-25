@@ -35,6 +35,7 @@ Document::Document(Tab *parent) : Tab(parent)
     this->textArea = new CodeEditor(this);
     this->textArea->setFont(QFont(Preferences::font, Preferences::fontSize));
     this->textArea->setAcceptDrops(true);
+    this->textArea->setCenterOnScroll(true);
     this->layout->addWidget(textArea);
     this->textArea->show();
     this->textArea->setFocus();
