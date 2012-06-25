@@ -33,8 +33,6 @@
 #include "document.h"
 #include "preferences.h"
 
-#include <QDebug>
-
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -520,7 +518,6 @@ void MainWindow::on_replace_clicked()
     }
 
     on_searchNext_clicked();
-
 }
 
 void MainWindow::on_searchBar_visibilityChanged(bool visible)
