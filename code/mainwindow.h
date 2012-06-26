@@ -83,6 +83,7 @@ private slots:
     void on_actionPreferences_triggered();
     void on_actionAdvanced_Search_triggered();
     void tabMenuRequested(QContextMenuEvent *event);
+    void searchBarFloated();
 
 private:
     Ui::MainWindow *ui;

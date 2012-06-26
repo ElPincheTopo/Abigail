@@ -33,25 +33,37 @@
 #include "document.h"
 #include "preferences.h"
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->projectExplorer->close();
     ui->searchBar->close();
     this->replaceMode = false;
+    this->cursor = 0;
+    this->searchDirection = MainWindow::SearchNext;
     ui->statusBar->showMessage(QString("Hi! Welcome to Abigail"), 10000);
+
+    // SearchBar Float Button
+    QAbstractButton* button = ui->searchBar->findChild<QAbstractButton*>("qt_dockwidget_floatbutton");
+    connect(button, SIGNAL(clicked()), this, SLOT(searchBarFloated()));
+
+    // Connect signals
     connect(ui->tabsManager, SIGNAL(tabContextMenuEvent(QContextMenuEvent*)), this, SLOT(tabMenuRequested(QContextMenuEvent*)));
     connect(ui->tabsManager, SIGNAL(copyAvailable(bool)), ui->actionCopy, SLOT(setEnabled(bool)));
     connect(ui->tabsManager, SIGNAL(cutAvailable(bool)), ui->actionCut, SLOT(setEnabled(bool)));
     connect(ui->tabsManager, SIGNAL(undoAvailable(bool)), ui->actionUndo, SLOT(setEnabled(bool)));
     connect(ui->tabsManager, SIGNAL(redoAvailable(bool)), ui->actionRedo, SLOT(setEnabled(bool)));
-    ui->tabsManager->newDoc();
-    this->cursor = 0;
+
     int argc= QApplication::argc();
     QStringList argv= QApplication::arguments();
-    this->searchDirection = MainWindow::SearchNext;
-    for (int i=1; i<argc; ++i)
-        ui->tabsManager->openFile(argv[i]);
+
+    if (argc < 2)
+        ui->tabsManager->newDoc();
+    else
+        for (int i=1; i<argc; ++i)
+            ui->tabsManager->openFile(argv[i]);
 }
 
 MainWindow::~MainWindow()
@@ -520,6 +532,14 @@ void MainWindow::on_replace_clicked()
     on_searchNext_clicked();
 }
 
+void MainWindow::on_actionReplace_triggered()
+{
+    replaceMode = true;
+    on_searchBar_visibilityChanged(true);
+    if (!ui->searchBar->isVisible()) ui->searchBar->setVisible(true);
+    ui->searchTextEdit->setFocus();
+}
+
 void MainWindow::on_searchBar_visibilityChanged(bool visible)
 {
     if (visible) {
@@ -534,19 +554,21 @@ void MainWindow::on_searchBar_visibilityChanged(bool visible)
             ui->replace->hide();
         }
     }
+
+    if (ui->searchBar->isFloating()) {
+        int x = ui->searchBar->x();
+        int y = ui->searchBar->y();
+        ui->searchBar->setGeometry(QRect(x,y,400,60));
+    }
+}
+
+void MainWindow::searchBarFloated()
+{
     if (ui->searchBar->isFloating()) {
         int x = (this->x() + this->width()) - 410;
         int y = (this->y() + this->height()) - 70;
         ui->searchBar->setGeometry(QRect(x,y,400,60));
     }
-}
-
-void MainWindow::on_actionReplace_triggered()
-{
-    replaceMode = true;
-    on_searchBar_visibilityChanged(true);
-    if (!ui->searchBar->isVisible()) ui->searchBar->setVisible(true);
-    ui->searchTextEdit->setFocus();
 }
 
 void MainWindow::on_actionLine_Wrap_triggered()
