@@ -39,6 +39,7 @@ void PreferencesTab::loadPreferences()
 {
     // Utilities
     ui->lineWrapCheck->setChecked(Preferences::lineWrap);
+    ui->centerOnScrollCheck->setChecked(Preferences::centerOnScroll);
 
     // Text Area
     ui->columnLineCheck->setChecked(Preferences::columnLine);
@@ -64,4 +65,9 @@ void PreferencesTab::on_columnLineBox_valueChanged(int value)
 void PreferencesTab::on_fontSizeCheck_valueChanged(int value)
 {
     Preferences::fontSize = value;
+}
+
+void PreferencesTab::on_centerOnScrollCheck_stateChanged(int state)
+{
+    Preferences::centerOnScroll = (state != 0 ? true : false);
 }

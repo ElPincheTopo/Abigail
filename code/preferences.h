@@ -47,20 +47,9 @@ public:
     static void writePreferences();
     static void generatePreferencesFile();
 
-    // Setters
-    static void setLineWrap(bool value);
-    static void setColumnLine(bool value);
-    static void setColumnOfLine(int column);
-    static void setFont(QString font);
-    static void setFontSize(int size);
-    static void setVLineColor(unsigned int color);
-    static void setCurrentLineColor(unsigned int color);
-    static void setLineNumberArea(unsigned int color);
-    static void setLineNumberColor(unsigned int color);
-    static void setSelectionColor(unsigned int color);
-
     // Preference variables
     static bool lineWrap;
+    static bool centerOnScroll;
     static bool columnLine;
     static int columnOfLine;
     static QString font;
@@ -70,6 +59,7 @@ public:
     static unsigned int lineNumberArea;
     static unsigned int lineNumberColor;
     static unsigned int selectionColor;
+
 
     // Constants
     static const QString SLASH;

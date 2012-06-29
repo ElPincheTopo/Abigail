@@ -43,29 +43,31 @@ void Preferences::readPreferences()
                 if (list.length() == 2) {
                     // Utilities Section
                     if(list[0] == "linewrap")
-                        setLineWrap(list[1] == "true" ? true : false);
+                        Preferences::lineWrap = (list[1] == "true" ? true : false);
+                    else if(list[0] == "centeronscroll")
+                        Preferences::centerOnScroll = (list[1] == "true" ? true : false);
 
                     // Text Area Section
                     else if (list[0] == "columnline")
-                        setColumnLine(list[1] == "true" ? true : false);
+                        Preferences::columnLine = (list[1] == "true" ? true : false);
                     else if (list[0] == "columnofline")
-                        setColumnOfLine(list[1].toInt());
+                        Preferences::columnOfLine = (list[1].toInt());
                     else if (list[0] == "verticallinecolor")
-                        setVLineColor(list[1].toUInt());
+                        Preferences::vLineColor = (list[1].toUInt());
                     else if (list[0] == "currentlinecolor")
-                        setCurrentLineColor(list[1].toUInt());
+                        Preferences::currentLineColor = (list[1].toUInt());
                     else if (list[0] == "linenumberarea")
-                        setLineNumberArea(list[1].toUInt());
+                        Preferences::lineNumberArea = (list[1].toUInt());
                     else if (list[0] == "linenumbercolor")
-                        setLineNumberColor(list[1].toUInt());
+                        Preferences::lineNumberColor = (list[1].toUInt());
                     else if (list[0] == "font")
-                        setFont(list[1]);
+                        Preferences::font = (list[1]);
                     else if (list[0] == "fontsize")
-                        setFontSize(list[1].toInt());
+                        Preferences::fontSize = (list[1].toInt());
 
                     // Find & Replace Section
                     else if (list[0] == "selectioncolor")
-                        setSelectionColor(list[1].toUInt());
+                        Preferences::selectionColor = (list[1].toUInt());
                 }
             }
         }
@@ -102,6 +104,8 @@ void Preferences::writePreferences()
                     // Utilities Section
                     if(list[0] == "linewrap")
                         writeLine = QString("Line Wrap = ") + (Preferences::lineWrap ? "TRUE" : "FALSE");
+                    else if (list[0] == "centeronscroll")
+                        writeLine = QString("Center On Scroll = ") + (Preferences::centerOnScroll ? "TRUE" : "FALSE");
 
                     // Text Area Section
                     else if (list[0] == "columnline")
@@ -159,60 +163,9 @@ void Preferences::generatePreferencesFile()
     outFile.close();
 }
 
-void Preferences::setLineWrap(bool value)
-{
-    // Call Tabs Manager set line wrap
-    Preferences::lineWrap = value;
-}
-
-void Preferences::setColumnLine(bool value)
-{
-    Preferences::columnLine = value;
-}
-
-void Preferences::setColumnOfLine(int column)
-{
-    Preferences::columnOfLine = column;
-}
-
-void Preferences::setFont(QString font)
-{
-    Preferences::font = font;
-}
-
-void Preferences::setFontSize(int size)
-{
-    Preferences::fontSize = size;
-}
-
-void Preferences::setVLineColor(unsigned int color)
-{
-    Preferences::vLineColor = color;
-
-}
-
-void Preferences::setCurrentLineColor(unsigned int color)
-{
-    Preferences::currentLineColor = color;
-}
-
-void Preferences::setLineNumberArea(unsigned int color)
-{
-    Preferences::lineNumberArea = color;
-}
-
-void Preferences::setLineNumberColor(unsigned int color)
-{
-    Preferences::lineNumberColor = color;
-}
-
-void Preferences::setSelectionColor(unsigned int color)
-{
-    Preferences::selectionColor = color;
-}
-
 // Preferences Variables
 bool Preferences::lineWrap = false;
+bool Preferences::centerOnScroll = true;
 bool Preferences::columnLine = true;
 int Preferences::columnOfLine = 80;
 QString Preferences::font = "Mono";

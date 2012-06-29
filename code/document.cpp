@@ -33,11 +33,8 @@ Document::Document(Tab *parent) : Tab(parent)
     this->layout->setMargin(0);
     this->setLayout(layout);
     this->textArea = new CodeEditor(this);
-    this->textArea->setFont(QFont(Preferences::font, Preferences::fontSize));
-    this->textArea->setCenterOnScroll(true);
     this->layout->addWidget(textArea);
-    this->textArea->show();
-    this->textArea->setFocus();
+
     QObject::connect(textArea, SIGNAL(textChanged()), this, SLOT(textChanges()));
     QObject::connect(textArea, SIGNAL(copyAvailable(bool)), this, SLOT(changeCutAvailability(bool)));
     QObject::connect(textArea, SIGNAL(copyAvailable(bool)), this, SLOT(changeCopyAvailability(bool)));

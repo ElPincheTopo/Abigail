@@ -47,6 +47,8 @@ private slots:
 
     void on_fontSizeCheck_valueChanged(int value);
 
+    void on_centerOnScrollCheck_stateChanged(int state);
+
 private:
     Ui::PreferencesTab *ui;
 };
