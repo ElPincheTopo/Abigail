@@ -271,7 +271,10 @@ void MainWindow::on_action_Indent_triggered()
         end += 4;
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
-    cursor.movePosition(QTextCursor::StartOfLine);
+    // Select the 'changed area'
+    cursor.setPosition(end);
+    cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, end-start);
+
     cursor.endEditBlock();
     doc->textArea->setTextCursor(cursor);
 }
@@ -302,7 +305,10 @@ void MainWindow::on_action_Unindent_triggered()
         end -= 4;
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
-    cursor.movePosition(QTextCursor::StartOfLine);
+    // Select the 'changed area'
+    cursor.setPosition(end);
+    cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, end-start);
+
     cursor.endEditBlock();
     doc->textArea->setTextCursor(cursor);
 }
