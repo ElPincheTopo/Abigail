@@ -42,8 +42,12 @@ void Preferences::readPreferences()
                 QStringList list = line.split("=");
                 if (list.length() == 2) {
                     // Utilities Section
-                    if(list[0] == "linewrap")
+                    if (list[0] == "linewrap")
                         Preferences::lineWrap = (list[1] == "true" ? true : false);
+                    else if (list[0] == "centeronscroll")
+                        Preferences::centerOnScroll = (list[1] == "true" ? true : false);
+                    else if (list[0] == "tablength")
+                        Preferences::tabLength = (list[1].toInt());
 
                     // Text Area Section
                     else if (list[0] == "columnline")
@@ -61,7 +65,7 @@ void Preferences::readPreferences()
                     else if (list[0] == "font")
                         Preferences::font = (list[1]);
                     else if (list[0] == "fontsize")
-                        Preferences:: fontSize = (list[1].toInt());
+                        Preferences::fontSize = (list[1].toInt());
 
                     // Find & Replace Section
                     else if (list[0] == "selectioncolor")
@@ -102,7 +106,10 @@ void Preferences::writePreferences()
                     // Utilities Section
                     if(list[0] == "linewrap")
                         writeLine = QString("Line Wrap = ") + (Preferences::lineWrap ? "TRUE" : "FALSE");
-
+                    else if (list[0] == "centeronscroll")
+                        writeLine = QString("Center On Scroll = ") + (Preferences::centerOnScroll ? "TRUE" : "FALSE");
+                    else if (list[0] == "tablength")
+                        writeLine = "Tab Length = " + QString::number(Preferences::tabLength);
                     // Text Area Section
                     else if (list[0] == "columnline")
                         writeLine = QString("Column Line = ") + (Preferences::columnLine ? "TRUE" : "FALSE");
@@ -162,8 +169,10 @@ void Preferences::generatePreferencesFile()
 
 // Preferences Variables
 bool Preferences::lineWrap = false;
+bool Preferences::centerOnScroll = true;
 bool Preferences::columnLine = true;
 int Preferences::columnOfLine = 80;
+int Preferences::tabLength = 4;
 QString Preferences::font = __FONT;
 int Preferences::fontSize = 10;
 unsigned int Preferences::vLineColor = 4290822336u;

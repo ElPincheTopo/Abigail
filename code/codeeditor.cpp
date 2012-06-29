@@ -74,6 +74,12 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
     this->setLineWrapMode(Preferences::lineWrap ? QPlainTextEdit::WidgetWidth : QPlainTextEdit::NoWrap);
+
+
+    this->setFont(QFont(Preferences::font, Preferences::fontSize));
+    this->setCenterOnScroll(Preferences::centerOnScroll);
+    this->show();
+    this->setFocus();
 }
 
 int CodeEditor::lineNumberAreaWidth()
@@ -181,5 +187,4 @@ void CodeEditor::dragEnterEvent(QDragEnterEvent *event)
 void CodeEditor::dropEvent(QDropEvent *event)
 {
     emit dropAcceptedEvent(event);
-
 }

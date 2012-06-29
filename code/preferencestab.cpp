@@ -39,11 +39,13 @@ void PreferencesTab::loadPreferences()
 {
     // Utilities
     ui->lineWrapCheck->setChecked(Preferences::lineWrap);
+    ui->centerOnScrollCheck->setChecked(Preferences::centerOnScroll);
+    ui->tabLengthBox->setValue(Preferences::tabLength);
 
     // Text Area
     ui->columnLineCheck->setChecked(Preferences::columnLine);
     ui->columnLineBox->setValue(Preferences::columnOfLine);
-    ui->fontSizeCheck->setValue(Preferences::fontSize);
+    ui->fontSizeBox->setValue(Preferences::fontSize);
 }
 
 void PreferencesTab::on_lineWrapCheck_stateChanged(int state)
@@ -61,7 +63,17 @@ void PreferencesTab::on_columnLineBox_valueChanged(int value)
     Preferences::columnOfLine = value;
 }
 
-void PreferencesTab::on_fontSizeCheck_valueChanged(int value)
+void PreferencesTab::on_fontSizeBox_valueChanged(int value)
 {
     Preferences::fontSize = value;
+}
+
+void PreferencesTab::on_centerOnScrollCheck_stateChanged(int state)
+{
+    Preferences::centerOnScroll = (state != 0 ? true : false);
+}
+
+void PreferencesTab::on_tabLengthBox_valueChanged(int value)
+{
+    Preferences::tabLength = value;
 }

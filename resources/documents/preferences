@@ -8,6 +8,10 @@
 # the default option is FALSE
 Line Wrap = FALSE
 
+# If set to TRUE you can scroll down untill the las line is in the top of the
+# text area. Default is TRUE
+Center On Scroll = TRUE
+
 # Text Area Section ------------------------------------------------------------
 # Determines if a vertical line appears in the document. The default option is
 # TRUE

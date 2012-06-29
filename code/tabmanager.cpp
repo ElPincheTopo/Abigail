@@ -152,21 +152,29 @@ void TabManager::dropEvent(QDropEvent *event)
 
 void TabManager::changeCopyAvailability(bool available)
 {
+    Document* doc = dynamic_cast<Document*>(this->currentWidget());
+    doc->isCopyAvailable = available;
     emit this->copyAvailable(available);
 }
 
 void TabManager::changeCutAvailability(bool available)
 {
+    Document* doc = dynamic_cast<Document*>(this->currentWidget());
+    doc->isCutAvailable = available;
     emit this->cutAvailable(available);
 }
 
 void TabManager::changeUndoAvailability(bool available)
 {
+    Document* doc = dynamic_cast<Document*>(this->currentWidget());
+    doc->isUndoAvailable = available;
     emit this->undoAvailable(available);
 }
 
 void TabManager::changeRedoAvailability(bool available)
 {
+    Document* doc = dynamic_cast<Document*>(this->currentWidget());
+    doc->isRedoAvailable = available;
     emit this->redoAvailable(available);
 }
 

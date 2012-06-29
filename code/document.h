@@ -36,6 +36,10 @@ public:
     ~Document();
     CodeEditor *textArea;
     bool docHasChanged;
+    bool isCopyAvailable;
+    bool isCutAvailable;
+    bool isUndoAvailable;
+    bool isRedoAvailable;
 
 private:
     QFile *file;

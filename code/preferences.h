@@ -59,8 +59,10 @@ public:
 
     // Preference variables
     static bool lineWrap;
+    static bool centerOnScroll;
     static bool columnLine;
     static int columnOfLine;
+    static int tabLength;
     static QString font;
     static int fontSize;
     static unsigned int vLineColor;

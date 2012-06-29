@@ -235,14 +235,49 @@ void MainWindow::on_tabsManager_currentChanged(QWidget *tab)
     if (doc != 0) { // If the tab is a document
         doc->textArea->setFocus();
         if (!ui->menuTab->isEnabled()) ui->menuTab->setEnabled(true);
+        ui->searchBar->setEnabled(true);
+        ui->actionSave->setEnabled(true);
+        ui->actionSave_All->setEnabled(true);
+        ui->actionPaste->setEnabled(true);
+        ui->actionSearch->setEnabled(true);
+        ui->actionReplace->setEnabled(true);
+        //ui->actionAdvanced_Search->setEnabled(true);
+        //ui->actionAuto_format->setEnabled(true);
+        ui->action_Indent->setEnabled(true);
+        ui->action_Unindent->setEnabled(true);
+        ui->actionComment->setEnabled(true);
+        ui->actionUncomment->setEnabled(true);
         ui->actionLine_Wrap->setChecked(doc->textArea->lineWrapMode() == QPlainTextEdit::WidgetWidth? true : false);
+        ui->actionUndo->setEnabled(doc->isUndoAvailable);
+        ui->actionRedo->setEnabled(doc->isRedoAvailable);
+        ui->actionCopy->setEnabled(doc->isCopyAvailable);
+        ui->actionCut->setEnabled(doc->isCutAvailable);
     } else { // If the tab is not a document
         PreferencesTab* pref = dynamic_cast<PreferencesTab*>(tab);
         if (pref != 0) { // If tab is a preferences tab
             pref->loadPreferences();
-            if (ui->menuTab->isEnabled()) ui->menuTab->setEnabled(false);
-        }
-
+            ui->searchBar->setEnabled(false);
+            ui->menuTab->setEnabled(false);
+            ui->actionSave->setEnabled(false);
+            ui->actionSave_All->setEnabled(false);
+            ui->actionUndo->setEnabled(false);
+            ui->actionRedo->setEnabled(false);
+            ui->actionCopy->setEnabled(false);
+            ui->actionCut->setEnabled(false);
+            ui->actionPaste->setEnabled(false);
+            ui->actionSearch->setEnabled(false);
+            ui->actionReplace->setEnabled(false);
+            ui->actionAdvanced_Search->setEnabled(false);
+            ui->actionAuto_format->setEnabled(false);
+            ui->action_Indent->setEnabled(false);
+            ui->action_Unindent->setEnabled(false);
+            ui->actionComment->setEnabled(false);
+            ui->actionUncomment->setEnabled(false);
+        }/* else {
+            Tab* tab = dynamic_cast<Tab*>(tab);
+            if (tab == 0) // If it isn't a tab
+                qDebug() << "NO HAY TAB";
+        }*/
     }
 }
 
@@ -266,12 +301,16 @@ void MainWindow::on_action_Indent_triggered()
 
     do {
         cursor.movePosition(QTextCursor::StartOfLine);
-        cursor.insertText("    ");
+        for (int i=0; i<Preferences::tabLength; ++i)
+            cursor.insertText(" ");
         cursor.movePosition(QTextCursor::EndOfLine);
-        end += 4;
+        end += Preferences::tabLength;
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
-    cursor.movePosition(QTextCursor::StartOfLine);
+    // Select the 'changed area'
+    cursor.setPosition(end);
+    cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, end-start);
+
     cursor.endEditBlock();
     doc->textArea->setTextCursor(cursor);
 }
@@ -294,15 +333,24 @@ void MainWindow::on_action_Unindent_triggered()
     cursor.movePosition(QTextCursor::StartOfLine);
     start = cursor.position();
 
+    int i;
     do {
-        cursor.movePosition(QTextCursor::StartOfLine);
-        cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor, 4);
-        if (cursor.selectedText() == "    ") cursor.removeSelectedText();
+        for (i=Preferences::tabLength; i>0; --i) {
+            cursor.movePosition(QTextCursor::StartOfLine);
+            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+            if (cursor.selectedText() == " " || cursor.selectedText() == "\t")
+                cursor.removeSelectedText();
+            else
+                break;
+        }
         cursor.movePosition(QTextCursor::EndOfLine);
-        end -= 4;
+        end -= (Preferences::tabLength - i);
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
-    cursor.movePosition(QTextCursor::StartOfLine);
+    // Select the 'changed area'
+    cursor.setPosition(end);
+    cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, end-start);
+
     cursor.endEditBlock();
     doc->textArea->setTextCursor(cursor);
 }
@@ -332,7 +380,10 @@ void MainWindow::on_actionComment_triggered()
         end += 3;
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
-    cursor.movePosition(QTextCursor::StartOfLine);
+    // Select the 'changed area'
+    cursor.setPosition(end);
+    cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, end-start);
+
     cursor.endEditBlock();
     doc->textArea->setTextCursor(cursor);
 }
@@ -356,16 +407,15 @@ void MainWindow::on_actionUncomment_triggered()
     start = cursor.position();
 
     QString selection;
-    int spaces = 2;
-    int pos = 0;
+    int spaces;
 
     do {
+        spaces = 0;
         cursor.movePosition(QTextCursor::StartOfLine);
         do {
             cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
             selection = cursor.selectedText();
             if (selection == "/") {
-                pos = cursor.position() - 1;
                 cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
                 if (cursor.selectedText() == "//") {
                     cursor.removeSelectedText();
@@ -383,7 +433,10 @@ void MainWindow::on_actionUncomment_triggered()
         end -= spaces;
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
-    cursor.setPosition(pos);
+    // Select the 'changed area'
+    cursor.setPosition(end);
+    cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, end-start);
+
     cursor.endEditBlock();
     doc->textArea->setTextCursor(cursor);
 }
