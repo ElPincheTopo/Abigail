@@ -42,10 +42,12 @@ void Preferences::readPreferences()
                 QStringList list = line.split("=");
                 if (list.length() == 2) {
                     // Utilities Section
-                    if(list[0] == "linewrap")
+                    if (list[0] == "linewrap")
                         Preferences::lineWrap = (list[1] == "true" ? true : false);
-                    else if(list[0] == "centeronscroll")
+                    else if (list[0] == "centeronscroll")
                         Preferences::centerOnScroll = (list[1] == "true" ? true : false);
+                    else if (list[0] == "tablength")
+                        Preferences::tabLength = (list[1].toInt());
 
                     // Text Area Section
                     else if (list[0] == "columnline")
@@ -106,7 +108,8 @@ void Preferences::writePreferences()
                         writeLine = QString("Line Wrap = ") + (Preferences::lineWrap ? "TRUE" : "FALSE");
                     else if (list[0] == "centeronscroll")
                         writeLine = QString("Center On Scroll = ") + (Preferences::centerOnScroll ? "TRUE" : "FALSE");
-
+                    else if (list[0] == "tablength")
+                        writeLine = "Tab Length = " + QString::number(Preferences::tabLength);
                     // Text Area Section
                     else if (list[0] == "columnline")
                         writeLine = QString("Column Line = ") + (Preferences::columnLine ? "TRUE" : "FALSE");
@@ -168,6 +171,7 @@ bool Preferences::lineWrap = false;
 bool Preferences::centerOnScroll = true;
 bool Preferences::columnLine = true;
 int Preferences::columnOfLine = 80;
+int Preferences::tabLength = 4;
 QString Preferences::font = "Mono";
 int Preferences::fontSize = 10;
 unsigned int Preferences::vLineColor = 4290822336;

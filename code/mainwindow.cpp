@@ -266,9 +266,10 @@ void MainWindow::on_action_Indent_triggered()
 
     do {
         cursor.movePosition(QTextCursor::StartOfLine);
-        cursor.insertText("    ");
+        for (int i=0; i<Preferences::tabLength; ++i)
+            cursor.insertText(" ");
         cursor.movePosition(QTextCursor::EndOfLine);
-        end += 4;
+        end += Preferences::tabLength;
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
     // Select the 'changed area'
@@ -297,12 +298,18 @@ void MainWindow::on_action_Unindent_triggered()
     cursor.movePosition(QTextCursor::StartOfLine);
     start = cursor.position();
 
+    int i;
     do {
-        cursor.movePosition(QTextCursor::StartOfLine);
-        cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor, 4);
-        if (cursor.selectedText() == "    ") cursor.removeSelectedText();
+        for (i=Preferences::tabLength; i>0; --i) {
+            cursor.movePosition(QTextCursor::StartOfLine);
+            cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+            if (cursor.selectedText() == " " || cursor.selectedText() == "\t")
+                cursor.removeSelectedText();
+            else
+                break;
+        }
         cursor.movePosition(QTextCursor::EndOfLine);
-        end -= 4;
+        end -= (Preferences::tabLength - i);
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
     // Select the 'changed area'
@@ -365,9 +372,10 @@ void MainWindow::on_actionUncomment_triggered()
     start = cursor.position();
 
     QString selection;
-    int spaces = 2;
+    int spaces;
 
     do {
+        spaces = 0;
         cursor.movePosition(QTextCursor::StartOfLine);
         do {
             cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);

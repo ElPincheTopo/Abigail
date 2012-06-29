@@ -116,7 +116,7 @@
          <string>Font Size:</string>
         </property>
        </widget>
-       <widget class="QSpinBox" name="fontSizeCheck">
+       <widget class="QSpinBox" name="fontSizeBox">
         <property name="geometry">
          <rect>
           <x>90</x>
@@ -137,10 +137,22 @@
      <item>
       <widget class="QGroupBox" name="groupBox">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="baseSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
        </property>
        <property name="title">
         <string>Utilities</string>
@@ -151,22 +163,58 @@
        <property name="checkable">
         <bool>false</bool>
        </property>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="1" column="0">
-         <widget class="QCheckBox" name="lineWrapCheck">
-          <property name="text">
-           <string>Line Wrap by Default</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QCheckBox" name="centerOnScrollCheck">
-          <property name="text">
-           <string>Center On Scroll</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QCheckBox" name="lineWrapCheck">
+        <property name="geometry">
+         <rect>
+          <x>17</x>
+          <y>25</y>
+          <width>171</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Line Wrap by Default</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="centerOnScrollCheck">
+        <property name="geometry">
+         <rect>
+          <x>17</x>
+          <y>53</y>
+          <width>140</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Center On Scroll</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_4">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>81</y>
+          <width>78</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Tab Length:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="tabLengthBox">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>76</y>
+          <width>60</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="singleStep">
+         <number>2</number>
+        </property>
+       </widget>
       </widget>
      </item>
     </layout>

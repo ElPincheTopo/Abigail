@@ -52,6 +52,7 @@ public:
     static bool centerOnScroll;
     static bool columnLine;
     static int columnOfLine;
+    static int tabLength;
     static QString font;
     static int fontSize;
     static unsigned int vLineColor;
@@ -59,7 +60,6 @@ public:
     static unsigned int lineNumberArea;
     static unsigned int lineNumberColor;
     static unsigned int selectionColor;
-
 
     // Constants
     static const QString SLASH;
