@@ -84,7 +84,6 @@ void Preferences::writePreferences()
 {
     QString preferencesFile = Preferences::PREFERENCESFILE;
     QString newPreferencesFile = Preferences::PREFERENCESDIR + "/preferences.tmp";
-
     QFile file(preferencesFile);
     QFile tmp(newPreferencesFile);
 
@@ -182,6 +181,7 @@ unsigned int Preferences::lineNumberColor = 4283782485u;
 unsigned int Preferences::selectionColor = 4294967040u;
 
 // Constants
+const QString Preferences::VERSION = _VERSION;
 const QString Preferences::SLASH = _SLASH;
 const QString Preferences::FILESTR = _FILESTR;
 const QString Preferences::HOME = _HOME;

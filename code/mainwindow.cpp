@@ -33,8 +33,6 @@
 #include "document.h"
 #include "preferences.h"
 
-#include <QDebug>
-
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -276,7 +274,6 @@ void MainWindow::on_tabsManager_currentChanged(QWidget *tab)
         }/* else {
             Tab* tab = dynamic_cast<Tab*>(tab);
             if (tab == 0) // If it isn't a tab
-                qDebug() << "NO HAY TAB";
         }*/
     }
 }

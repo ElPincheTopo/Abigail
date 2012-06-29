@@ -36,6 +36,8 @@ int main(int argc, char *argv[])
               << "     under certain conditions.\n\n"
               << "     Visit " << Preferences::HOMEPAGE.toStdString() << " for more information." << std::endl;
 
+    // Command-line Argument Options
+
     // Load app preferences
     Preferences::readPreferences();
 

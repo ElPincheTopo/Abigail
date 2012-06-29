@@ -26,6 +26,7 @@
 #include <QApplication>
 
 #define QT4 // Define the Qt version in use.
+#define _VERSION "v0.5.2"
 
 #if defined(_WIN32) || defined(__WIN32)
     #define WINDOWS
@@ -43,7 +44,7 @@
     #define __FONT "Mono"
     #define _SLASH "/"
     #define _FILESTR "file://"
-    #define _HOME QDir::homePath().replace("/", "\\")
+    #define _HOME QDir::homePath()
     #define _PREFERENCESDIR Preferences::HOME+"/.abigail"
     #define _PREFERENCESFILE Preferences::PREFERENCESDIR+"/preferences"
 #endif
@@ -72,6 +73,7 @@ public:
     static unsigned int selectionColor;
 
     // Constants
+    static const QString VERSION;
     static const QString SLASH;
     static const QString FILESTR;
     static const QString HOME;

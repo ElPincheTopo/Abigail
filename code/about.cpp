@@ -24,12 +24,14 @@
 
 #include "about.h"
 #include "ui_about.h"
+#include "preferences.h"
 
 About::About(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::About)
 {
     ui->setupUi(this);
+    ui->versionLabel->setText(Preferences::VERSION);
 }
 
 About::~About()
