@@ -34,6 +34,12 @@ Document::Document(Tab *parent) : Tab(parent)
     this->setLayout(layout);
     this->textArea = new CodeEditor(this);
     this->layout->addWidget(textArea);
+    this->docHasChanged = false;
+    this->isCopyAvailable = false;
+    this->isCutAvailable = false;
+    this->isUndoAvailable = false;
+    this->isRedoAvailable = false;
+
 
     QObject::connect(textArea, SIGNAL(textChanged()), this, SLOT(textChanges()));
     QObject::connect(textArea, SIGNAL(copyAvailable(bool)), this, SLOT(changeCutAvailability(bool)));

@@ -235,14 +235,49 @@ void MainWindow::on_tabsManager_currentChanged(QWidget *tab)
     if (doc != 0) { // If the tab is a document
         doc->textArea->setFocus();
         if (!ui->menuTab->isEnabled()) ui->menuTab->setEnabled(true);
+        ui->searchBar->setEnabled(true);
+        ui->actionSave->setEnabled(true);
+        ui->actionSave_All->setEnabled(true);
+        ui->actionPaste->setEnabled(true);
+        ui->actionSearch->setEnabled(true);
+        ui->actionReplace->setEnabled(true);
+        //ui->actionAdvanced_Search->setEnabled(true);
+        //ui->actionAuto_format->setEnabled(true);
+        ui->action_Indent->setEnabled(true);
+        ui->action_Unindent->setEnabled(true);
+        ui->actionComment->setEnabled(true);
+        ui->actionUncomment->setEnabled(true);
         ui->actionLine_Wrap->setChecked(doc->textArea->lineWrapMode() == QPlainTextEdit::WidgetWidth? true : false);
+        ui->actionUndo->setEnabled(doc->isUndoAvailable);
+        ui->actionRedo->setEnabled(doc->isRedoAvailable);
+        ui->actionCopy->setEnabled(doc->isCopyAvailable);
+        ui->actionCut->setEnabled(doc->isCutAvailable);
     } else { // If the tab is not a document
         PreferencesTab* pref = dynamic_cast<PreferencesTab*>(tab);
         if (pref != 0) { // If tab is a preferences tab
             pref->loadPreferences();
-            if (ui->menuTab->isEnabled()) ui->menuTab->setEnabled(false);
-        }
-
+            ui->searchBar->setEnabled(false);
+            ui->menuTab->setEnabled(false);
+            ui->actionSave->setEnabled(false);
+            ui->actionSave_All->setEnabled(false);
+            ui->actionUndo->setEnabled(false);
+            ui->actionRedo->setEnabled(false);
+            ui->actionCopy->setEnabled(false);
+            ui->actionCut->setEnabled(false);
+            ui->actionPaste->setEnabled(false);
+            ui->actionSearch->setEnabled(false);
+            ui->actionReplace->setEnabled(false);
+            ui->actionAdvanced_Search->setEnabled(false);
+            ui->actionAuto_format->setEnabled(false);
+            ui->action_Indent->setEnabled(false);
+            ui->action_Unindent->setEnabled(false);
+            ui->actionComment->setEnabled(false);
+            ui->actionUncomment->setEnabled(false);
+        }/* else {
+            Tab* tab = dynamic_cast<Tab*>(tab);
+            if (tab == 0) // If it isn't a tab
+                qDebug() << "NO HAY TAB";
+        }*/
     }
 }
 
