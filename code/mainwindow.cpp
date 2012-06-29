@@ -332,7 +332,10 @@ void MainWindow::on_actionComment_triggered()
         end += 3;
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
-    cursor.movePosition(QTextCursor::StartOfLine);
+    // Select the 'changed area'
+    cursor.setPosition(end);
+    cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, end-start);
+
     cursor.endEditBlock();
     doc->textArea->setTextCursor(cursor);
 }
@@ -357,7 +360,6 @@ void MainWindow::on_actionUncomment_triggered()
 
     QString selection;
     int spaces = 2;
-    int pos = 0;
 
     do {
         cursor.movePosition(QTextCursor::StartOfLine);
@@ -365,7 +367,6 @@ void MainWindow::on_actionUncomment_triggered()
             cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
             selection = cursor.selectedText();
             if (selection == "/") {
-                pos = cursor.position() - 1;
                 cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
                 if (cursor.selectedText() == "//") {
                     cursor.removeSelectedText();
@@ -383,7 +384,10 @@ void MainWindow::on_actionUncomment_triggered()
         end -= spaces;
     } while (cursor.position() < end && cursor.movePosition(QTextCursor::Down));
 
-    cursor.setPosition(pos);
+    // Select the 'changed area'
+    cursor.setPosition(end);
+    cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor, end-start);
+
     cursor.endEditBlock();
     doc->textArea->setTextCursor(cursor);
 }
