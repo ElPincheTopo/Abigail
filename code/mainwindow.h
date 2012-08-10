@@ -72,10 +72,10 @@ private slots:
     void on_actionSearch_triggered();
     void on_searchTextEdit_textChanged(const QString);
     void on_action_Print_triggered();
-    void on_searchNext_clicked();
+    int on_searchNext_clicked();
     int search(QTextCursor *docCursor, QTextDocument::FindFlags flags = 0);
-    void on_replace_clicked();
-    void on_searchPrev_clicked();
+    int on_replace_clicked();
+    int on_searchPrev_clicked();
     void on_searchBar_visibilityChanged(bool visible);
     void on_actionReplace_triggered();
     void on_actionLine_Wrap_triggered();
@@ -84,6 +84,9 @@ private slots:
     void on_actionAdvanced_Search_triggered();
     void tabMenuRequested(QContextMenuEvent *event);
     void searchBarFloated();
+
+
+    int on_replaceAll_clicked();
 
 private:
     Ui::MainWindow *ui;

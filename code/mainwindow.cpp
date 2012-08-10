@@ -33,6 +33,8 @@
 #include "document.h"
 #include "preferences.h"
 
+#include "QDebug"
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -466,10 +468,11 @@ void MainWindow::on_searchTextEdit_textChanged(const QString)
     this->search(docCursor);
 }
 
-void MainWindow::on_searchNext_clicked()
+int MainWindow::on_searchNext_clicked()
 {
     QTextCursor *docCursor;
     int ret = QMessageBox::No;
+    int found = 1;
 
     if (this->cursor == 0) {
         CodeEditor* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget())->textArea;
@@ -484,6 +487,7 @@ void MainWindow::on_searchNext_clicked()
                                        "Your search reached the end of the document.\nDo you want to search from the top?",
                                         QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
         pos = 0;
+        found = 0;
     }
     docCursor->setPosition(pos);
     this->cursor = docCursor;
@@ -494,12 +498,15 @@ void MainWindow::on_searchNext_clicked()
         this->searchDirection = MainWindow::SearchNext;
         this->on_searchNext_clicked();
     }
+
+    return found;
 }
 
-void MainWindow::on_searchPrev_clicked()
+int MainWindow::on_searchPrev_clicked()
 {
     QTextCursor *docCursor;
     int ret = QMessageBox::No;
+    int found = 1;
 
     if (this->cursor == 0) {
         CodeEditor* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget())->textArea;
@@ -518,7 +525,9 @@ void MainWindow::on_searchPrev_clicked()
         ret = QMessageBox::warning(this, "Abigail",
                                        "Your search reached the beginning of the document.\nDo you want to search from the bottom?",
                                         QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+
         pos = max;
+        found = 0;
     }
     docCursor->setPosition(pos);
     this->cursor = docCursor;
@@ -529,6 +538,8 @@ void MainWindow::on_searchPrev_clicked()
         this->searchDirection = MainWindow::SearchPrevious;
         this->on_searchPrev_clicked();
     }
+
+    return found;
 }
 
 int MainWindow::search(QTextCursor *docCursor, QTextDocument::FindFlags flags)
@@ -568,7 +579,7 @@ int MainWindow::search(QTextCursor *docCursor, QTextDocument::FindFlags flags)
     return posFound;
 }
 
-void MainWindow::on_replace_clicked()
+int MainWindow::on_replace_clicked()
 {
     CodeEditor* doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget())->textArea;
 
@@ -579,7 +590,7 @@ void MainWindow::on_replace_clicked()
         selection.cursor.insertText(ui->replaceTextEdit->text());
     }
 
-    on_searchNext_clicked();
+    return on_searchNext_clicked();
 }
 
 void MainWindow::on_actionReplace_triggered()
@@ -597,11 +608,13 @@ void MainWindow::on_searchBar_visibilityChanged(bool visible)
             ui->replaceLabel->show();
             ui->replaceTextEdit->show();
             ui->replace->show();
+            ui->replaceAll->show();
             this->searchDirection = MainWindow::SearchNext;
         } else {
             ui->replaceLabel->hide();
             ui->replaceTextEdit->hide();
             ui->replace->hide();
+            ui->replaceAll->hide();
         }
     }
 
@@ -648,4 +661,9 @@ void MainWindow::on_actionAdvanced_Search_triggered()
 void MainWindow::tabMenuRequested(QContextMenuEvent *event)
 {
     ui->menuTab->exec(event->globalPos());
+}
+
+int MainWindow::on_replaceAll_clicked()
+{
+    while (this->on_replace_clicked() > 0);
 }
