@@ -44,3 +44,6 @@ Font Size = 10
 # Find & Replace Section -------------------------------------------------------
 # The highlight color for the find function. Deafault value 4294967040
 Selection Color = 4294967040
+
+# Software & Plugins Section ---------------------------------------------------
+Terminal = Default

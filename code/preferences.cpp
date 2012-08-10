@@ -70,6 +70,10 @@ void Preferences::readPreferences()
                     // Find & Replace Section
                     else if (list[0] == "selectioncolor")
                         Preferences::selectionColor = (list[1].toUInt());
+
+                    // Software & Plugins
+                    else if (list[0] == "terminal")
+                        Preferences::terminal = QString(list[1]);
                 }
             }
         }
@@ -130,6 +134,10 @@ void Preferences::writePreferences()
                     // Find & Replace Section
                     else if (list[0] == "selectioncolor")
                         writeLine = "Selection Color = " + QString::number(Preferences::selectionColor);
+
+                    // Software & Plugins
+                    else if (list[0] == "terminal")
+                        writeLine = QString("Terminal = ") + Preferences::terminal;
                 }
             }
             // Write the line to the new file
@@ -179,6 +187,7 @@ unsigned int Preferences::currentLineColor = 4293848831u;
 unsigned int Preferences::lineNumberArea = 4293980400u;
 unsigned int Preferences::lineNumberColor = 4283782485u;
 unsigned int Preferences::selectionColor = 4294967040u;
+QString Preferences::terminal = _TERMINAL;
 
 // Constants
 const QString Preferences::VERSION = _VERSION;
@@ -191,3 +200,4 @@ const QString Preferences::WIKI = "https://github.com/ElPincheTopo/Abigail/wiki"
 const QString Preferences::REPO = "https://github.com/ElPincheTopo/Abigail";
 const QString Preferences::PREFERENCESDIR = _PREFERENCESDIR;
 const QString Preferences::PREFERENCESFILE = _PREFERENCESFILE;
+const QString Preferences::TERMINALCOMMAND = _TERMINALCOMMAND;

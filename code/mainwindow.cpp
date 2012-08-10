@@ -26,6 +26,8 @@
 #include <QTextDocumentFragment>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QProcess>
+#include <QFileInfo>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -666,4 +668,25 @@ void MainWindow::tabMenuRequested(QContextMenuEvent *event)
 int MainWindow::on_replaceAll_clicked()
 {
     while (this->on_replace_clicked() > 0);
+
+    return 0;
+}
+
+void MainWindow::on_actionOpen_Terminal_triggered()
+{
+    QProcess* terminal = new QProcess(this);
+    QString location;
+    QStringList arguments;
+    Document *doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
+
+    if (doc != 0 && doc->fileName() != 0) {
+        QFileInfo fileInfo(doc->fileName());
+        location = fileInfo.absolutePath();
+    } else {
+        location = Preferences::HOME;
+    }
+    qDebug() << location;
+
+    arguments.append(Preferences::TERMINALCOMMAND + location);
+    terminal->start(Preferences::terminal, arguments);
 }

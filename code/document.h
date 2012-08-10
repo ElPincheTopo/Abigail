@@ -40,6 +40,7 @@ public:
     bool isCutAvailable;
     bool isUndoAvailable;
     bool isRedoAvailable;
+    QString fileName();
 
 private:
     QFile *file;

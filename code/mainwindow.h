@@ -88,6 +88,8 @@ private slots:
 
     int on_replaceAll_clicked();
 
+    void on_actionOpen_Terminal_triggered();
+
 private:
     Ui::MainWindow *ui;
     bool replaceMode;

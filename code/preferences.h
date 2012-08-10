@@ -35,9 +35,10 @@
     #define _SLASH "\\"
     #define _FILESTR "file:///"
     #define _HOME QDir::homePath().replace("/", "\\")
-    //#define _PREFERENCESDIR QCoreApplication::applicationDirPath();
     #define _PREFERENCESDIR Preferences::HOME+"\\abigail"
     #define _PREFERENCESFILE Preferences::PREFERENCESDIR+"\\preferences"
+    #define _TERMINAL "cmd"
+    #define _TERMINALCOMMAND ""
 #else
     #define UNIX
     #define _FONT Mono
@@ -47,6 +48,8 @@
     #define _HOME QDir::homePath()
     #define _PREFERENCESDIR Preferences::HOME+"/.abigail"
     #define _PREFERENCESFILE Preferences::PREFERENCESDIR+"/preferences"
+    #define _TERMINAL "gnome-terminal" // Make this Generic
+    #define _TERMINALCOMMAND "--working-directory="
 #endif
 
 class Preferences
@@ -71,6 +74,7 @@ public:
     static unsigned int lineNumberArea;
     static unsigned int lineNumberColor;
     static unsigned int selectionColor;
+    static QString terminal;
 
     // Constants
     static const QString VERSION;
@@ -83,6 +87,7 @@ public:
     static const QString REPO;
     static const QString PREFERENCESDIR;
     static const QString PREFERENCESFILE;
+    static const QString TERMINALCOMMAND;
 };
 
 #endif // STRINGS_H

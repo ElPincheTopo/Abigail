@@ -24,6 +24,8 @@
 
 #include "document.h"
 
+#include <QDebug>
+
 Document::Document(Tab *parent) : Tab(parent)
 {
     this->file = 0;
@@ -121,4 +123,9 @@ void Document::changeUndoAvailability(bool available)
 void Document::changeRedoAvailability(bool available)
 {
     emit this->redoAvailable(available);
+}
+
+QString Document::fileName()
+{
+    return (this->file != 0 ? this->file->fileName() : 0);
 }
