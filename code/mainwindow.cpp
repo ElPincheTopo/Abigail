@@ -676,7 +676,7 @@ void MainWindow::on_actionOpen_Terminal_triggered()
 {
     QProcess* terminal = new QProcess(this);
     QString location;
-    QStringList arguments;
+    QString command;
     Document *doc = dynamic_cast<Document*>(ui->tabsManager->currentWidget());
 
     if (doc != 0 && doc->fileName() != 0) {
@@ -685,8 +685,7 @@ void MainWindow::on_actionOpen_Terminal_triggered()
     } else {
         location = Preferences::HOME;
     }
-    qDebug() << location;
 
-    arguments.append(Preferences::TERMINALCOMMAND + location);
-    terminal->start(Preferences::terminal, arguments);
+    command = Preferences::terminal + Preferences::TERMINALCOMMAND + "\"" + location + "\"";
+    terminal->startDetached(command);
 }

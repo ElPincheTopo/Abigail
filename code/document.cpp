@@ -24,8 +24,6 @@
 
 #include "document.h"
 
-#include <QDebug>
-
 Document::Document(Tab *parent) : Tab(parent)
 {
     this->file = 0;
@@ -41,7 +39,6 @@ Document::Document(Tab *parent) : Tab(parent)
     this->isCutAvailable = false;
     this->isUndoAvailable = false;
     this->isRedoAvailable = false;
-
 
     QObject::connect(textArea, SIGNAL(textChanged()), this, SLOT(textChanges()));
     QObject::connect(textArea, SIGNAL(copyAvailable(bool)), this, SLOT(changeCutAvailability(bool)));
