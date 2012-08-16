@@ -37,7 +37,7 @@
     #define _HOME QDir::homePath().replace("/", "\\")
     #define _PREFERENCESDIR Preferences::HOME+"\\abigail"
     #define _PREFERENCESFILE Preferences::PREFERENCESDIR+"\\preferences"
-    #define _TERMINAL "C:\\WINDOWS\\system32\\cmd.exe"
+    #define _TERMINAL "C:\\WINDOWS\\system32\\cmd.exe" // Just call cmd
     #define _TERMINALCOMMAND " /k cd /d "
 #else
     #define UNIX
