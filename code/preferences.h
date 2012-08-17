@@ -26,7 +26,7 @@
 #include <QApplication>
 
 #define QT4 // Define the Qt version in use.
-#define _VERSION "v0.5.3.2"
+#define _VERSION "v0.5.4"
 
 #if defined(_WIN32) || defined(__WIN32)
     #define WINDOWS

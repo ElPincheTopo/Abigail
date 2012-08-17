@@ -40,15 +40,10 @@ public:
 
 private slots:
     void on_lineWrapCheck_stateChanged(int state);
-
     void on_columnLineCheck_stateChanged(int state);
-
     void on_columnLineBox_valueChanged(int value);
-
     void on_fontSizeBox_valueChanged(int value);
-
     void on_centerOnScrollCheck_stateChanged(int state);
-
     void on_tabLengthBox_valueChanged(int value);
 
 private:

@@ -43,7 +43,7 @@ Document* TabManager::newDoc(QString title)
     int index = this->addTab(doc, title);
     this->setCurrentIndex(index);
 
-    QObject::connect(doc->textArea, SIGNAL(dropAcceptedEvent(QDropEvent*)), this, SLOT(codeEditorDropEvent(QDropEvent*)));
+    //QObject::connect(doc->textArea, SIGNAL(dropAcceptedEvent(QDropEvent*)), this, SLOT(codeEditorDropEvent(QDropEvent*)));
     QObject::connect(doc, SIGNAL(textChanged(Document*)), this, SLOT(textChanges(Document*)));
     QObject::connect(doc, SIGNAL(cutAvailable(bool)), this, SLOT(changeCutAvailability(bool)));
     QObject::connect(doc, SIGNAL(copyAvailable(bool)), this, SLOT(changeCopyAvailability(bool)));
@@ -76,7 +76,7 @@ void TabManager::saveCurrentDoc()
 
 void TabManager::saveAll()
 {
-    for (int i=0; i<count(); ++i)
+    for (int i=0; i<this->count(); ++i)
         this->save(i);
 }
 
@@ -132,7 +132,7 @@ void TabManager::tabRemoved(int /*index*/)
 
 void TabManager::dragEnterEvent(QDragEnterEvent *event)
 {
-    if (event->mimeData()->hasFormat("text/uri-list") || event->mimeData()->hasFormat("text/plain"))
+    if (event->mimeData()->hasFormat("text/uri-list"))
         event->acceptProposedAction();
 }
 
@@ -149,10 +149,7 @@ void TabManager::dropEvent(QDropEvent *event)
                 this->openFile(archivo);
             }
         }
-
         event->acceptProposedAction();
-    } else if (event->mimeData()->hasFormat("text/plain")) {
-
     }
 }
 
@@ -200,4 +197,17 @@ void TabManager::contextMenuEvent(QContextMenuEvent *event)
 
 void TabManager::codeEditorDropEvent(QDropEvent *event){
     this->dropEvent(event);
+}
+
+void TabManager::reloadDocuments()
+{
+    Document* doc;
+    for (int i=0; i<this->count(); ++i) {
+         doc = dynamic_cast<Document*>(this->widget(i));
+         if (doc != 0) {
+             // Put here reloading things after preferences
+             doc->textArea->setFont(QFont(Preferences::font, Preferences::fontSize));
+         }
+
+    }
 }

@@ -252,6 +252,7 @@ void MainWindow::on_tabsManager_currentChanged(QWidget *tab)
         ui->actionRedo->setEnabled(doc->isRedoAvailable);
         ui->actionCopy->setEnabled(doc->isCopyAvailable);
         ui->actionCut->setEnabled(doc->isCutAvailable);
+        ui->tabsManager->reloadDocuments();
     } else { // If the tab is not a document
         PreferencesTab* pref = dynamic_cast<PreferencesTab*>(tab);
         if (pref != 0) { // If tab is a preferences tab
