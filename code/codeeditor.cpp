@@ -177,7 +177,7 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
         ++blockNumber;
     }
 }
-
+/*
 void CodeEditor::dragEnterEvent(QDragEnterEvent *event)
 {
     if (event->mimeData()->hasFormat("text/uri-list") || event->mimeData()->hasFormat("text/plain"))
@@ -186,8 +186,9 @@ void CodeEditor::dragEnterEvent(QDragEnterEvent *event)
 
 void CodeEditor::dropEvent(QDropEvent *event)
 {
-    if (event->mimeData()->hasFormat("text/uri-list"))
+    if (event->mimeData()->hasFormat("text/uri-list")) {
+        event->acceptProposedAction();
         emit dropAcceptedEvent(event);
-    else
+    } else
         QPlainTextEdit::dropEvent(event);
-}
+}*/

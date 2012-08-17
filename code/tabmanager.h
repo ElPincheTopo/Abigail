@@ -73,7 +73,6 @@ public slots:
 
 private slots:
     void textChanges(Document* doc);
-
 };
 
 #endif // TABMANAGER_H

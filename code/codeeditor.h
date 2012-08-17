@@ -75,9 +75,9 @@ signals:
     void dropAcceptedEvent(QDropEvent *event);
 
 private:
-    QWidget *lineNumberArea;
+    QWidget *lineNumberArea;/*
     void dragEnterEvent(QDragEnterEvent *event);
-    void dropEvent(QDropEvent *event);
+    void dropEvent(QDropEvent *event);*/
 };
 
 
