@@ -132,22 +132,28 @@ void TabManager::tabRemoved(int /*index*/)
 
 void TabManager::dragEnterEvent(QDragEnterEvent *event)
 {
-    if (event->mimeData()->hasFormat("text/uri-list")) event->acceptProposedAction();
+    if (event->mimeData()->hasFormat("text/uri-list") || event->mimeData()->hasFormat("text/plain"))
+        event->acceptProposedAction();
 }
 
 void TabManager::dropEvent(QDropEvent *event)
 {
-    foreach (QUrl url, event->mimeData()->urls()) {
-        QStringList list = url.toString().split(Preferences::FILESTR);
-        if (list.count() == 2) {
-            QString archivo = list[1];
-            #ifdef WINDOWS
-                archivo = archivo.replace("/", "\\");
-            #endif
-            this->openFile(archivo);
+    if (event->mimeData()->hasFormat("text/uri-list")) {
+        foreach (QUrl url, event->mimeData()->urls()) {
+            QStringList list = url.toString().split(Preferences::FILESTR);
+            if (list.count() == 2) {
+                QString archivo = list[1];
+                #ifdef WINDOWS
+                    archivo = archivo.replace("/", "\\");
+                #endif
+                this->openFile(archivo);
+            }
         }
+
+        event->acceptProposedAction();
+    } else if (event->mimeData()->hasFormat("text/plain")) {
+
     }
-    event->acceptProposedAction();
 }
 
 void TabManager::changeCopyAvailability(bool available)
