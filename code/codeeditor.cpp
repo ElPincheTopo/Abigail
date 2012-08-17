@@ -180,11 +180,14 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 
 void CodeEditor::dragEnterEvent(QDragEnterEvent *event)
 {
-    if (event->mimeData()->hasFormat("text/uri-list")) event->acceptProposedAction();
-
+    if (event->mimeData()->hasFormat("text/uri-list") || event->mimeData()->hasFormat("text/plain"))
+        event->acceptProposedAction();
 }
 
 void CodeEditor::dropEvent(QDropEvent *event)
 {
-    emit dropAcceptedEvent(event);
+    if (event->mimeData()->hasFormat("text/uri-list"))
+        emit dropAcceptedEvent(event);
+    else
+        QPlainTextEdit::dropEvent(event);
 }
