@@ -35,8 +35,6 @@
 #include "document.h"
 #include "preferences.h"
 
-#include <QDebug>
-
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -277,28 +275,27 @@ void MainWindow::on_tabsManager_currentChanged(QWidget *tab)
             ui->actionComment->setEnabled(false);
             ui->actionUncomment->setEnabled(false);
         } else {
-            ui->searchBar->setEnabled(false);
-            ui->menuTab->setEnabled(false);
-            ui->actionSave->setEnabled(false);
-            ui->actionSave_All->setEnabled(false);
-            ui->actionUndo->setEnabled(false);
-            ui->actionRedo->setEnabled(false);
-            ui->actionCopy->setEnabled(false);
-            ui->actionCut->setEnabled(false);
-            ui->actionPaste->setEnabled(false);
-            ui->actionSearch->setEnabled(false);
-            ui->actionReplace->setEnabled(false);
-            ui->actionAdvanced_Search->setEnabled(false);
-            ui->actionAuto_format->setEnabled(false);
-            ui->action_Indent->setEnabled(false);
-            ui->action_Unindent->setEnabled(false);
-            ui->actionComment->setEnabled(false);
-            ui->actionUncomment->setEnabled(false);
-        }
-        /* else {
             Tab* tab = dynamic_cast<Tab*>(tab);
-            if (tab == 0) // If it isn't a tab
-        }*/
+            if (tab == 0) { // If it isn't a tab
+                ui->searchBar->setEnabled(false);
+                ui->menuTab->setEnabled(false);
+                ui->actionSave->setEnabled(false);
+                ui->actionSave_All->setEnabled(false);
+                ui->actionUndo->setEnabled(false);
+                ui->actionRedo->setEnabled(false);
+                ui->actionCopy->setEnabled(false);
+                ui->actionCut->setEnabled(false);
+                ui->actionPaste->setEnabled(false);
+                ui->actionSearch->setEnabled(false);
+                ui->actionReplace->setEnabled(false);
+                ui->actionAdvanced_Search->setEnabled(false);
+                ui->actionAuto_format->setEnabled(false);
+                ui->action_Indent->setEnabled(false);
+                ui->action_Unindent->setEnabled(false);
+                ui->actionComment->setEnabled(false);
+                ui->actionUncomment->setEnabled(false);
+            }
+        }
     }
 }
 
