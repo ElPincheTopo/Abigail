@@ -1,6 +1,7 @@
 # Qt information #
 ##################
 *.pro.user
+*.autosave
 
 # Linux Files #
 ###############
