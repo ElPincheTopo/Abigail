@@ -76,7 +76,7 @@ void TabManager::saveCurrentDoc()
 
 void TabManager::saveAll()
 {
-    for (int i=0; i<count(); ++i)
+    for (int i=0; i<this->count(); ++i)
         this->save(i);
 }
 
@@ -197,4 +197,17 @@ void TabManager::contextMenuEvent(QContextMenuEvent *event)
 
 void TabManager::codeEditorDropEvent(QDropEvent *event){
     this->dropEvent(event);
+}
+
+void TabManager::reloadDocuments()
+{
+    Document* doc;
+    for (int i=0; i<this->count(); ++i) {
+         doc = dynamic_cast<Document*>(this->widget(i));
+         if (doc != 0) {
+             // Put here reloading things after preferences
+             doc->textArea->setFont(QFont(Preferences::font, Preferences::fontSize));
+         }
+
+    }
 }

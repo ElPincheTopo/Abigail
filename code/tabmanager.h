@@ -40,6 +40,7 @@ public:
     ~TabManager();
     void openPreferences();
     void openFile(QString archivo);
+    void reloadDocuments();
 
 private:
     void tabRemoved(int );
